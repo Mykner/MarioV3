@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseDebug|Win32">
+      <Configuration>ReleaseDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseDebug|x64">
+      <Configuration>ReleaseDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{47908BCF-CE9A-4863-87FC-CF47C50C665D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MarioLib</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\Output\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Output\Build\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;%(AdditionalIncludeDirectories);$(IncludePath)</IncludePath>
+    <LibraryPath>$(VCInstallDir)PlatformSDK\lib;$(LibraryPath);D:\Program Files (x86)\Visual Leak Detector\lib\Win32</LibraryPath>
+    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\Output\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Output\Build\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;%(AdditionalIncludeDirectories);$(IncludePath)</IncludePath>
+    <LibraryPath>$(VCInstallDir)PlatformSDK\lib;$(LibraryPath);D:\Program Files (x86)\Visual Leak Detector\lib\Win32</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">
+    <OutDir>$(SolutionDir)\Output\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Output\Build\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;%(AdditionalIncludeDirectories);$(IncludePath)</IncludePath>
+    <LibraryPath>$(VCInstallDir)PlatformSDK\lib;$(LibraryPath);D:\Program Files (x86)\Visual Leak Detector\lib\Win32</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%DIRECTX_SDK%Include;%OPENGL_SDK%;%FMOD_SDK%api\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <CallingConvention>Cdecl</CallingConvention>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)OutPut\pre_build_mario_lib.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%DIRECTX_SDK%Include;%OPENGL_SDK%;%FMOD_SDK%api\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)OutPut\pre_build_mario_lib.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <UndefinePreprocessorDefinitions>_DEBUG</UndefinePreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%DIRECTX_SDK%Include;%OPENGL_SDK%;%FMOD_SDK%api\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)OutPut\pre_build_mario_lib.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\CurlLib\src\cookie.cpp" />
+    <ClCompile Include="..\CurlLib\src\cookie_date.cpp" />
+    <ClCompile Include="..\CurlLib\src\cookie_datetime.cpp" />
+    <ClCompile Include="..\CurlLib\src\cookie_time.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_cookie.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_easy.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_exception.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_form.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_header.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_info.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_multi.cpp" />
+    <ClCompile Include="..\CurlLib\src\curl_share.cpp" />
+    <ClCompile Include="..\JsonLib\json_reader.cpp" />
+    <ClCompile Include="..\JsonLib\json_value.cpp" />
+    <ClCompile Include="..\JsonLib\json_writer.cpp" />
+    <ClCompile Include="..\NaLib\aes\aes.c" />
+    <ClCompile Include="..\NaLib\aes\md5.cpp" />
+    <ClCompile Include="..\NaLib\NaCurl.cpp" />
+    <ClCompile Include="..\NaLib\NaException.cpp" />
+    <ClCompile Include="..\NaLib\NaLeakDetector.cpp" />
+    <ClCompile Include="..\NaLib\NaPlatformAPI_Win32.cpp" />
+    <ClCompile Include="Background\BackgroundAirShip.cpp" />
+    <ClCompile Include="Background\BackgroundBase.cpp" />
+    <ClCompile Include="Background\BackgroundCastle.cpp" />
+    <ClCompile Include="Background\BackgroundCloud.cpp" />
+    <ClCompile Include="Background\BackgroundFence.cpp" />
+    <ClCompile Include="Background\BackgroundGhostHouse.cpp" />
+    <ClCompile Include="Background\BackgroundMountain.cpp" />
+    <ClCompile Include="Background\BackgroundRedCloud.cpp" />
+    <ClCompile Include="Background\BackgroundSnowFence.cpp" />
+    <ClCompile Include="Background\BackgroundUnderground.cpp" />
+    <ClCompile Include="Background\BackgroundUnderWater.cpp" />
+    <ClCompile Include="Bullet\Boomerang.cpp" />
+    <ClCompile Include="Bullet\BowserFire.cpp" />
+    <ClCompile Include="Bullet\BulletObjectBase.cpp" />
+    <ClCompile Include="Bullet\Fireball.cpp" />
+    <ClCompile Include="Bullet\SpinySpike.cpp" />
+    <ClCompile Include="Bullet\ThrowingHammer.cpp" />
+    <ClCompile Include="Bullet\Wrench.cpp" />
+    <ClCompile Include="Bullet\YoshiFire.cpp" />
+    <ClCompile Include="Bullet\YoshiTongue.cpp" />
+    <ClCompile Include="Common\GameConfig.cpp" />
+    <ClCompile Include="ControllableObject\ControllableObject.cpp" />
+    <ClCompile Include="ControllableObject\Mario.cpp" />
+    <ClCompile Include="ControllableObject\MarioM3.cpp" />
+    <ClCompile Include="ControllableObject\NewMario.cpp" />
+    <ClCompile Include="ControllableObject\PhysicalProperties.cpp" />
+    <ClCompile Include="ControllerBase.cpp" />
+    <ClCompile Include="Design\DesignGame.cpp" />
+    <ClCompile Include="Design\DesignPlayGame.cpp" />
+    <ClCompile Include="Design\DesignStage.cpp" />
+    <ClCompile Include="Design\GameStateDesign.cpp" />
+    <ClCompile Include="Design\GameStateDesignPlay.cpp" />
+    <ClCompile Include="Effect\EffectAirBubble.cpp" />
+    <ClCompile Include="Effect\EffectBrickDebris.cpp" />
+    <ClCompile Include="Effect\EffectChainDebris.cpp" />
+    <ClCompile Include="Effect\EffectCoin.cpp" />
+    <ClCompile Include="Effect\EffectDeathPosition.cpp" />
+    <ClCompile Include="Effect\EffectDebrisBase.cpp" />
+    <ClCompile Include="Effect\EffectDryBoneDebris.cpp" />
+    <ClCompile Include="Effect\EffectDust.cpp" />
+    <ClCompile Include="Effect\EffectEggDebris.cpp" />
+    <ClCompile Include="Effect\EffectFireBoom.cpp" />
+    <ClCompile Include="Effect\EffectHit.cpp" />
+    <ClCompile Include="Effect\EffectObjectBase.cpp" />
+    <ClCompile Include="Effect\EffectParalyze.cpp" />
+    <ClCompile Include="Effect\EffectPop.cpp" />
+    <ClCompile Include="Effect\EffectSceneCircle.cpp" />
+    <ClCompile Include="Effect\EffectSceneFade.cpp" />
+    <ClCompile Include="Effect\EffectScore.cpp" />
+    <ClCompile Include="Effect\EffectSpin.cpp" />
+    <ClCompile Include="Effect\EffectSplash.cpp" />
+    <ClCompile Include="Effect\EffectStarDust.cpp" />
+    <ClCompile Include="Effect\EffectTwinkle.cpp" />
+    <ClCompile Include="Effect\EffectWingDebris.cpp" />
+    <ClCompile Include="Enemy\Bloober.cpp" />
+    <ClCompile Include="Enemy\Bobomb.cpp" />
+    <ClCompile Include="Enemy\Boo.cpp" />
+    <ClCompile Include="Enemy\BoomBoom.cpp" />
+    <ClCompile Include="Enemy\BoomerangBrothers.cpp" />
+    <ClCompile Include="Enemy\Bowser.cpp" />
+    <ClCompile Include="Enemy\BowserJunior.cpp" />
+    <ClCompile Include="Enemy\BulletBill.cpp" />
+    <ClCompile Include="Enemy\BuzzyBeetle.cpp" />
+    <ClCompile Include="Enemy\CannonBall.cpp" />
+    <ClCompile Include="Enemy\ChainChomp.cpp" />
+    <ClCompile Include="Enemy\ChainChompStake.cpp" />
+    <ClCompile Include="Enemy\CheepCheep.cpp" />
+    <ClCompile Include="Enemy\CheepCheepFly.cpp" />
+    <ClCompile Include="Enemy\DryBone.cpp" />
+    <ClCompile Include="Enemy\EnemyObjectBase.cpp" />
+    <ClCompile Include="Enemy\FireBar.cpp" />
+    <ClCompile Include="Enemy\FireBrothers.cpp" />
+    <ClCompile Include="Enemy\Goomba.cpp" />
+    <ClCompile Include="Enemy\Grinder.cpp" />
+    <ClCompile Include="Enemy\HammerBrothers.cpp" />
+    <ClCompile Include="Enemy\Lakitu.cpp" />
+    <ClCompile Include="Enemy\PiranhaPlant.cpp" />
+    <ClCompile Include="Enemy\Podoboo.cpp" />
+    <ClCompile Include="Enemy\RedCheepCheep.cpp" />
+    <ClCompile Include="Enemy\RedCheepCheepFly.cpp" />
+    <ClCompile Include="Enemy\RedTurtle.cpp" />
+    <ClCompile Include="Enemy\RedTurtleWingedPatrol.cpp" />
+    <ClCompile Include="Enemy\RockyWrench.cpp" />
+    <ClCompile Include="Enemy\SledgeBrothers.cpp" />
+    <ClCompile Include="Enemy\Spiny.cpp" />
+    <ClCompile Include="Enemy\Thwomp.cpp" />
+    <ClCompile Include="Enemy\Turtle.cpp" />
+    <ClCompile Include="Enemy\TurtleWinged.cpp" />
+    <ClCompile Include="EventObject\BillBlaster.cpp" />
+    <ClCompile Include="EventObject\BossBridge.cpp" />
+    <ClCompile Include="EventObject\BossBridgeAxe.cpp" />
+    <ClCompile Include="EventObject\BowserFireShooter.cpp" />
+    <ClCompile Include="EventObject\Bridge.cpp" />
+    <ClCompile Include="EventObject\Cannon.cpp" />
+    <ClCompile Include="EventObject\CheckPointFlag.cpp" />
+    <ClCompile Include="EventObject\Door.cpp" />
+    <ClCompile Include="EventObject\EnemyGenerator.cpp" />
+    <ClCompile Include="EventObject\EventObjectBase.cpp" />
+    <ClCompile Include="EventObject\FlagPole.cpp" />
+    <ClCompile Include="EventObject\GoalBox.cpp" />
+    <ClCompile Include="EventObject\GoalPoint.cpp" />
+    <ClCompile Include="EventObject\GoalPost.cpp" />
+    <ClCompile Include="EventObject\LoopFlag.cpp" />
+    <ClCompile Include="EventObject\LoopHandler.cpp" />
+    <ClCompile Include="EventObject\OneWayWall.cpp" />
+    <ClCompile Include="EventObject\PowBlock.cpp" />
+    <ClCompile Include="EventObject\Princess.cpp" />
+    <ClCompile Include="EventObject\PSwitch.cpp" />
+    <ClCompile Include="EventObject\ShoeSmoke.cpp" />
+    <ClCompile Include="EventObject\SignArrow.cpp" />
+    <ClCompile Include="EventObject\SkyBridge.cpp" />
+    <ClCompile Include="EventObject\StartPointSignArrow.cpp" />
+    <ClCompile Include="EventObject\Trampolin.cpp" />
+    <ClCompile Include="EventObject\TrampolinMini.cpp" />
+    <ClCompile Include="EventObject\VineLadder.cpp" />
+    <ClCompile Include="EventObject\Vortex.cpp" />
+    <ClCompile Include="EventObject\WarpZoneFlag.cpp" />
+    <ClCompile Include="EventObject\WarpZoneText.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObjectBase.cpp" />
+    <ClCompile Include="GameState\GameStateAppUpdate.cpp" />
+    <ClCompile Include="GameState\GameStateBase.cpp" />
+    <ClCompile Include="GameState\GameStateCredits.cpp" />
+    <ClCompile Include="GameState\GameStateCutBridge.cpp" />
+    <ClCompile Include="GameState\GameStateDie.cpp" />
+    <ClCompile Include="GameState\GameStateEnterDoor.cpp" />
+    <ClCompile Include="GameState\GameStateEnterPipe.cpp" />
+    <ClCompile Include="GameState\GameStateEnterSky.cpp" />
+    <ClCompile Include="GameState\GameStateEnterStage.cpp" />
+    <ClCompile Include="GameState\GameStateExitDoor.cpp" />
+    <ClCompile Include="GameState\GameStateExitPipe.cpp" />
+    <ClCompile Include="GameState\GameStateFlagDown.cpp" />
+    <ClCompile Include="GameState\GameStateGameOver.cpp" />
+    <ClCompile Include="GameState\GameStateGoal.cpp" />
+    <ClCompile Include="GameState\GameStateHitGoalBox.cpp" />
+    <ClCompile Include="GameState\GameStateHitGoalPost.cpp" />
+    <ClCompile Include="GameState\GameStateLogo.cpp" />
+    <ClCompile Include="GameState\GameStateMessageBlock.cpp" />
+    <ClCompile Include="GameState\GameStatePlay.cpp" />
+    <ClCompile Include="GameState\GameStateRegisterUser.cpp" />
+    <ClCompile Include="GameState\GameStateRescuePrincess.cpp" />
+    <ClCompile Include="GameState\GameStateShapeChange.cpp" />
+    <ClCompile Include="GameState\GameStateSingleStageClear.cpp" />
+    <ClCompile Include="GameState\GameStateSingleStageGameOver.cpp" />
+    <ClCompile Include="GameState\GameStateSkyIntro.cpp" />
+    <ClCompile Include="GameState\GameStateStageIntro.cpp" />
+    <ClCompile Include="GameState\GameStateTest.cpp" />
+    <ClCompile Include="GameState\GameStateTimeUp.cpp" />
+    <ClCompile Include="GameState\GameStateTitle.cpp" />
+    <ClCompile Include="Item\CloudItem.cpp" />
+    <ClCompile Include="Item\DoorKey.cpp" />
+    <ClCompile Include="Item\DoorKeyCoin.cpp" />
+    <ClCompile Include="Item\FireFlower.cpp" />
+    <ClCompile Include="Item\GiantMushroom.cpp" />
+    <ClCompile Include="Item\ItemObjectBase.cpp" />
+    <ClCompile Include="Item\Mushroom.cpp" />
+    <ClCompile Include="Item\Mushroom1UP.cpp" />
+    <ClCompile Include="Item\MysteryMushroom.cpp" />
+    <ClCompile Include="Item\StaticCoin.cpp" />
+    <ClCompile Include="Item\SuperStar.cpp" />
+    <ClCompile Include="Item\ThrownCoin.cpp" />
+    <ClCompile Include="Item\TurtleShell.cpp" />
+    <ClCompile Include="Item\Vine.cpp" />
+    <ClCompile Include="Item\YoshiEgg.cpp" />
+    <ClCompile Include="Manager\DirectXManager.cpp" />
+    <ClCompile Include="Manager\FModManager.cpp" />
+    <ClCompile Include="Manager\InputManager.cpp" />
+    <ClCompile Include="Manager\JsonManager.cpp" />
+    <ClCompile Include="Manager\OpenGLManager.cpp" />
+    <ClCompile Include="Manager\PathManager.cpp" />
+    <ClCompile Include="Manager\SoundManager.cpp" />
+    <ClCompile Include="Manager\SpriteManager.cpp" />
+    <ClCompile Include="Manager\ThemeManager.cpp" />
+    <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="MapObject\MapObjectBase.cpp" />
+    <ClCompile Include="MapObject\MapObjectBillBlaster.cpp" />
+    <ClCompile Include="MapObject\MapObjectCameraStop.cpp" />
+    <ClCompile Include="MapObject\MapObjectCheckPoint.cpp" />
+    <ClCompile Include="MapObject\MapObjectEnemyStop.cpp" />
+    <ClCompile Include="MapObject\MapObjectIsland.cpp" />
+    <ClCompile Include="MapObject\MapObjectMessageBlock.cpp" />
+    <ClCompile Include="MapObject\MapObjectMushroomIsland.cpp" />
+    <ClCompile Include="MapObject\MapObjectPipe.cpp" />
+    <ClCompile Include="MapObject\MapObjectPipeBody.cpp" />
+    <ClCompile Include="MapObject\MapObjectPipeExit.cpp" />
+    <ClCompile Include="MapObject\MapObjectPipeHorz.cpp" />
+    <ClCompile Include="MapObject\MapObjectRiver.cpp" />
+    <ClCompile Include="MapObject\MapObjectRiverBridge.cpp" />
+    <ClCompile Include="MapObject\MapObjectSemiSolid.cpp" />
+    <ClCompile Include="MapObject\MapObjectSkyExit.cpp" />
+    <ClCompile Include="MapObject\MapObjectStartPoint.cpp" />
+    <ClCompile Include="MapObject\MapObjectWall.cpp" />
+    <ClCompile Include="Misc\Camera.cpp" />
+    <ClCompile Include="Misc\PipeInfo.cpp" />
+    <ClCompile Include="Misc\PropertyMap.cpp" />
+    <ClCompile Include="Misc\SpeechBubble.cpp" />
+    <ClCompile Include="Misc\TypeNames.cpp" />
+    <ClCompile Include="GameOption.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceHolder.cpp" />
+    <ClCompile Include="ServerRequest.cpp" />
+    <ClCompile Include="ServerTransaction.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="..\NaLib\NaCommon.cpp" />
+    <ClCompile Include="..\NaLib\NaString.cpp" />
+    <ClCompile Include="StageMetaInfo.cpp" />
+    <ClCompile Include="StagePack.cpp" />
+    <ClCompile Include="ThemeSetting.cpp" />
+    <ClCompile Include="Updater.cpp" />
+    <ClCompile Include="UserInterface\UIBase.cpp" />
+    <ClCompile Include="UserInterface\UIButton.cpp" />
+    <ClCompile Include="UserInterface\UIContainer.cpp" />
+    <ClCompile Include="UserInterface\UICustomGameButton.cpp" />
+    <ClCompile Include="UserInterface\UIEdit.cpp" />
+    <ClCompile Include="UserInterface\UIImageButton.cpp" />
+    <ClCompile Include="UserInterface\UIList.cpp" />
+    <ClCompile Include="UserInterface\UIPanel.cpp" />
+    <ClCompile Include="UserInterface\UIRectangle.cpp" />
+    <ClCompile Include="UserInterface\UISingleStageButton.cpp" />
+    <ClCompile Include="UserInterface\UIText.cpp" />
+    <ClCompile Include="UserInterface\UIWorldStageButton.cpp" />
+    <ClCompile Include="UserProfile.cpp" />
+    <ClCompile Include="Vehicle\Cloud.cpp" />
+    <ClCompile Include="Vehicle\ClownCar.cpp" />
+    <ClCompile Include="Vehicle\GoombaShoe.cpp" />
+    <ClCompile Include="Vehicle\VehicleObjectBase.cpp" />
+    <ClCompile Include="Vehicle\Yoshi.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CurlLib\include\cookie.h" />
+    <ClInclude Include="..\CurlLib\include\cookie_date.h" />
+    <ClInclude Include="..\CurlLib\include\cookie_datetime.h" />
+    <ClInclude Include="..\CurlLib\include\cookie_time.h" />
+    <ClInclude Include="..\CurlLib\include\curl_config.h" />
+    <ClInclude Include="..\CurlLib\include\curl_cookie.h" />
+    <ClInclude Include="..\CurlLib\include\curl_easy.h" />
+    <ClInclude Include="..\CurlLib\include\curl_easy_info.h" />
+    <ClInclude Include="..\CurlLib\include\curl_exception.h" />
+    <ClInclude Include="..\CurlLib\include\curl_form.h" />
+    <ClInclude Include="..\CurlLib\include\curl_global.h" />
+    <ClInclude Include="..\CurlLib\include\curl_header.h" />
+    <ClInclude Include="..\CurlLib\include\curl_info.h" />
+    <ClInclude Include="..\CurlLib\include\curl_interface.h" />
+    <ClInclude Include="..\CurlLib\include\curl_ios.h" />
+    <ClInclude Include="..\CurlLib\include\curl_multi.h" />
+    <ClInclude Include="..\CurlLib\include\curl_option.h" />
+    <ClInclude Include="..\CurlLib\include\curl_pair.h" />
+    <ClInclude Include="..\CurlLib\include\curl_receiver.h" />
+    <ClInclude Include="..\CurlLib\include\curl_sender.h" />
+    <ClInclude Include="..\CurlLib\include\curl_share.h" />
+    <ClInclude Include="..\CurlLib\include\curl_utility.h" />
+    <ClInclude Include="..\JsonLib\json.h" />
+    <ClInclude Include="..\JsonLib\json\allocator.h" />
+    <ClInclude Include="..\JsonLib\json\assertions.h" />
+    <ClInclude Include="..\JsonLib\json\autolink.h" />
+    <ClInclude Include="..\JsonLib\json\config.h" />
+    <ClInclude Include="..\JsonLib\json\features.h" />
+    <ClInclude Include="..\JsonLib\json\forwards.h" />
+    <ClInclude Include="..\JsonLib\json\reader.h" />
+    <ClInclude Include="..\JsonLib\json\value.h" />
+    <ClInclude Include="..\JsonLib\json\version.h" />
+    <ClInclude Include="..\JsonLib\json\writer.h" />
+    <ClInclude Include="..\JsonLib\json_tool.h" />
+    <ClInclude Include="..\NaLib\aes\aes.h" />
+    <ClInclude Include="..\NaLib\aes\md5.h" />
+    <ClInclude Include="..\NaLib\NaCurl.h" />
+    <ClInclude Include="..\NaLib\NaException.h" />
+    <ClInclude Include="..\NaLib\NaLeakDetector.h" />
+    <ClInclude Include="..\NaLib\NaPlatformAPI.h" />
+    <ClInclude Include="..\NaLib\NaPlatformWindow.h" />
+    <ClInclude Include="..\NaLib\NaPoint.h" />
+    <ClInclude Include="Background\BackgroundAirShip.h" />
+    <ClInclude Include="Background\BackgroundBase.h" />
+    <ClInclude Include="Background\BackgroundCastle.h" />
+    <ClInclude Include="Background\BackgroundCloud.h" />
+    <ClInclude Include="Background\BackgroundFence.h" />
+    <ClInclude Include="Background\BackgroundGhostHouse.h" />
+    <ClInclude Include="Background\BackgroundMountain.h" />
+    <ClInclude Include="Background\BackgroundRedCloud.h" />
+    <ClInclude Include="Background\BackgroundSnowFence.h" />
+    <ClInclude Include="Background\BackgroundUnderground.h" />
+    <ClInclude Include="Background\BackgroundUnderWater.h" />
+    <ClInclude Include="Bullet\Boomerang.h" />
+    <ClInclude Include="Bullet\BowserFire.h" />
+    <ClInclude Include="Bullet\BulletObjectBase.h" />
+    <ClInclude Include="Bullet\Fireball.h" />
+    <ClInclude Include="Bullet\SpinySpike.h" />
+    <ClInclude Include="Bullet\ThrowingHammer.h" />
+    <ClInclude Include="Bullet\Wrench.h" />
+    <ClInclude Include="Bullet\YoshiFire.h" />
+    <ClInclude Include="Bullet\YoshiTongue.h" />
+    <ClInclude Include="Common\Common.h" />
+    <ClInclude Include="Common\GameConfig.h" />
+    <ClInclude Include="Common\GameObjectStates.h" />
+    <ClInclude Include="Common\GameStates.h" />
+    <ClInclude Include="Common\Macros.h" />
+    <ClInclude Include="Common\SpriteIndex.h" />
+    <ClInclude Include="Common\Themes.h" />
+    <ClInclude Include="Common\Types.h" />
+    <ClInclude Include="ControllableObject\ControllableObject.h" />
+    <ClInclude Include="ControllableObject\Mario.h" />
+    <ClInclude Include="ControllableObject\MarioM3.h" />
+    <ClInclude Include="ControllableObject\NewMario.h" />
+    <ClInclude Include="ControllableObject\PhysicalProperties.h" />
+    <ClInclude Include="ControllerBase.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curl.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlrules.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlver.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\easy.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\mprintf.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\multi.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\stdcheaders.h" />
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\typecheck-gcc.h" />
+    <ClInclude Include="Design\DesignGame.h" />
+    <ClInclude Include="Design\DesignPlayGame.h" />
+    <ClInclude Include="Design\DesignStage.h" />
+    <ClInclude Include="Design\GameStateDesign.h" />
+    <ClInclude Include="Design\GameStateDesignPlay.h" />
+    <ClInclude Include="Effect\EffectAirBubble.h" />
+    <ClInclude Include="Effect\EffectBrickDebris.h" />
+    <ClInclude Include="Effect\EffectChainDebris.h" />
+    <ClInclude Include="Effect\EffectCoin.h" />
+    <ClInclude Include="Effect\EffectDeathPosition.h" />
+    <ClInclude Include="Effect\EffectDebrisBase.h" />
+    <ClInclude Include="Effect\EffectDryBoneDebris.h" />
+    <ClInclude Include="Effect\EffectDust.h" />
+    <ClInclude Include="Effect\EffectEggDebris.h" />
+    <ClInclude Include="Effect\EffectFireBoom.h" />
+    <ClInclude Include="Effect\EffectHit.h" />
+    <ClInclude Include="Effect\EffectObjectBase.h" />
+    <ClInclude Include="Effect\EffectParalyze.h" />
+    <ClInclude Include="Effect\EffectPop.h" />
+    <ClInclude Include="Effect\EffectSceneCircle.h" />
+    <ClInclude Include="Effect\EffectSceneFade.h" />
+    <ClInclude Include="Effect\EffectScore.h" />
+    <ClInclude Include="Effect\EffectSpin.h" />
+    <ClInclude Include="Effect\EffectSplash.h" />
+    <ClInclude Include="Effect\EffectStarDust.h" />
+    <ClInclude Include="Effect\EffectTwinkle.h" />
+    <ClInclude Include="Effect\EffectWingDebris.h" />
+    <ClInclude Include="Enemy\Bloober.h" />
+    <ClInclude Include="Enemy\Bobomb.h" />
+    <ClInclude Include="Enemy\Boo.h" />
+    <ClInclude Include="Enemy\BoomBoom.h" />
+    <ClInclude Include="Enemy\BoomerangBrothers.h" />
+    <ClInclude Include="Enemy\Bowser.h" />
+    <ClInclude Include="Enemy\BowserJunior.h" />
+    <ClInclude Include="Enemy\BulletBill.h" />
+    <ClInclude Include="Enemy\BuzzyBeetle.h" />
+    <ClInclude Include="Enemy\CannonBall.h" />
+    <ClInclude Include="Enemy\ChainChomp.h" />
+    <ClInclude Include="Enemy\ChainChompStake.h" />
+    <ClInclude Include="Enemy\CheepCheep.h" />
+    <ClInclude Include="Enemy\CheepCheepFly.h" />
+    <ClInclude Include="Enemy\DryBone.h" />
+    <ClInclude Include="Enemy\EnemyObjectBase.h" />
+    <ClInclude Include="Enemy\FireBar.h" />
+    <ClInclude Include="Enemy\FireBrothers.h" />
+    <ClInclude Include="Enemy\Goomba.h" />
+    <ClInclude Include="Enemy\Grinder.h" />
+    <ClInclude Include="Enemy\HammerBrothers.h" />
+    <ClInclude Include="Enemy\Lakitu.h" />
+    <ClInclude Include="Enemy\PiranhaPlant.h" />
+    <ClInclude Include="Enemy\Podoboo.h" />
+    <ClInclude Include="Enemy\RedCheepCheep.h" />
+    <ClInclude Include="Enemy\RedCheepCheepFly.h" />
+    <ClInclude Include="Enemy\RedTurtle.h" />
+    <ClInclude Include="Enemy\RedTurtleWingedPatrol.h" />
+    <ClInclude Include="Enemy\RockyWrench.h" />
+    <ClInclude Include="Enemy\SledgeBrothers.h" />
+    <ClInclude Include="Enemy\Spiny.h" />
+    <ClInclude Include="Enemy\Thwomp.h" />
+    <ClInclude Include="Enemy\Turtle.h" />
+    <ClInclude Include="Enemy\TurtleWinged.h" />
+    <ClInclude Include="EventObject\BillBlaster.h" />
+    <ClInclude Include="EventObject\BossBridge.h" />
+    <ClInclude Include="EventObject\BossBridgeAxe.h" />
+    <ClInclude Include="EventObject\BowserFireShooter.h" />
+    <ClInclude Include="EventObject\Bridge.h" />
+    <ClInclude Include="EventObject\Cannon.h" />
+    <ClInclude Include="EventObject\CheckPointFlag.h" />
+    <ClInclude Include="EventObject\Door.h" />
+    <ClInclude Include="EventObject\EnemyGenerator.h" />
+    <ClInclude Include="EventObject\EventObjectBase.h" />
+    <ClInclude Include="EventObject\FlagPole.h" />
+    <ClInclude Include="EventObject\GoalBox.h" />
+    <ClInclude Include="EventObject\GoalPoint.h" />
+    <ClInclude Include="EventObject\GoalPost.h" />
+    <ClInclude Include="EventObject\LoopFlag.h" />
+    <ClInclude Include="EventObject\LoopHandler.h" />
+    <ClInclude Include="EventObject\OneWayWall.h" />
+    <ClInclude Include="EventObject\PowBlock.h" />
+    <ClInclude Include="EventObject\Princess.h" />
+    <ClInclude Include="EventObject\PSwitch.h" />
+    <ClInclude Include="EventObject\ShoeSmoke.h" />
+    <ClInclude Include="EventObject\SignArrow.h" />
+    <ClInclude Include="EventObject\SkyBridge.h" />
+    <ClInclude Include="EventObject\StartPointSignArrow.h" />
+    <ClInclude Include="EventObject\Trampolin.h" />
+    <ClInclude Include="EventObject\TrampolinMini.h" />
+    <ClInclude Include="EventObject\VineLadder.h" />
+    <ClInclude Include="EventObject\Vortex.h" />
+    <ClInclude Include="EventObject\WarpZoneFlag.h" />
+    <ClInclude Include="EventObject\WarpZoneText.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObjectBase.h" />
+    <ClInclude Include="GameState\GameStateAppUpdate.h" />
+    <ClInclude Include="GameState\GameStateBase.h" />
+    <ClInclude Include="GameState\GameStateCredits.h" />
+    <ClInclude Include="GameState\GameStateCutBridge.h" />
+    <ClInclude Include="GameState\GameStateDie.h" />
+    <ClInclude Include="GameState\GameStateEnterDoor.h" />
+    <ClInclude Include="GameState\GameStateEnterPipe.h" />
+    <ClInclude Include="GameState\GameStateEnterSky.h" />
+    <ClInclude Include="GameState\GameStateEnterStage.h" />
+    <ClInclude Include="GameState\GameStateExitDoor.h" />
+    <ClInclude Include="GameState\GameStateExitPipe.h" />
+    <ClInclude Include="GameState\GameStateFlagDown.h" />
+    <ClInclude Include="GameState\GameStateGameOver.h" />
+    <ClInclude Include="GameState\GameStateGoal.h" />
+    <ClInclude Include="GameState\GameStateHitGoalBox.h" />
+    <ClInclude Include="GameState\GameStateHitGoalPost.h" />
+    <ClInclude Include="GameState\GameStateLogo.h" />
+    <ClInclude Include="GameState\GameStateMessageBlock.h" />
+    <ClInclude Include="GameState\GameStatePlay.h" />
+    <ClInclude Include="GameState\GameStateRegisterUser.h" />
+    <ClInclude Include="GameState\GameStateRescuePrincess.h" />
+    <ClInclude Include="GameState\GameStateShapeChange.h" />
+    <ClInclude Include="GameState\GameStateSingleStageClear.h" />
+    <ClInclude Include="GameState\GameStateSingleStageGameOver.h" />
+    <ClInclude Include="GameState\GameStateSkyIntro.h" />
+    <ClInclude Include="GameState\GameStateStageIntro.h" />
+    <ClInclude Include="GameState\GameStateTest.h" />
+    <ClInclude Include="GameState\GameStateTimeUp.h" />
+    <ClInclude Include="GameState\GameStateTitle.h" />
+    <ClInclude Include="Item\CloudItem.h" />
+    <ClInclude Include="Item\DoorKey.h" />
+    <ClInclude Include="Item\DoorKeyCoin.h" />
+    <ClInclude Include="Item\FireFlower.h" />
+    <ClInclude Include="Item\GiantMushroom.h" />
+    <ClInclude Include="Item\ItemObjectBase.h" />
+    <ClInclude Include="Item\Mushroom.h" />
+    <ClInclude Include="Item\Mushroom1UP.h" />
+    <ClInclude Include="Item\MysteryMushroom.h" />
+    <ClInclude Include="Item\StaticCoin.h" />
+    <ClInclude Include="Item\SuperStar.h" />
+    <ClInclude Include="Item\ThrownCoin.h" />
+    <ClInclude Include="Item\TurtleShell.h" />
+    <ClInclude Include="Item\Vine.h" />
+    <ClInclude Include="Item\YoshiEgg.h" />
+    <ClInclude Include="Manager\DirectXManager.h" />
+    <ClInclude Include="Manager\FModManager.h" />
+    <ClInclude Include="Manager\InputManager.h" />
+    <ClInclude Include="Manager\JsonManager.h" />
+    <ClInclude Include="Manager\OpenGLManager.h" />
+    <ClInclude Include="Manager\PathManager.h" />
+    <ClInclude Include="Manager\RenderManager.h" />
+    <ClInclude Include="Manager\SoundManager.h" />
+    <ClInclude Include="Manager\SpriteManager.h" />
+    <ClInclude Include="Manager\ThemeManager.h" />
+    <ClInclude Include="MapObject\MapObjectBase.h" />
+    <ClInclude Include="MapObject\MapObjectBillBlaster.h" />
+    <ClInclude Include="MapObject\MapObjectCameraStop.h" />
+    <ClInclude Include="MapObject\MapObjectCheckPoint.h" />
+    <ClInclude Include="MapObject\MapObjectEnemyStop.h" />
+    <ClInclude Include="MapObject\MapObjectIsland.h" />
+    <ClInclude Include="MapObject\MapObjectMessageBlock.h" />
+    <ClInclude Include="MapObject\MapObjectMushroomIsland.h" />
+    <ClInclude Include="MapObject\MapObjectPipe.h" />
+    <ClInclude Include="MapObject\MapObjectPipeBody.h" />
+    <ClInclude Include="MapObject\MapObjectPipeExit.h" />
+    <ClInclude Include="MapObject\MapObjectPipeHorz.h" />
+    <ClInclude Include="MapObject\MapObjectRiver.h" />
+    <ClInclude Include="MapObject\MapObjectRiverBridge.h" />
+    <ClInclude Include="MapObject\MapObjectSemiSolid.h" />
+    <ClInclude Include="MapObject\MapObjectSkyExit.h" />
+    <ClInclude Include="MapObject\MapObjectStartPoint.h" />
+    <ClInclude Include="MapObject\MapObjectWall.h" />
+    <ClInclude Include="Misc\Camera.h" />
+    <ClInclude Include="Misc\PipeInfo.h" />
+    <ClInclude Include="Misc\PropertyMap.h" />
+    <ClInclude Include="Misc\SpeechBubble.h" />
+    <ClInclude Include="Misc\TypeNames.h" />
+    <ClInclude Include="GameOption.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourceHolder.h" />
+    <ClInclude Include="ServerRequest.h" />
+    <ClInclude Include="ServerRequest_.h" />
+    <ClInclude Include="ServerTransaction.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="..\NaLib\NaCommon.h" />
+    <ClInclude Include="..\NaLib\NaRect.h" />
+    <ClInclude Include="..\NaLib\NaString.h" />
+    <ClInclude Include="StageMetaInfo.h" />
+    <ClInclude Include="StagePack.h" />
+    <ClInclude Include="ThemeSetting.h" />
+    <ClInclude Include="Updater.h" />
+    <ClInclude Include="UserInterface\UIBase.h" />
+    <ClInclude Include="UserInterface\UIButton.h" />
+    <ClInclude Include="UserInterface\UIContainer.h" />
+    <ClInclude Include="UserInterface\UICustomGameButton.h" />
+    <ClInclude Include="UserInterface\UIEdit.h" />
+    <ClInclude Include="UserInterface\UIImageButton.h" />
+    <ClInclude Include="UserInterface\UIList.h" />
+    <ClInclude Include="UserInterface\UIPanel.h" />
+    <ClInclude Include="UserInterface\UIRectangle.h" />
+    <ClInclude Include="UserInterface\UISingleStageButton.h" />
+    <ClInclude Include="UserInterface\UIText.h" />
+    <ClInclude Include="UserInterface\UIWorldStageButton.h" />
+    <ClInclude Include="UserProfile.h" />
+    <ClInclude Include="Vehicle\Cloud.h" />
+    <ClInclude Include="Vehicle\ClownCar.h" />
+    <ClInclude Include="Vehicle\GoombaShoe.h" />
+    <ClInclude Include="Vehicle\VehicleObjectBase.h" />
+    <ClInclude Include="Vehicle\Yoshi.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\NaLib\NaPlatformAPI_macOS.mm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.cmake" />
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.dist" />
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="StagePatternData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="MarioV3.natvis">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <SubType>Designer</SubType>
+    </Natvis>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2016/6/26" BuildVersion_UpdateAssemblyVersion="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

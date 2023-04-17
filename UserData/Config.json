@@ -1,0 +1,12 @@
+{
+   "InputKeyCode" : "37,39,38,40,88,90",
+   "Name" : "neoarc",
+   "RenderEngine" : "OpenGL",
+   "SoftwareFrameSkip" : false,
+   "StageDifficultyFilter" : 0,
+   "StageSortMethod" : -1,
+   "StageThemeFilter" : 0,
+   "UniqueId" : "-KhAGZ-0d-55x828qpF-",
+   "WindowRect" : "",
+   "ZoomFactor" : 2
+}

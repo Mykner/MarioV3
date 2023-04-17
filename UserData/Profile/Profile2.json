@@ -1,0 +1,125 @@
+{
+   "ClearedSingleStages" : "1-1,SingleStage,_1-1 Remix 1104,-KhILba_k05jpF2RPkb8,-KhINIF_D6Z_J-0ReoSP,-KhINhKBdTdDrXmOA19K,-KhOMxMfqmV39I-WHXk9",
+   "LikedStages" : "-KhOMxMfqmV39I-WHXk9",
+   "Name" : "HYKIM",
+   "SingleStageRecord" : [
+      {
+         "BestScore" : 4450,
+         "BestTime" : 4165,
+         "Name" : "-KhILba_k05jpF2RPkb8"
+      },
+      {
+         "BestScore" : 20350,
+         "BestTime" : 50076,
+         "Name" : "-KhINIF_D6Z_J-0ReoSP"
+      },
+      {
+         "BestScore" : 20500,
+         "BestTime" : 4571,
+         "Name" : "-KhINhKBdTdDrXmOA19K"
+      },
+      {
+         "BestScore" : 16050,
+         "BestTime" : 120839,
+         "Name" : "-KhOMxMfqmV39I-WHXk9"
+      },
+      {
+         "BestScore" : 29200,
+         "BestTime" : 50373,
+         "Name" : "1-1"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "1-1 Remix 1104"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "EnemyWinged"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "SceneChangeEffect"
+      },
+      {
+         "BestScore" : 21100,
+         "BestTime" : 10436,
+         "Name" : "SingleStage"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "SoundManager"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "Stuck"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "Tricks"
+      },
+      {
+         "BestScore" : 0,
+         "BestTime" : 0,
+         "Name" : "Version104"
+      },
+      {
+         "BestScore" : 66550,
+         "BestTime" : 3038852,
+         "Name" : "_1-1 Remix 1104"
+      }
+   ],
+   "SpecialCodes" : "ModernStyle,SpecialEventGiantMushroom,SpecialEventGiantPreventHole",
+   "StagePackRecord" : [
+      {
+         "Coin" : 89,
+         "LastStage" : "",
+         "Life" : 4,
+         "Name" : ".",
+         "Score" : 66550,
+         "SelectableStages" : "",
+         "Shape" : 4
+      },
+      {
+         "Coin" : 87,
+         "LastStage" : "3-2",
+         "Life" : 6,
+         "Name" : "Classic",
+         "Score" : 1421000,
+         "SelectableStages" : "1-1,1-2,1-3,1-4,2-1,2-2,2-3,2-4,3-1,3-2,3-3,3-4,4-1,4-2,4-3,4-4,5-1,5-2,5-3,5-4,6-1,6-2,6-3",
+         "Shape" : 11
+      },
+      {
+         "Coin" : 0,
+         "LastStage" : "",
+         "Life" : 3,
+         "Name" : "Download",
+         "Score" : 0,
+         "SelectableStages" : "",
+         "Shape" : 1
+      },
+      {
+         "Coin" : 93,
+         "LastStage" : "1-4",
+         "Life" : 3,
+         "Name" : "SMB Remix",
+         "Score" : 179400,
+         "SelectableStages" : "1-1,1-2,1-3,1-4",
+         "Shape" : 1
+      },
+      {
+         "Coin" : 3,
+         "LastStage" : "Test3",
+         "Life" : 4,
+         "Name" : "Test",
+         "Score" : 42250,
+         "SelectableStages" : "Test1,Test2,Test3",
+         "Shape" : 3
+      }
+   ]
+}

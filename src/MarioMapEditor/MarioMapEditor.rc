@@ -1,0 +1,978 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어(대한민국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)\r\n"
+    "LANGUAGE 18, 1\r\n"
+    "#include ""res\\MarioMapEditor.rc2""  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.\r\n"
+    "#include ""l.KOR\\afxres.rc""      // 표준 구성 요소\r\n"
+    "#include ""l.KOR\\afxprint.rc""    // 인쇄 미리 보기 리소스\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""l.KOR\\afxribbon.rc""        // MFC 리본 및 컨트롤 막대 리소스\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\MarioMapEditor.ico"
+
+IDR_MarioMapEditorTYPE  ICON                    "res\\MarioMapEditorDoc.ico"
+
+IDI_FILE_VIEW           ICON                    "res\\file_view.ico"
+
+IDI_FILE_VIEW_HC        ICON                    "res\\file_view_hc.ico"
+
+IDI_CLASS_VIEW          ICON                    "res\\class_view.ico"
+
+IDI_CLASS_VIEW_HC       ICON                    "res\\class_view_hc.ico"
+
+IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
+IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
+IDI_PROPERTIES_WND      ICON                    "res\\properties_wnd.ico"
+
+IDI_PROPERTIES_WND_HC   ICON                    "res\\properties_wnd_hc.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
+IDR_SORT                BITMAP                  "res\\sort.bmp"
+
+IDB_SORT_24             BITMAP                  "res\\sort_hc.bmp"
+
+IDB_FILE_VIEW           BITMAP                  "res\\fileview.bmp"
+
+IDB_FILE_VIEW_24        BITMAP                  "res\\fileview_hc.bmp"
+
+IDB_CLASS_VIEW          BITMAP                  "res\\classview.bmp"
+
+IDB_CLASS_VIEW_24       BITMAP                  "res\\classview_hc.bmp"
+
+IDR_EXPLORER            BITMAP                  "res\\explorer.bmp"
+
+IDB_EXPLORER_24         BITMAP                  "res\\explorer_hc.bmp"
+
+IDR_MENU_IMAGES         BITMAP                  "res\\menuimages.bmp"
+
+IDB_MENU_IMAGES_24      BITMAP                  "res\\menuimages_hc.bmp"
+
+IDR_PROPERTIES          BITMAP                  "res\\properties.bmp"
+
+IDB_PROPERTIES_HC       BITMAP                  "res\\properties_hc.bmp"
+
+IDR_TOOLBAR_BLOCKS      BITMAP                  "res\\ToolbarBlocks.bmp"
+
+IDR_TOOLBAR_ITEMS       BITMAP                  "res\\ToolbarItems.bmp"
+
+IDR_TOOLBAR_ENEMIES     BITMAP                  "res\\ToolbarEnemies.bmp"
+
+IDR_TOOLBAR_MAPOBJECTS  BITMAP                  "res\\ToolbarMapObjects.bmp"
+
+IDR_TOOLBAR_EVENTOBJECTS BITMAP                  "res\\ToolbarEventObjects.bmp"
+
+IDR_TOOLBAR_VEHICLES    BITMAP                  "res\\ToolbarVehicles.bmp"
+
+IDB_ABILITY_0001        BITMAP                  "res\\Ability0001.bmp"
+
+IDB_ABILITY_0002        BITMAP                  "res\\Ability0002.bmp"
+
+IDB_ABILITY_0004        BITMAP                  "res\\Ability0004.bmp"
+
+IDB_ABILITY_0008        BITMAP                  "res\\Ability0008.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_FILE_UPLOAD
+    SEPARATOR
+    BUTTON      ID_BTN_PLAY
+    BUTTON      ID_BTN_STOP
+    SEPARATOR
+    BUTTON      ID_BTN_TOGGLE_PLAYEDSHADOW
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_FILE_UPLOAD
+    SEPARATOR
+    BUTTON      ID_BTN_PLAY
+    BUTTON      ID_BTN_STOP
+    SEPARATOR
+    BUTTON      ID_BTN_TOGGLE_PLAYEDSHADOW
+    BUTTON      ID_BTN_PLAYONGAME
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_SORT TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_SORT_MENU
+    BUTTON      ID_NEW_FOLDER
+END
+
+IDR_EXPLORER TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_PROPERTIES
+END
+
+IDR_MENU_IMAGES TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_WINDOW_MANAGER
+    SEPARATOR
+    BUTTON      ID_WINDOW_CASCADE
+    BUTTON      ID_WINDOW_TILE_HORZ
+    BUTTON      ID_TOOLS_MACRO
+    BUTTON      ID_SORTING_SORTALPHABETIC
+    BUTTON      ID_SORTING_SORTBYTYPE
+    BUTTON      ID_SORTING_SORTBYACCESS
+    BUTTON      ID_SORTING_GROUPBYTYPE
+END
+
+IDR_PROPERTIES TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_EXPAND_ALL
+    BUTTON      ID_SORTPROPERTIES
+    BUTTON      ID_PROPERTIES1
+    BUTTON      ID_PROPERTIES2
+END
+
+IDR_TOOLBAR_BLOCKS TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_BTN_BLOCK_PICK
+    BUTTON      ID_BTN_BLOCK_ERASER
+    BUTTON      ID_BTN_BLOCK_BRICK
+    BUTTON      ID_BTN_BLOCK_ITEM
+    BUTTON      ID_BTN_BLOCK_HARDBRICK
+    BUTTON      ID_BTN_BLOCK_GROUND
+    BUTTON      ID_BTN_BLOCK_TAKENITEM
+    BUTTON      ID_BTN_BLOCK_HIDDENITEM
+    BUTTON      ID_BTN_BLOCK_CLOUD
+    BUTTON      ID_BTN_BLOCK_VERTICAL_LINE
+    BUTTON      ID_BTN_BLOCK_SPIKE
+    BUTTON      ID_BTN_BLOCK_JUMP
+END
+
+IDR_TOOLBAR_ITEMS TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_BTN_OBJ_COIN
+    BUTTON      ID_BTN_OBJ_MUSHROOM
+    BUTTON      ID_BTN_OBJ_FIREFLOWER
+    BUTTON      ID_BTN_OBJ_STAR
+    BUTTON      ID_BTN_OBJ_1UP
+    BUTTON      ID_BTN_OBJ_VINE
+    BUTTON      ID_BTN_OBJ_GIANTMUSHROOM
+    BUTTON      ID_BTN_OBJ_DOORKEYCOIN
+    BUTTON      ID_BTN_OBJ_DOORKEY
+    BUTTON      ID_BTN_OBJ_TURTLESHELL
+    BUTTON      ID_BTN_OBJ_LEAF
+    BUTTON      ID_BTN_OBJ_MYSTERYMUSHROOM
+END
+
+IDR_TOOLBAR_ENEMIES TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_BTN_OBJ_GOOMBA
+    BUTTON      ID_BTN_OBJ_TURTLE
+    BUTTON      ID_BTN_OBJ_REDTURTLE
+    BUTTON      ID_BTN_OBJ_DRYBONE
+    BUTTON      ID_BTN_OBJ_SPINY
+    BUTTON      ID_BTN_OBJ_BUZZYBEETLE
+    BUTTON      ID_BTN_OBJ_LAKITU
+    BUTTON      ID_BTN_OBJ_KILLERFLOWER
+    BUTTON      ID_BTN_OBJ_FIREPIRANHAPLANT
+    BUTTON      ID_BTN_OBJ_MUNCHER
+    BUTTON      ID_BTN_OBJ_BLOOBER
+    BUTTON      ID_BTN_OBJ_CHEEPCHEEP
+    BUTTON      ID_BTN_OBJ_REDCHEEPCHEEP
+    BUTTON      ID_BTN_OBJ_HAMMERBROTHERS
+    BUTTON      ID_BTN_OBJ_BOOMERANGBROTHERS
+    BUTTON      ID_BTN_OBJ_FIREBROTHERS
+    BUTTON      ID_BTN_OBJ_SLEDGEBROTHERS
+    BUTTON      ID_BTN_OBJ_BOBOMB
+    BUTTON      ID_BTN_OBJ_CHAINCHOMP
+    BUTTON      ID_BTN_OBJ_THWOMP
+    BUTTON      ID_BTN_OBJ_GRINDER
+    BUTTON      ID_BTN_OBJ_FIREBAR
+    BUTTON      ID_BTN_OBJ_PODOBOO
+    BUTTON      ID_BTN_OBJ_BOWSERJUNIOR
+    BUTTON      ID_BTN_OBJ_BOWSER
+    BUTTON      ID_BTN_OBJ_BOO
+    BUTTON      ID_BTN_OBJ_ROCKYWRENCH
+    BUTTON      ID_BTN_OBJ_BOOMBOOM
+END
+
+IDR_TOOLBAR_MAPOBJECTS TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_BTN_OBJ_STARTPOINT
+    BUTTON      ID_BTN_OBJ_PIPE
+    BUTTON      ID_BTN_OBJ_PIPEBODY
+    BUTTON      ID_BTN_OBJ_ISLAND
+    BUTTON      ID_BTN_OBJ_RIVER
+    BUTTON      ID_BTN_OBJ_CAMERASTOP
+    BUTTON      ID_BTN_OBJ_SKYEXIT
+    BUTTON      ID_BTN_OBJ_RIVERBRIDGE
+    BUTTON      ID_BTN_OBJ_ENEMYSTOP
+    BUTTON      ID_BTN_OBJ_BILLBLASTER
+    BUTTON      ID_BTN_OBJ_MUSHROOMISLAND
+    BUTTON      ID_BTN_OBJ_WALL
+    BUTTON      ID_BTN_OBJ_SEMI_SOLID
+    BUTTON      ID_BTN_OBJ_MESSAGEBLOCK
+END
+
+IDR_TOOLBAR_EVENTOBJECTS TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_BTN_OBJ_STARTPOINT_SIGNARROW
+    BUTTON      ID_BTN_OBJ_SIGNARROW
+    BUTTON      ID_BTN_OBJ_PSWITCH
+    BUTTON      ID_BTN_OBJ_DOOR
+    BUTTON      ID_BTN_OBJ_VINES
+    BUTTON      ID_BTN_OBJ_TRAMPOLIN_MINI
+    BUTTON      ID_BTN_OBJ_CHECKPOINTFLAG
+    BUTTON      ID_BTN_OBJ_WARPZONETEXT
+    BUTTON      ID_BTN_OBJ_FLAGPOLE
+    BUTTON      ID_BTN_OBJ_GOALPOINT
+    BUTTON      ID_BTN_OBJ_BRIDGE
+    BUTTON      ID_BTN_OBJ_SKYBRIDGE
+    BUTTON      ID_BTN_OBJ_ENEMYGENERATOR
+    BUTTON      ID_BTN_OBJ_BOWSERFIRE
+    BUTTON      ID_BTN_OBJ_BOSSBRIDGE
+    BUTTON      ID_BTN_OBJ_AXE
+    BUTTON      ID_BTN_OBJ_PRINCESS
+    BUTTON      ID_BTN_OBJ_CANNON
+    BUTTON      ID_BTN_OBJ_TRAMPOLIN
+    BUTTON      ID_BTN_OBJ_LOOPHANDLER
+    BUTTON      ID_BTN_OBJ_LOOPFLAG
+    BUTTON      ID_BTN_OBJ_WARPZONEFLAG
+    BUTTON      ID_BTN_OBJ_ONEWAYWALL
+    BUTTON      ID_BTN_OBJ_POWBLOCK
+    BUTTON      ID_BTN_OBJ_GOALBOX
+    BUTTON      ID_BTN_OBJ_GOALPOST
+END
+
+IDR_TOOLBAR_VEHICLES TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_BTN_OBJ_YOSHI
+    BUTTON      ID_BTN_OBJ_CLOUD
+    BUTTON      ID_BTN_OBJ_CLOWNCAR
+    BUTTON      ID_BTN_OBJ_GOOMBASHOE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "New(&N)\tCtrl+N",             ID_FILE_NEW
+        MENUITEM "Open(&O)...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "Close(&C)",                   ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "Recently Opened",             ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                    ID_APP_EXIT
+    END
+    POPUP "View(&V)"
+    BEGIN
+        MENUITEM "Statusbar(&S)",               ID_VIEW_STATUS_BAR
+        POPUP "Application Theme(&A)"
+        BEGIN
+            MENUITEM "Windows 2000(&2)",            ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office XP(&X)",               ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "Windows XP(&W)",              ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 2003(&3)",             ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            POPUP "Office 2007(&7)"
+            BEGIN
+                MENUITEM "파랑 스타일(&B)",                  ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "검정 스타일(&L)",                  ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "은색 스타일(&S)",                  ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "바다색 스타일(&A)",                 ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "About MarioMapEditor(&A)...", ID_APP_ABOUT
+    END
+END
+
+IDR_MarioMapEditorTYPE MENU
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "New(&N)\tCtrl+N",             ID_FILE_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "Open(&O)...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "Save(&S)\tCtrl+S",            ID_FILE_SAVE
+        MENUITEM "Save as(&A)...",              ID_FILE_SAVE_AS
+        MENUITEM "Close(&C)",                   ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "Upload(&U)\tCtrl+U",          ID_FILE_UPLOAD
+        MENUITEM SEPARATOR
+        MENUITEM "Recently Opened",             ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                    ID_APP_EXIT
+    END
+    POPUP "Edit(&E)"
+    BEGIN
+        MENUITEM "Undo(&U)\tCtrl+Z",            ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cut(&T)\tCtrl+X",             ID_EDIT_CUT
+        MENUITEM "Copy(&C)\tCtrl+C",            ID_EDIT_COPY
+        MENUITEM "Paste(&P)\tCtrl+V",           ID_EDIT_PASTE
+    END
+    POPUP "View(&V)"
+    BEGIN
+        MENUITEM "Statusbar(&S)",               ID_VIEW_STATUS_BAR
+        POPUP "Application Theme(&A)"
+        BEGIN
+            MENUITEM "Windows 2000(&2)",            ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office XP(&X)",               ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "Windows XP(&W)",              ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 2003(&3)",             ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            POPUP "Office 2007(&7)"
+            BEGIN
+                MENUITEM "파랑 스타일(&B)",                  ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "검정 스타일(&L)",                  ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "은색 스타일(&S)",                  ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "바다색 스타일(&A)",                 ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "Window(&W)"
+    BEGIN
+        MENUITEM "New Window",                  ID_WINDOW_NEW, INACTIVE
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "About MarioMapEditor(&A)...", ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_EDIT MENU
+BEGIN
+    POPUP "편집"
+    BEGIN
+        MENUITEM SEPARATOR
+        POPUP "Sub Stages"
+        BEGIN
+            MENUITEM "Add Sub Stage",               ID_SUBSTAGES_ADDSUBSTAGE
+            MENUITEM "Main Stage",                  ID_SUBSTAGES_MAINSTAGE
+            MENUITEM SEPARATOR
+            MENUITEM "SubStage 1",                  ID_SUBSTAGES_SUBSTAGE1
+            MENUITEM "SubStage 2",                  ID_SUBSTAGES_SUBSTAGE2
+            MENUITEM "SubStage 3",                  ID_SUBSTAGES_SUBSTAGE3
+            MENUITEM "SubStage 4",                  ID_SUBSTAGES_SUBSTAGE4
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Select Ability Flags",        ID_SELECT_ABILITY_FLAGS
+        MENUITEM SEPARATOR
+        MENUITEM "Play Current Stage",          ID_BTN_PLAY
+        MENUITEM "Stop Playing",                ID_BTN_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "Cut(&T)\tCtrl+X",             ID_EDIT_CUT
+        MENUITEM "Copy(&C)\tCtrl+C",            ID_EDIT_COPY
+        MENUITEM "Paste(&P)\tCtrl+V",           ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Empty Page at Current Position", ID_INSERT_EMPTYPAGE
+        MENUITEM SEPARATOR
+        MENUITEM "Create Balanced Lift",        ID_CREATE_BALANCED_LIFT
+        MENUITEM "Create Piranha Plant on All Pipes", ID_CREATE_PIRANHAPLANT_ALLPIPE
+        MENUITEM SEPARATOR
+        MENUITEM "Clear Ground Blocks",         ID_CLEAR_GROUND_BLOCKS
+        POPUP "Auto Building"
+        BEGIN
+            MENUITEM "Underground Bonus Stage",     ID_AUTOBUILDING_UNDERGROUNDBONUSSTAGE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Toggle ModernStyle",          ID_TOGGLE_MODERNSTYLE
+        MENUITEM "Check Valid",                 ID_CHECK_VALID
+    END
+END
+
+IDR_POPUP_SORT MENU
+BEGIN
+    POPUP "정렬"
+    BEGIN
+        MENUITEM "사전순 정렬(&S)",                  ID_SORTING_SORTALPHABETIC
+        MENUITEM "형식별 정렬(&T)",                  ID_SORTING_SORTBYTYPE
+        MENUITEM "액세스별 정렬(&E)",                 ID_SORTING_SORTBYACCESS
+        MENUITEM "형식별 그룹화(&Y)",                 ID_SORTING_GROUPBYTYPE
+    END
+END
+
+IDR_POPUP_EXPLORER MENU
+BEGIN
+    POPUP "탐색기"
+    BEGIN
+        MENUITEM "열기(&O)",                      ID_OPEN
+        MENUITEM "연결 프로그램(&W)....",             ID_OPEN_WITH
+        MENUITEM SEPARATOR
+        MENUITEM "컴파일(&C)",                     ID_DUMMY_COMPILE
+        MENUITEM SEPARATOR
+        MENUITEM "잘라내기(&T)\tCtrl+X",            ID_EDIT_CUT
+        MENUITEM "복사(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "제거(&R)",                      ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "속성(&P)...",                   ID_PROPERTIES
+    END
+END
+
+IDR_OUTPUT_POPUP MENU
+BEGIN
+    POPUP "팝업"
+    BEGIN
+        MENUITEM "복사(&C)",                      ID_EDIT_COPY
+        MENUITEM "지우기(&C)",                     ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "숨기기(&H)",                     ID_VIEW_OUTPUTWND
+    END
+END
+
+IDR_HELP_MENU MENU
+BEGIN
+    MENUITEM "MarioMapEditor 정보(&A)...",    ID_APP_ABOUT
+END
+
+IDR_THEME_MENU MENU
+BEGIN
+    MENUITEM "Office 2007(파랑 스타일)(&B)",     ID_VIEW_APPLOOK_OFF_2007_BLUE
+    MENUITEM "Office 2007(검정 스타일)(&L)",     ID_VIEW_APPLOOK_OFF_2007_BLACK
+    MENUITEM "Office 2007(은색 스타일)(&S)",     ID_VIEW_APPLOOK_OFF_2007_SILVER
+    MENUITEM "Office 2007(바다색 스타일)(&A)",    ID_VIEW_APPLOOK_OFF_2007_AQUA
+    MENUITEM "Windows 7(&D)",               ID_VIEW_APPLOOK_WINDOWS_7
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    VK_ESCAPE,      ID_ACCEL_CANCEL,        VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F5,          ID_BTN_PLAY,            VIRTKEY, NOINVERT
+    VK_F5,          ID_BTN_STOP,            VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 280, 274
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About this program ..."
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    LTEXT           "MapEditor for Super fanmade Mario Bros",IDC_STATIC,43,14,230,8,SS_NOPREFIX
+    LTEXT           "Created by neoarc, since 2016. Original game by Nintendo.",IDC_STATIC,42,26,231,8
+    DEFPUSHBUTTON   "Ok",IDOK,223,253,50,14,WS_GROUP
+    CTEXT           "---=@=--- Hotkeys ---=@=---\n\n[Space] : Play / Stop\n\n[F5] : Play\n\n[Shift + F5] : Stop\n\n[Esc] : Cancel selection\n\n[Delete] : Remove selected object\n\n[E] : Select eraser tool",IDC_STATIC,7,49,266,107,0,WS_EX_TRANSPARENT
+    CTEXT           "[`], [1], [2], [3] : Change to sub stage\n\n[+] : Toggle 'PowerUp' property of selected Enemy object\n\n[-] : Toggle some property quickly (Ex. Pipe direction)\n\n[W] or [*] : Toggle 'Winged' property of selected Enemy object\n\n[Arrow] : Scroll stage",IDC_STATIC,7,161,266,76
+END
+
+IDD_DLG_COSTUME DIALOGEX 0, 0, 669, 237
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Costume"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Ok",IDOK,549,216,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,611,216,50,14
+    CTEXT           "",IDC_STATIC_LIST,7,7,654,205,NOT WS_VISIBLE | WS_BORDER,WS_EX_TRANSPARENT
+END
+
+IDD_DLG_SUBSTAGE DIALOGEX 0, 0, 289, 159
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Pick a stage to move through this pipe"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Ok",IDOK,179,138,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,232,138,50,14
+    CONTROL         "Main Stage",IDC_RADIO_MAIN,"Button",BS_AUTORADIOBUTTON | WS_GROUP,7,7,51,22
+    CONTROL         "SubStage1",IDC_RADIO_SUBSTAGE1,"Button",BS_AUTORADIOBUTTON,7,33,51,22
+    CONTROL         "SubStage2",IDC_RADIO_SUBSTAGE2,"Button",BS_AUTORADIOBUTTON,7,59,51,22
+    CONTROL         "SubStage3",IDC_RADIO_SUBSTAGE3,"Button",BS_AUTORADIOBUTTON,7,85,51,22
+    CONTROL         "SubStage4",IDC_RADIO_SUBSTAGE4,"Button",BS_AUTORADIOBUTTON,7,111,51,22
+    CTEXT           "Stage Thumbnail",IDC_STATIC_THUMB0,63,7,219,22,SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Stage Thumbnail",IDC_STATIC_THUMB1,63,33,219,22,SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Stage Thumbnail",IDC_STATIC_THUMB2,63,59,219,22,SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Stage Thumbnail",IDC_STATIC_THUMB3,63,85,219,22,SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Stage Thumbnail",IDC_STATIC_THUMB4,63,111,219,22,SS_CENTERIMAGE | WS_BORDER
+END
+
+IDD_DLG_ABILITY DIALOGEX 0, 0, 129, 118
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select ability flags"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Ok",IDOK,19,97,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,71,97,50,14
+    CONTROL         IDB_ABILITY_0001,IDC_STATIC_0001,"Static",SS_BITMAP,19,6,40,37
+    CONTROL         IDB_ABILITY_0002,IDC_STATIC_0002,"Static",SS_BITMAP,81,6,40,37
+    CONTROL         IDB_ABILITY_0004,IDC_STATIC_0004,"Static",SS_BITMAP,19,51,40,37
+    CONTROL         IDB_ABILITY_0008,IDC_STATIC_0008,"Static",SS_BITMAP,80,51,40,37
+    CONTROL         "",IDC_CHECK_0001,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,21,8,10
+    CONTROL         "",IDC_CHECK_0002,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,68,20,8,10
+    CONTROL         "",IDC_CHECK_0004,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,65,8,10
+    CONTROL         "",IDC_CHECK_0008,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,67,66,8,10
+END
+
+IDD_DLG_USERNAME DIALOGEX 0, 0, 191, 66
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Welcome!"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_NAME,29,45,77,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Ok",IDOK,111,45,50,14
+    LTEXT           "What's your name? (or nickname?)\n\nThis will be automatically entered into the Creator of all maps created on this PC in the future.",IDC_STATIC,7,7,176,37
+END
+
+IDD_DLG_QNA DIALOGEX 0, 0, 223, 125
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Question"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_ANSWER,7,85,209,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Ok",IDOK,110,104,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,166,104,50,14
+    LTEXT           "Q",IDC_STATIC_QUESTION,7,7,209,71
+END
+
+IDD_DLG_CREATOR_COMMENT DIALOGEX 0, 0, 181, 98
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Creator's comment"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_COMMENT,7,32,167,40,ES_MULTILINE
+    DEFPUSHBUTTON   "Ok",IDOK,70,78,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,124,78,50,14
+    LTEXT           "You can add Creator's comment below.\nThis is visible to all users.",IDC_STATIC,7,7,167,23
+END
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 273
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 267
+    END
+
+    IDD_DLG_COSTUME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 661
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 230
+    END
+
+    IDD_DLG_SUBSTAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 282
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 152
+    END
+
+    IDD_DLG_ABILITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 122
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 111
+    END
+
+    IDD_DLG_USERNAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 184
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 59
+    END
+
+    IDD_DLG_QNA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 216
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 118
+    END
+
+    IDD_DLG_CREATOR_COMMENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 91
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_COSTUME AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SUBSTAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_ABILITY AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_USERNAME AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_QNA AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_CREATOR_COMMENT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR_MARIO_HAND   CURSOR                  "res\\MarioHand.cur"
+
+IDC_CURSOR_ERASER       CURSOR                  "res\\Eraser.cur"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE를 초기화할 수 없습니다. OLE 라이브러리 버전이 올바른지 확인하십시오."
+END
+
+STRINGTABLE
+BEGIN
+    //IDR_MAINFRAME           "SFMB MapEditor v3.1 by neoarc"
+    IDR_MarioMapEditorTYPE  "\nMarioMap\nMap\nSFMB Stage Files (*.map)\n.map\nMarioMap.Document\nMarioMap.Document"
+    ID_WINDOW_MANAGER       "Window Manager(&W)..."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "MarioMapEditor"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+    ID_INDICATOR_TYPENAME   "<Unknown type>"
+    ID_INDICATOR_SIZE       "..."
+    ID_INDICATOR_CURSOR     "Game: 0000,0000 / Tile: 000,000"
+    ID_INDICATOR_POSITION   "..."
+    ID_INDICATOR_CAMERAPOS  "Camera: 000"
+    ID_INDICATOR_EDITMODE   "Unknown mode"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Create a new document.\nNew"
+    ID_FILE_OPEN            "Open a document.\nOpen"
+    ID_FILE_CLOSE           "Close a active document.\nClose"
+    ID_FILE_SAVE            "Save a active document.\nSave"
+    ID_FILE_SAVE_AS         "Save a active document to new name.\nSave as..."
+    ID_FILE_PAGE_SETUP      "인쇄 옵션을 변경합니다.\n페이지 설정"
+    ID_FILE_PRINT_SETUP     "Change printer or print options.\nPrint Setup"
+    ID_FILE_PRINT           "Print a active document.\nPrint"
+    ID_FILE_PRINT_DIRECT    "현재 옵션을 사용하여 활성 문서를 인쇄합니다.\n빠른 인쇄"
+    ID_FILE_PRINT_PREVIEW   "Preview a active document.\nPrint Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Show program version, information, license, etc.\nAbout"
+    ID_APP_EXIT             "Exit program.\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open a selected document."
+    ID_FILE_MRU_FILE2       "Open a selected document."
+    ID_FILE_MRU_FILE3       "Open a selected document."
+    ID_FILE_MRU_FILE4       "Open a selected document."
+    ID_FILE_MRU_FILE5       "Open a selected document."
+    ID_FILE_MRU_FILE6       "Open a selected document."
+    ID_FILE_MRU_FILE7       "Open a selected document."
+    ID_FILE_MRU_FILE8       "Open a selected document."
+    ID_FILE_MRU_FILE9       "Open a selected document."
+    ID_FILE_MRU_FILE10      "Open a selected document."
+    ID_FILE_MRU_FILE11      "Open a selected document."
+    ID_FILE_MRU_FILE12      "Open a selected document."
+    ID_FILE_MRU_FILE13      "Open a selected document."
+    ID_FILE_MRU_FILE14      "Open a selected document."
+    ID_FILE_MRU_FILE15      "Open a selected document."
+    ID_FILE_MRU_FILE16      "Open a selected document."
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "다음 창으로 전환합니다.\n다음 창"
+    ID_PREV_PANE            "이전 창으로 전환합니다.\n이전 창"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_ARRANGE       "창의 아래쪽에 아이콘을 정렬합니다.\n아이콘 정렬"
+    ID_WINDOW_CASCADE       "창이 겹치도록 계단식으로 정렬합니다.\n계단식 창 배열"
+    ID_WINDOW_TILE_HORZ     "창이 겹치지 않도록 바둑판식으로 정렬합니다.\n바둑판식 창 배열"
+    ID_WINDOW_TILE_VERT     "창이 겹치지 않도록 바둑판식으로 정렬합니다.\n바둑판식 창 배열"
+    ID_WINDOW_SPLIT         "활성 창을 여러 개의 창으로 분할합니다.\n분할"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "선택 영역을 지웁니다.\n지우기"
+    ID_EDIT_CLEAR_ALL       "모두 지웁니다.\n모두 지우기"
+    ID_EDIT_COPY            "Copy selected item to clipboard.\nCopy"
+    ID_EDIT_CUT             "Cut selected item to clipboard.\nCut"
+    ID_EDIT_FIND            "지정한 텍스트를 찾습니다.\n찾기"
+    ID_EDIT_PASTE           "Paste clipboard into document.\nPaste"
+    ID_EDIT_REPEAT          "마지막 작업을 반복합니다.\n반복"
+    ID_EDIT_REPLACE         "특정 텍스트를 다른 텍스트로 바꿉니다.\n바꾸기"
+    ID_EDIT_SELECT_ALL      "전체 문서를 선택합니다.\n모두 선택"
+    ID_EDIT_UNDO            "Undo last editing.\nUndo"
+    ID_EDIT_REDO            "Redo last undo action.\nRedo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_STATUS_BAR      "Toggle visible status of statusbar.\nStatusbar"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "창 크기를 변경합니다."
+    AFX_IDS_SCMOVE          "창 위치를 변경합니다."
+    AFX_IDS_SCMINIMIZE      "창을 아이콘으로 축소합니다."
+    AFX_IDS_SCMAXIMIZE      "창을 전체 화면 크기로 확대합니다."
+    AFX_IDS_SCNEXTWINDOW    "다음 문서 창으로 전환합니다."
+    AFX_IDS_SCPREVWINDOW    "이전 문서 창으로 전환합니다."
+    AFX_IDS_SCCLOSE         "문서를 저장할 것인지 확인하고 활성 창을 닫습니다."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "창을 보통 크기로 복원합니다."
+    AFX_IDS_SCTASKLIST      "작업 목록을 활성화합니다."
+    AFX_IDS_MDICHILD        "이 창을 활성화합니다."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "인쇄 미리 보기 모드를 닫습니다.\n미리 보기 취소"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STATUS_PANE1        "창 1"
+    IDS_STATUS_PANE2        "창 2"
+    IDS_TOOLBAR_STANDARD    "Standard"
+    IDS_TOOLBAR_CUSTOMIZE   "Toolbar Customize"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_FILE_VIEW           "파일 뷰"
+    IDS_CLASS_VIEW          "클래스 뷰"
+    IDS_OUTPUT_WND          "출력"
+    IDS_PROPERTIES_WND      "Properties"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_EXPLORER            "탐색기"
+    IDS_EDIT_MENU           "편집"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_BUILD_TAB           "빌드"
+    IDS_DEBUG_TAB           "디버그"
+    IDS_FIND_TAB            "찾기"
+END
+
+#endif    // 한국어(대한민국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE 18, 1
+#include "res\MarioMapEditor.rc2"  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.
+#include "l.KOR\afxres.rc"      // 표준 구성 요소
+#include "l.KOR\afxprint.rc"    // 인쇄 미리 보기 리소스
+#if !defined(_AFXDLL)
+#include "l.KOR\afxribbon.rc"        // MFC 리본 및 컨트롤 막대 리소스
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

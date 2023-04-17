@@ -1,0 +1,1774 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9e73d678-f881-4048-88bc-8182aaf268de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MapObjects">
+      <UniqueIdentifier>{4de26232-3a17-4e3f-859c-c9dee8ff8bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{884952de-3902-4f56-899f-b507599b97aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Bullet">
+      <UniqueIdentifier>{60eab993-6b15-42f9-8b53-871e8c8afd74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Effect">
+      <UniqueIdentifier>{56f1c418-4e0c-4c61-bdb6-07f2ee0edcaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enemy">
+      <UniqueIdentifier>{8ad649cc-74cc-4f3e-9ef7-d3a668b65b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Item">
+      <UniqueIdentifier>{593bc7be-f904-4489-9489-44b9465cba25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\EventObject">
+      <UniqueIdentifier>{199407c5-88f6-44f0-a391-66e35a631290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{78e854a5-bcdb-4b77-9810-a2dc7584bf81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\Design">
+      <UniqueIdentifier>{44d355f0-a7db-43a1-9392-e5fbb53b5c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\Background">
+      <UniqueIdentifier>{9b3271f4-a5bc-4720-b8d9-b3f071924d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\Misc">
+      <UniqueIdentifier>{f3d49565-a467-46ec-891e-8790f3a417e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d3f88bb9-b7dd-4f28-87f6-3657775d2e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MapObjects">
+      <UniqueIdentifier>{3c01a495-82ea-4199-9309-4bd0fd081cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager">
+      <UniqueIdentifier>{2e0d8ca8-3c00-459c-b2b7-d57368c4910a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{fd2d521d-0aac-4a39-9e0c-cf0a048d53f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Effect">
+      <UniqueIdentifier>{13bdba98-b9a1-45ce-9afb-224da5787e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Item">
+      <UniqueIdentifier>{91aeba3f-9000-48bf-ac4c-a9359e31f896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\EventObject">
+      <UniqueIdentifier>{8739aaa9-ba27-43c1-9b34-872fd2c0d946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Bullet">
+      <UniqueIdentifier>{3b4ffcdf-7af2-43e5-970a-f01a0f968977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine">
+      <UniqueIdentifier>{a2c39d24-f3bc-412b-8e16-d39825050213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\GameStates">
+      <UniqueIdentifier>{24732b5b-70f7-4231-8b5a-f1195cdfff24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\Background">
+      <UniqueIdentifier>{c8206c9b-7918-47e6-b279-d83157fc7ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\Design">
+      <UniqueIdentifier>{d5ac8488-57a5-4b4d-9f60-982cb7cd156f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\Misc">
+      <UniqueIdentifier>{c9d3313a-0c13-4127-9b6a-434ff3e248b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib">
+      <UniqueIdentifier>{81a8ac11-cb18-42a2-b90c-09083f978faa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\NaLib">
+      <UniqueIdentifier>{432fd5b5-5a4a-487a-b78a-84b184cc0fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\JsonLib">
+      <UniqueIdentifier>{66fe2733-bc6f-46e7-9a98-657eb56d8b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Manager">
+      <UniqueIdentifier>{492247d3-70ba-4940-bc33-db7d17fa73e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\GameState">
+      <UniqueIdentifier>{7706f4a7-3f9d-404e-a5a5-0890d781dd08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\UserInterface">
+      <UniqueIdentifier>{2193d2e3-c4f6-4af3-896e-d5fa9334e95c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\UserInterface">
+      <UniqueIdentifier>{b955afe3-c1a8-43db-b707-cf7b4fedf5f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Vehicle">
+      <UniqueIdentifier>{b1f96741-fc8c-40f9-9c15-43951ffc7a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Vehicle">
+      <UniqueIdentifier>{195bfd3f-a3c5-455c-9272-bf26bf9bd1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine\Common">
+      <UniqueIdentifier>{e5655c36-36c0-4919-b93b-3096ba288106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Enemy">
+      <UniqueIdentifier>{f7a9da5c-82d1-43b3-b0c5-5d885feb7ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\ControllableObject">
+      <UniqueIdentifier>{99a11f8e-5d7c-4598-8b14-4aa62d103dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\ControllableObject">
+      <UniqueIdentifier>{07f5ebee-c115-4704-bf19-8084fffdef8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine\Common">
+      <UniqueIdentifier>{a17eb689-95e6-40f7-8306-ec22e5f16b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enemy\Deprecated">
+      <UniqueIdentifier>{b0cc4802-6f40-472d-9f04-c75c4fa36c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\CurlLib">
+      <UniqueIdentifier>{45f9204b-a5c7-4dd9-89a1-23484006d2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\CurlLib\curl">
+      <UniqueIdentifier>{87d1f9dd-8555-47b2-9fb1-2540e39745df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\CurlLib\curlcpp">
+      <UniqueIdentifier>{f5f71026-ca48-4d53-8ac0-86c142e852f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLib\NaLib\aes">
+      <UniqueIdentifier>{a9a32d4e-cb75-412f-88b5-0f26dbbe9f9c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\NaLib\NaCommon.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\NaString.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\JsonLib\json_reader.cpp">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\JsonLib\json_value.cpp">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\JsonLib\json_writer.cpp">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectBase.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\NaLeakDetector.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\NaPlatformAPI_Win32.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundFence.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundMountain.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundRedCloud.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundSnowFence.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundUnderground.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundUnderWater.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundBase.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundCastle.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundCloud.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIImageButton.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIList.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIPanel.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UISingleStageButton.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIText.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIBase.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIButton.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIContainer.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UICustomGameButton.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIEdit.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateCutBridge.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateDie.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateEnterDoor.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateEnterPipe.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateEnterSky.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateEnterStage.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateExitDoor.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateExitPipe.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateFlagDown.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateGameOver.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateGoal.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateMessageBlock.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStatePlay.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateRescuePrincess.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateShapeChange.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateSingleStageClear.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateSkyIntro.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateStageIntro.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateTest.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateTimeUp.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateTitle.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateBase.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectAirBubble.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectBrickDebris.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectChainDebris.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectCoin.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectDebrisBase.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectDryBoneDebris.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectDust.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectEggDebris.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectFireBoom.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectHit.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectObjectBase.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectParalyze.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectPop.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectSceneCircle.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectSceneFade.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectScore.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectSpin.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectStarDust.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectTwinkle.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectWingDebris.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyObjectBase.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\FireBar.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\FireBrothers.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Goomba.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Grinder.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\HammerBrothers.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Lakitu.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\PiranhaPlant.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Podoboo.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\RedCheepCheep.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\RedTurtle.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\SledgeBrothers.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Spiny.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Thwomp.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Turtle.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Bloober.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Bobomb.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BoomerangBrothers.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Bowser.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BulletBill.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BuzzyBeetle.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\ChainChomp.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\ChainChompStake.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CheepCheep.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\DryBone.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectBillBlaster.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectCameraStop.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectCheckPoint.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectEnemyStop.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectIsland.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectMessageBlock.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectMushroomIsland.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectPipe.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectPipeBody.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectPipeExit.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectPipeHorz.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectRiver.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectRiverBridge.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectSemiSolid.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectSkyExit.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectStartPoint.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectWall.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject\MapObjectBase.cpp">
+      <Filter>Source Files\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\BillBlaster.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\BossBridge.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\BossBridgeAxe.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\BowserFireShooter.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\CheckPointFlag.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\FlagPole.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\GoalPoint.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\LoopFlag.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\LoopHandler.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Princess.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\PSwitch.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\SignArrow.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\SkyBridge.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\StartPointSignArrow.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Trampolin.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\TrampolinMini.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\VineLadder.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Vortex.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\WarpZoneFlag.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\WarpZoneText.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\DoorKeyCoin.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\FireFlower.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\ItemObjectBase.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Mushroom.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Mushroom1UP.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\MysteryMushroom.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\StaticCoin.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\SuperStar.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\ThrownCoin.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\TurtleShell.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Vine.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\YoshiEgg.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\CloudItem.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\DoorKey.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\GiantMushroom.cpp">
+      <Filter>Source Files\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle\VehicleObjectBase.cpp">
+      <Filter>Source Files\GameObjects\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle\Yoshi.cpp">
+      <Filter>Source Files\GameObjects\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle\Cloud.cpp">
+      <Filter>Source Files\GameObjects\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\SpinySpike.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\ThrowingHammer.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\YoshiFire.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\YoshiTongue.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\Boomerang.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BowserFire.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BulletObjectBase.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\Fireball.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Bridge.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Door.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\EnemyGenerator.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\EventObjectBase.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Design\GameStateDesign.cpp">
+      <Filter>Source Files\GameEngine\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Design\GameStateDesignPlay.cpp">
+      <Filter>Source Files\GameEngine\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Design\DesignGame.cpp">
+      <Filter>Source Files\GameEngine\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Design\DesignPlayGame.cpp">
+      <Filter>Source Files\GameEngine\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Design\DesignStage.cpp">
+      <Filter>Source Files\GameEngine\Design</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\OpenGLManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\SoundManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\SpriteManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\ThemeManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\DirectXManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\FModManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\InputManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\UIManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\SpeechBubble.cpp">
+      <Filter>Source Files\GameEngine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\TypeNames.cpp">
+      <Filter>Source Files\GameEngine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\Camera.cpp">
+      <Filter>Source Files\GameEngine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\PipeInfo.cpp">
+      <Filter>Source Files\GameEngine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\PropertyMap.cpp">
+      <Filter>Source Files\GameEngine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllableObject\NewMario.cpp">
+      <Filter>Source Files\GameObjects\ControllableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllableObject\ControllableObject.cpp">
+      <Filter>Source Files\GameObjects\ControllableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllableObject\Mario.cpp">
+      <Filter>Source Files\GameObjects\ControllableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllableObject\MarioM3.cpp">
+      <Filter>Source Files\GameObjects\ControllableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BowserJunior.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateLogo.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectSplash.cpp">
+      <Filter>Source Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle\ClownCar.cpp">
+      <Filter>Source Files\GameObjects\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundGhostHouse.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundAirShip.cpp">
+      <Filter>Source Files\GameEngine\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StagePack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\GameConfig.cpp">
+      <Filter>Source Files\GameEngine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\JsonManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\PathManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateCredits.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\NaException.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Boo.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\RockyWrench.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\Wrench.cpp">
+      <Filter>Source Files\GameObjects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllableObject\PhysicalProperties.cpp">
+      <Filter>Source Files\GameObjects\ControllableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\Cannon.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CannonBall.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\OneWayWall.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\TurtleWinged.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\RedTurtleWingedPatrol.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\RedCheepCheepFly.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CheepCheepFly.cpp">
+      <Filter>Source Files\GameObjects\Enemy\Deprecated</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerBase.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_multi.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_share.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\cookie.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\cookie_date.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\cookie_datetime.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\cookie_time.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_cookie.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_easy.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_exception.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_form.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_header.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CurlLib\src\curl_info.cpp">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\NaCurl.cpp">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOption.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerRequest.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="StageMetaInfo.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIWorldStageButton.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateSingleStageGameOver.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerTransaction.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIRectangle.cpp">
+      <Filter>Source Files\GameEngine\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\aes\aes.c">
+      <Filter>ExtLib\NaLib\aes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NaLib\aes\md5.cpp">
+      <Filter>ExtLib\NaLib\aes</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BoomBoom.cpp">
+      <Filter>Source Files\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\PowBlock.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle\GoombaShoe.cpp">
+      <Filter>Source Files\GameObjects\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\ShoeSmoke.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\GoalBox.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\GoalPost.cpp">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateHitGoalBox.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateHitGoalPost.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="ThemeSetting.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectDeathPosition.cpp">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Updater.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateAppUpdate.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\GameStateRegisterUser.cpp">
+      <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectBase.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaCommon.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaRect.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaString.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json_tool.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\reader.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\value.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\version.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\writer.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\allocator.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\assertions.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\autolink.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\config.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\features.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JsonLib\json\forwards.h">
+      <Filter>ExtLib\JsonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaPoint.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaLeakDetector.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaPlatformWindow.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaPlatformAPI.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StagePack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserProfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundSnowFence.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundUnderground.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundUnderWater.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundBase.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundCastle.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundCloud.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundFence.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundMountain.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundRedCloud.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UICustomGameButton.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIEdit.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIImageButton.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIList.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIPanel.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UISingleStageButton.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIText.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIBase.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIButton.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIContainer.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateCutBridge.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateDie.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateEnterDoor.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateEnterPipe.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateEnterSky.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateEnterStage.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateExitDoor.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateExitPipe.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateFlagDown.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateGameOver.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateGoal.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateMessageBlock.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStatePlay.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateRescuePrincess.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateShapeChange.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateSingleStageClear.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateSkyIntro.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateStageIntro.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateTest.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateTimeUp.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateTitle.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateBase.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDebrisBase.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDryBoneDebris.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDust.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectEggDebris.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectFireBoom.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectHit.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectObjectBase.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectParalyze.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectPop.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectSceneCircle.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectSceneFade.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectScore.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectSpin.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectStarDust.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectTwinkle.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectWingDebris.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectAirBubble.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectBrickDebris.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectChainDebris.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectCoin.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\BulletBill.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\BuzzyBeetle.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\ChainChomp.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\ChainChompStake.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CheepCheep.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CheepCheepFly.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\DryBone.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyObjectBase.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\FireBar.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\FireBrothers.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Goomba.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Grinder.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\HammerBrothers.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Lakitu.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\PiranhaPlant.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Podoboo.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\RedCheepCheep.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\RedCheepCheepFly.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\RedTurtle.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\RedTurtleWingedPatrol.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\SledgeBrothers.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Spiny.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Thwomp.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Turtle.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\TurtleWinged.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Bloober.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Bobomb.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\BoomerangBrothers.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Bowser.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectMessageBlock.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectMushroomIsland.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectPipe.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectPipeBody.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectPipeExit.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectPipeHorz.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectRiver.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectRiverBridge.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectSemiSolid.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectSkyExit.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectStartPoint.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectWall.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectBase.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectBillBlaster.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectCameraStop.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectCheckPoint.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectEnemyStop.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject\MapObjectIsland.h">
+      <Filter>Header Files\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\CheckPointFlag.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\FlagPole.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\GoalPoint.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\LoopFlag.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\LoopHandler.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Princess.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\PSwitch.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\SignArrow.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\SkyBridge.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\StartPointSignArrow.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Trampolin.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\TrampolinMini.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\VineLadder.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Vortex.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\WarpZoneFlag.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\WarpZoneText.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\BillBlaster.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\BossBridge.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\BossBridgeAxe.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\BowserFireShooter.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Mushroom1UP.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\MysteryMushroom.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\StaticCoin.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\SuperStar.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\ThrownCoin.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\TurtleShell.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Vine.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\YoshiEgg.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\CloudItem.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\DoorKey.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\DoorKeyCoin.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\FireFlower.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\ItemObjectBase.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Mushroom.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\GiantMushroom.h">
+      <Filter>Header Files\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle\VehicleObjectBase.h">
+      <Filter>Header Files\GameObjects\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle\Yoshi.h">
+      <Filter>Header Files\GameObjects\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle\Cloud.h">
+      <Filter>Header Files\GameObjects\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\SpinySpike.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\ThrowingHammer.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\YoshiFire.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\YoshiTongue.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\Boomerang.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BowserFire.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BulletObjectBase.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\Fireball.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Bridge.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Door.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\EnemyGenerator.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\EventObjectBase.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Design\DesignStage.h">
+      <Filter>Header Files\GameEngine\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Design\GameStateDesign.h">
+      <Filter>Header Files\GameEngine\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Design\GameStateDesignPlay.h">
+      <Filter>Header Files\GameEngine\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Design\DesignGame.h">
+      <Filter>Header Files\GameEngine\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Design\DesignPlayGame.h">
+      <Filter>Header Files\GameEngine\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\RenderManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SoundManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SpriteManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\ThemeManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\DirectXManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\FModManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\InputManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\OpenGLManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc\SpeechBubble.h">
+      <Filter>Header Files\GameEngine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc\TypeNames.h">
+      <Filter>Header Files\GameEngine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc\Camera.h">
+      <Filter>Header Files\GameEngine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc\PipeInfo.h">
+      <Filter>Header Files\GameEngine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc\PropertyMap.h">
+      <Filter>Header Files\GameEngine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllableObject\ControllableObject.h">
+      <Filter>Header Files\GameObjects\ControllableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllableObject\Mario.h">
+      <Filter>Header Files\GameObjects\ControllableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllableObject\MarioM3.h">
+      <Filter>Header Files\GameObjects\ControllableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllableObject\NewMario.h">
+      <Filter>Header Files\GameObjects\ControllableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameStates.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Macros.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SpriteIndex.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Types.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameObjectStates.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\BowserJunior.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateLogo.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectSplash.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle\ClownCar.h">
+      <Filter>Header Files\GameObjects\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundGhostHouse.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundAirShip.h">
+      <Filter>Header Files\GameEngine\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Themes.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\GameConfig.h">
+      <Filter>Header Files\GameEngine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\JsonManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\PathManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateCredits.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaException.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Boo.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\RockyWrench.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\Wrench.h">
+      <Filter>Header Files\GameObjects\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllableObject\PhysicalProperties.h">
+      <Filter>Header Files\GameObjects\ControllableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\Cannon.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CannonBall.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\OneWayWall.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerBase.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\typecheck-gcc.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curl.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlrules.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlver.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\easy.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\mprintf.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\multi.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\stdcheaders.h">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_exception.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_form.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_global.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_header.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_info.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_interface.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_ios.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_multi.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_option.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_pair.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_receiver.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_sender.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_share.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_utility.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\cookie.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\cookie_date.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\cookie_datetime.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\cookie_time.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_config.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_cookie.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_easy.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CurlLib\include\curl_easy_info.h">
+      <Filter>ExtLib\CurlLib\curlcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\NaCurl.h">
+      <Filter>ExtLib\NaLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOption.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerRequest.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="StageMetaInfo.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIWorldStageButton.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateSingleStageGameOver.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerTransaction.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIRectangle.h">
+      <Filter>Header Files\GameEngine\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\aes\aes.h">
+      <Filter>ExtLib\NaLib\aes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NaLib\aes\md5.h">
+      <Filter>ExtLib\NaLib\aes</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\BoomBoom.h">
+      <Filter>Header Files\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\PowBlock.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle\GoombaShoe.h">
+      <Filter>Header Files\GameObjects\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\ShoeSmoke.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\GoalBox.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\GoalPost.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateHitGoalBox.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateHitGoalPost.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ThemeSetting.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDeathPosition.h">
+      <Filter>Header Files\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Updater.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateAppUpdate.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerRequest_.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\GameStateRegisterUser.h">
+      <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\NaLib\NaPlatformAPI_macOS.mm">
+      <Filter>ExtLib\NaLib</Filter>
+    </None>
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.cmake">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </None>
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.dist">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </None>
+    <None Include="D:\MyProjects\Test\UsingCurl\libcurl\include\curl\curlbuild.h.in">
+      <Filter>ExtLib\CurlLib\curl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="StagePatternData.txt">
+      <Filter>Source Files\GameEngine</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="MarioV3.natvis" />
+  </ItemGroup>
+</Project>

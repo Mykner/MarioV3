@@ -1,0 +1,12 @@
+{
+   "AccelRun" : 0.10000000149011612,
+   "AccelTurnBack" : 0.10000000149011612,
+   "AccelWalk" : 0.05000000074505806,
+   "Deceleration" : 1.2000000476837158,
+   "JumpPower" : 27,
+   "JumpSpeed" : -4.0,
+   "MaxRunSpeedClassic" : 3.0,
+   "MaxRunSpeedInvinsible" : 4.0,
+   "MaxRunSpeedNonClassic" : 3.5,
+   "MaxWalkSpeed" : 1.5
+}
