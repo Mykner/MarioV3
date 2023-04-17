@@ -1,6 +1,6 @@
 #include "DirectXManager.h"
 
-#ifdef WIN32
+#if defined(WIN32) && defined(SUPPORT_DIRECTX) 
 
 #include "Game.h"
 #include "SpriteManager.h"

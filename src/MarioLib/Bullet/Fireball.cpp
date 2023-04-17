@@ -160,7 +160,6 @@ void FireBall::OnFly()
 		CreateParameter param;
 		param.nType = EFFECT_DUST;
 		param.pFromObject = this;
-		param.bIsQuick = true;
 		param.fScaleX = m_fScaleX;
 		param.fScaleY = m_fScaleY;
 		CUR_STAGE->CreateEffect(
@@ -234,7 +233,6 @@ void FireBall::OnReachWall(bool bIsLeftWall)
 		CreateParameter param;
 		param.nType = EFFECT_DUST;
 		param.pFromObject = this;
-		param.bIsQuick = true;
 		CUR_STAGE->CreateEffect(m_fX, m_fY - 4, EFFECT_DUST, &param);
 	}
 	else

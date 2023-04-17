@@ -416,9 +416,6 @@ void Game::LoadSprites()
 		NaPlatform::Sleep(10);
 	}
 
-	// Load Background Tile Sprite
-	m_pSpriteManager->Load(L"TileBackground", SPRITE_LOAD_TILE16);
-
 	// Load Mario Parts Sprite, Theme Sprite
 	// -> Changed to load dynamically
 }
@@ -854,7 +851,7 @@ void Game::InitCamera()
 	}
 	else
 	{
-		x = max(0, nCurPlayerObjX - (m_nWidth / 2));
+		x = std::max(0, nCurPlayerObjX - (m_nWidth / 2));
 	}
 
 	// Set Y

@@ -50,8 +50,8 @@ void ThemeManager::ApplyThemeSet(Stage * pStage)
 	if (pStage->m_strCustomThemeName.GetLength() > 0)
 	{
 		RequestCustomTileSprite(L"Tile", pStage->m_strCustomThemeName, &pStage->m_pSprite, &pStage->m_pSpritePiece);
-		RequestCustomTileSprite(L"TileBackground", pStage->m_strCustomThemeName, &pStage->m_pSpriteBackground, nullptr);
 
+        pStage->m_pSpriteBackground = RequestCustomSprite(L"Background", pStage->m_strCustomThemeName);
 		pStage->m_pSpriteItem = RequestCustomSprite(L"Item", pStage->m_strCustomThemeName);
 		pStage->m_pSpriteEnemy = RequestCustomSprite(L"Enemy", pStage->m_strCustomThemeName);
 		pStage->m_pSpriteEffect = RequestCustomSprite(L"Effect", pStage->m_strCustomThemeName);
@@ -90,8 +90,8 @@ void ThemeManager::ApplyThemeSet(Stage * pStage)
 		break;
 	case STAGETHEMESET_AIRSHIP:
 		pStage->m_nTheme = STAGETHEME_AIRSHIP;
-		pStage->m_nBackgroundTheme = STAGEBGTHEME_CLOUD;// AIRSHIP;
-		pStage->m_lBackgroundColor = 0xff7686ff;
+		pStage->m_nBackgroundTheme = STAGEBGTHEME_AIRSHIP;
+		pStage->m_lBackgroundColor = 0xff708bff;
 
 		// I need background with 2 level layer...
 		// 1) cloud (far layer)
@@ -113,9 +113,9 @@ void ThemeManager::ApplyThemeSet(Stage * pStage)
 	Stage *pCurStage = m_pGame->m_pCurStage;
 	m_pGame->m_pCurStage = pStage;
 	RequestTileSprite(L"Tile", pStage->m_nTheme, &pStage->m_pSprite, &pStage->m_pSpritePiece);
-	RequestTileSprite(L"TileBackground", pStage->m_nTheme, &pStage->m_pSpriteBackground, nullptr);
 	m_pGame->m_pCurStage = pCurStage;
 
+    pStage->m_pSpriteBackground = RequestSprite(L"Background", pStage->m_nTheme);
 	pStage->m_pSpriteItem = RequestSprite(L"Item", pStage->m_nTheme);
 	pStage->m_pSpriteEnemy = RequestSprite(L"Enemy", pStage->m_nTheme);
 	pStage->m_pSpriteEffect = RequestSprite(L"Effect", pStage->m_nTheme);

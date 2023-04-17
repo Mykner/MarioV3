@@ -152,6 +152,11 @@ void Yoshi::OnAfterProcess()
 		m_nGulpCooltime--;
 	}
 
+    if (m_nKickCooltime > 0)
+    {
+        m_nKickCooltime--;
+    }
+
 	if (!m_bHatched)
 	{
 		ProcessHatch();
@@ -162,15 +167,7 @@ void Yoshi::OnAfterProcess()
 		PositionPassenger();
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
-
-		OnChangeState(m_nState);
-	}
+    ProcessState();
 }
 
 void Yoshi::ProcessHatch()
@@ -438,6 +435,9 @@ void Yoshi::OnDamaged()
 
 	if (m_pPassenger)
 	{
+        if (m_pPassenger->m_nInvinsibleTime > 0)
+            return;
+
 		OnDamagedPassenger();
 	}
 }
@@ -505,6 +505,13 @@ void Yoshi::ThrowFireball()
 	else
 	{
 		ConvertSpitType();
+
+        float fOffset = abs(nOffsetX);
+        POINT ptOffset = FindCollidableOffset(
+            m_bFlip ? COLLISION_LEFT : COLLISION_RIGHT,
+            fOffset);
+
+        nOffsetX = ptOffset.x;
 
 		float fX = m_fX + nOffsetX;
 		float fY = m_fY - 10;

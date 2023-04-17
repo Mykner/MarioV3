@@ -29,6 +29,7 @@ public:
 	virtual void ChangeState(int nState, ChangeStateInfo *pInfo = nullptr);
 	virtual void OnChangeState(int nState);
 
+    virtual void OnIdle();
 	virtual void OnWalk();
 	virtual void OnJump();
 	virtual void OnReachWall(bool bIsLeftWall);
@@ -39,6 +40,7 @@ public:
 	virtual void OnShellRun();
 	virtual void OnShellAwake();
 	virtual void OnShellKicked();
+    virtual void OnStacked();
 	virtual void OnBlockJump();
 	virtual void OnLanding();
 
@@ -55,8 +57,10 @@ public:
 	int m_nAwakeTimer;
 
 	bool m_bDeadInside;
+    bool m_bIsEmptyShell;
 
 	BEGIN_DECLARE_PROPERTYMAP()
+        DECL_PROP("IsEmptyShell", &m_bIsEmptyShell)
 		DECL_PROP("PowerUp", &m_bPowerUp)
 		DECL_PROP("Winged", &m_bWinged)
 	END_DECLARE_PROPERTYMAP()

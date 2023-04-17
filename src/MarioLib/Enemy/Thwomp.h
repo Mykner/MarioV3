@@ -20,7 +20,7 @@ public:
 	virtual void OnStand();
 	virtual void OnStacked();
 
-	int SmashAll();
+	void SmashAll(bool& bHitHard, bool& bHitSuperHard, bool& bHitUnbreakable);
 
 	virtual bool IsAlive();
 

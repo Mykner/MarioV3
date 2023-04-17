@@ -23,10 +23,12 @@ public:
 	int m_nWidth;
 	int m_nHeight;
 	bool m_bCanSwim;
+    bool m_bCanHurt;
 
 	// Property Interface
 	BEGIN_DECLARE_PROPERTYMAP()
 		{ L"CanSwim", &m_bCanSwim },
+        { L"CanHurt", &m_bCanHurt },
 	END_DECLARE_PROPERTYMAP()
 };
 

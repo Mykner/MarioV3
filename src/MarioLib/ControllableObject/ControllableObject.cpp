@@ -45,6 +45,15 @@ ControllableObject::~ControllableObject()
 
 void ControllableObject::CheckCollision()
 {
+    int nMaxX = (CUR_STAGE->m_nMaxPage * GameDefaults::nPageWidth) - (GetSize().cx / 2);
+
+    //Mykner> Not from decomp. This should stop auto move on page end.
+    if (m_pController && m_pController->m_bInputLock && m_fX > nMaxX)
+    {
+        m_fX = nMaxX;
+        return;
+    }
+
 	if (m_nShape != SHAPE_GIANT && m_nNextShape != SHAPE_GIANT)
 		GameObjectBase::CheckCollision();
 	else
@@ -60,7 +69,7 @@ void ControllableObject::CheckCollisionGiant()
 
 	bool bBlockCrushed = false;
 	int nPower = POWER_HITBLOCK_GIANTMARIO;
-	if (m_nNextShape == SHAPE_GIANT)
+	if (IS_PLAYEROBJECT(this) && m_nNextShape == SHAPE_GIANT)
 		nPower = POWER_HITBLOCK_GROWING_GIANTMARIO;
 
 	memset(&m_bCollision, 0, sizeof(m_bCollision));
@@ -78,37 +87,41 @@ void ControllableObject::CheckCollisionGiant()
 
 #define SHOW_STAGETILEBOX	{}
 
-	// Check Top
-	for (int i = rcTile.left; i <= rcTile.right; i++)
-	{
-		x = i;
-		y = rcTile.top;
-		if ((CUR_STAGE->IsHardTile(x, y) || (m_fYS < 0 && CUR_STAGE->HasItem(x, y))) &&
-			!CUR_STAGE->IsHardTile(x, y + 1))
-		{
-			NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y);
-			SHOW_STAGETILEBOX;
-			if (CUR_STAGE->CanCrush(x, y, nPower))
-			{
-				CUR_STAGE->CrushBlock(x, y, this);
-				bBlockCrushed = true;
-			}
-			else if (m_bCollision[COLLISION_TOP])
-			{
-				// Store best near tile
-				if (abs((m_ptCollision[COLLISION_TOP].x) + (TILE_XS / 2) - m_fX) >
-					abs((x * TILE_XS) + (TILE_XS / 2) - m_fX))
-					m_ptCollision[COLLISION_TOP] = { (float)(x * TILE_XS), (float)(y * TILE_YS + TILE_YS - 1) };
-			}
-			else if (rc.IsOverlapped(rcStageTile))
-			{
-				m_bCollision[COLLISION_TOP] = true;
-				m_ptCollision[COLLISION_TOP] = { (float)(x * TILE_XS), (float)(y * TILE_YS + TILE_YS - 1) };
-			}
-		}
-	}
+    if (!m_bCollision[COLLISION_TOP])
+    {
+	    // Check Top
+	    for (int i = rcTile.left; i <= rcTile.right; i++)
+	    {
+		    x = i;
+		    y = rcTile.top;
+		    if ((CUR_STAGE->IsHardTile(x, y) || (m_fYS < 0 && CUR_STAGE->HasItem(x, y))) &&
+			    !CUR_STAGE->IsHardTile(x, y + 1))
+		    {
+			    NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y);
+			    SHOW_STAGETILEBOX;
+			    if (CUR_STAGE->CanCrush(x, y, nPower))
+			    {
+				    CUR_STAGE->CrushBlock(x, y, this);
+				    bBlockCrushed = true;
+			    }
+			    else if (m_bCollision[COLLISION_TOP])
+			    {
+				    // Store best near tile
+				    if (abs((m_ptCollision[COLLISION_TOP].x) + (TILE_XS / 2) - m_fX) >
+					    abs((x * TILE_XS) + (TILE_XS / 2) - m_fX))
+					    m_ptCollision[COLLISION_TOP] = { (float)(x * TILE_XS), (float)(y * TILE_YS + TILE_YS - 1) };
+			    }
+			    else if (rc.IsOverlapped(rcStageTile))
+			    {
+				    m_bCollision[COLLISION_TOP] = true;
+				    m_ptCollision[COLLISION_TOP] = { (float)(x * TILE_XS), (float)(y * TILE_YS + TILE_YS - 1) };
+			    }
+		    }
+	    }
+    }
 
 	// Check Left,Right
+    rc.bottom -= 1;
 	for (int i = rcTile.top; i <= rcTile.bottom; i++)
 	{
 		x = rcTile.left;
@@ -151,6 +164,7 @@ void ControllableObject::CheckCollisionGiant()
 			}
 		}
 	}
+    rc.bottom += 1;
 
 	// Check Inside of body
 	for (int i = rcTile.top + 1; i <= rcTile.bottom - 1; i++)
@@ -182,52 +196,57 @@ void ControllableObject::CheckCollisionGiant()
 		}
 	}
 
-	// Check Bottom
-	for (int i = rcTile.left; i <= rcTile.right; i++)
-	{
-		x = i;
-		y = rcTile.bottom;
+    if (!m_bCollision[COLLISION_BOTTOM])
+    {
+	    // Check Bottom
+        NaRect rcFoot = rc;
+        rcFoot.top = rcFoot.bottom - rcFoot.Height() / 2;
+	    for (int i = rcTile.left; i <= rcTile.right; i++)
+	    {
+		    x = i;
+		    y = rcTile.bottom;
 
-		if (m_fYS >= 0 && CUR_STAGE->IsJumpTile(x, y) && !CUR_STAGE->IsHardTile(x, y - 1, COLLISION_BOTTOM))
-		{
-			NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y, true);
-			if (m_bCollision[COLLISION_BOTTOM])
-			{
-				if (abs((m_ptCollision[COLLISION_BOTTOM].x) + (TILE_XS / 2) - m_fX) >
-					abs((x * TILE_XS) + (TILE_XS / 2) - m_fX))
-					m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
-			}
-			else if (rc.IsOverlapped(rcStageTile))
-			{
-				m_bCollision[COLLISION_BOTTOM] = true;
-				m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
+		    if (m_fYS >= 0 && CUR_STAGE->IsJumpTile(x, y) && !CUR_STAGE->IsHardTile(x, y - 1, COLLISION_BOTTOM))
+		    {
+			    NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y, true);
+			    if (m_bCollision[COLLISION_BOTTOM])
+			    {
+				    if (abs((m_ptCollision[COLLISION_BOTTOM].x) + (TILE_XS / 2) - m_fX) >
+					    abs((x * TILE_XS) + (TILE_XS / 2) - m_fX))
+					    m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
+			    }
+			    else if (rcFoot.IsOverlapped(rcStageTile))
+			    {
+				    m_bCollision[COLLISION_BOTTOM] = true;
+				    m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
 
-				m_bStandOnJumpBlock = true;
-			}
-		}
-		else if(CUR_STAGE->IsHardTile(x, y, COLLISION_BOTTOM) && !CUR_STAGE->IsHardTile(x, y - 1))
-		{
-			NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y);
-			SHOW_STAGETILEBOX;
-			if (rc.IsOverlapped(rcStageTile))
-			{
- 				if (m_fYS >= 0 && CUR_STAGE->CanPress(x, y))
- 				{
- 					CUR_STAGE->PressBlock(x, y, nPower, this);
-					bBlockCrushed = true;
- 				}
- 				else
-				{
-					rcStageTile = CUR_STAGE->GetTileRect(x, y);
-					m_bCollision[COLLISION_BOTTOM] = true;
-					m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
+				    m_bStandOnJumpBlock = true;
+			    }
+		    }
+		    else if(CUR_STAGE->IsHardTile(x, y, COLLISION_BOTTOM) && !CUR_STAGE->IsHardTile(x, y - 1))
+		    {
+			    NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y);
+			    SHOW_STAGETILEBOX;
+			    if (rcFoot.IsOverlapped(rcStageTile))
+			    {
+ 				    if (m_fYS >= 0 && CUR_STAGE->CanPress(x, y) && nPower != POWER_HITBLOCK_GROWING_GIANTMARIO)
+ 				    {
+ 					    CUR_STAGE->PressBlock(x, y, nPower, this);
+					    bBlockCrushed = true;
+ 				    }
+ 				    else if (rcStageTile.top + 6 >= rcFoot.bottom)
+				    {
+					    rcStageTile = CUR_STAGE->GetTileRect(x, y);
+					    m_bCollision[COLLISION_BOTTOM] = true;
+					    m_ptCollision[COLLISION_BOTTOM] = { (float)(x * TILE_XS), (float)(y * TILE_YS) };
 
-					m_bStandOnJumpBlock = false;
-					break;
-				}	
-			}
-		}
-	}
+					    m_bStandOnJumpBlock = false;
+					    break;
+				    }	
+			    }
+		    }
+	    }
+    }
 
 	{
 		auto rcF = GetRectFloat();
@@ -375,23 +394,12 @@ void ControllableObject::ProcessBase()
 
 	if (IsAlive())
 	{
+        ProcessCarry();
+
 		bool bInvinsible = (m_nInvinsibleTime > 0);
 		bool bImmune = (m_nImmuneTime > 0);
 		if (bInvinsible || bImmune)
 			OnInvinsible(bInvinsible);
-
-		if (m_pCarry)
-		{
-			if (!IsInputHold(INPUT_F))
-			{
-				Kick(m_pCarry, true);
-			}
-			else if (!m_pCarry->IsAlive())
-			{
-				CUR_STAGE->m_vecReservedGameObject.push_back(m_pCarry);
-				m_pCarry = nullptr;
-			}
-		}
 
 		if (m_vecOverlappedEnemy.size() > 0 && !bInvinsible)
 		{
@@ -464,46 +472,37 @@ void ControllableObject::ProcessBase()
 				OnDamaged();
 		}
 
+        // Mykner> TODO I think this isn't 100% right
+        // TODO Move to a function
+        // #TODO
+        if (CUR_PLAYER->m_pControlObj == this)
+        {
+            NaRect rc = GetRect();
+            if (m_pStage->CanHurt(rc))
+            {
+                ChangeState(STATE_DIE);
+                m_pGame->ChangeState(GAMESTATE_DIE);
+            }
+        }
+
 		if (m_bDamagedByMap && m_nShape != SHAPE_GIANT && m_nInvinsibleTime == 0)
 		{
 			OnDamaged();
 		}
+
+        if (m_pGame->IsActiveAbility(ABILITY_ITEMSTACK))
+        {
+            // #TODO
+            // Mykner> TODO
+            //if (m_pController != nullptr)
+            //{
+                
+            //}
+        }
 	}
 
-	if (CUR_PLAYER->m_pControlObj == this && IsAlive() && IsOutOfStage())
-	{
-		if (CUR_STAGE->m_nEntranceType == STAGEENTRANCE_GROUNDTOSKY &&
-			CUR_STAGE->m_pParentStage != nullptr)
-		{
-			m_pGame->PopStage();
-
-			m_pGame->m_pGameState->MovePlayerObjectToSkyExit();
-			m_pGame->m_pGameState->ClearEnemyInViewport();
-		}
-		else
-		{
-			if (m_nShape == SHAPE_GIANT &&
-				m_pGame->m_nSpecialEvents & SPECIALEVENT_GIANTPREVENTHOLE)
-			{
-				ChangeState(STATE_TRAMPOLINJUMP);
-				m_fYS = -11.0f;
-			}
-			else
-			{
-				ChangeState(STATE_DIE);
-				m_pGame->ChangeState(GAMESTATE_DIE);
-			}
-		}
-	}
-
-	if (CanSwim())
-	{
-		if (m_pGame->m_nGameFrame % 70 == 0)
-		{
-			SIZE s = GetSize();
-			CUR_STAGE->CreateEffect(m_fX, m_fY - s.cy + 8, EFFECT_AIRBUBBLE, 0);
-		}
-	}
+    CheckOutOfStage();
+    UnderwaterEffect();
 }
 
 void ControllableObject::ProcessShapeChange(int nStateFrame)
@@ -565,6 +564,22 @@ void ControllableObject::ProcessShapeChange(int nStateFrame)
 	{
 		OnChangeShape(m_nNextShape);
 	}
+}
+
+void ControllableObject::ProcessCarry()
+{
+    if (m_pCarry)
+    {
+        if (!IsInputHold(INPUT_F))
+        {
+            Kick(m_pCarry, true);
+        }
+        else if (!m_pCarry->IsAlive())
+        {
+            CUR_STAGE->m_vecReservedGameObject.push_back(m_pCarry);
+            m_pCarry = nullptr;
+        }
+    }
 }
 
 void ControllableObject::OnBeforeProcess()
@@ -1022,6 +1037,47 @@ void ControllableObject::OnChangeShape(int nShape)
 
 	m_nShape = nShape;
 	m_nNextShape = -1;
+}
+
+void ControllableObject::CheckOutOfStage()
+{
+    if (CUR_PLAYER->m_pControlObj == this && IsAlive() && IsOutOfStage())
+    {
+        if (CUR_STAGE->m_nEntranceType == STAGEENTRANCE_GROUNDTOSKY &&
+            CUR_STAGE->m_pParentStage != nullptr)
+        {
+            m_pGame->PopStage();
+
+            m_pGame->m_pGameState->MovePlayerObjectToSkyExit();
+            m_pGame->m_pGameState->ClearEnemyInViewport();
+        }
+        else
+        {
+            if (m_nShape == SHAPE_GIANT &&
+                m_pGame->m_nSpecialEvents & SPECIALEVENT_GIANTPREVENTHOLE)
+            {
+                ChangeState(STATE_TRAMPOLINJUMP);
+                m_fYS = -11.0f;
+            }
+            else
+            {
+                ChangeState(STATE_DIE);
+                m_pGame->ChangeState(GAMESTATE_DIE);
+            }
+        }
+    }
+}
+
+void ControllableObject::UnderwaterEffect()
+{
+    if (CanSwim())
+    {
+        if (m_pGame->m_nGameFrame % 70 == 0)
+        {
+            SIZE s = GetSize();
+            CUR_STAGE->CreateEffect(m_fX, m_fY - s.cy + 8, EFFECT_AIRBUBBLE, 0);
+        }
+    }
 }
 
 bool ControllableObject::CanSit()
@@ -2811,6 +2867,9 @@ void ControllableObject::OnDamaged()
 
 	if (m_nInvinsibleTime > 0)
 		return;
+
+    if (m_nNextShape != -1)
+        return;
 	
 	if (m_pVehicle)
 	{

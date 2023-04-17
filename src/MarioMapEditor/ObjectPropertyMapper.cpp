@@ -166,6 +166,14 @@ void ObjectPropertyMapper::InitControl()
 			pProp->AddOption(L"false");
 			pProp->AllowEdit(FALSE);
 			break;
+        case VT_ETC_CUSTOM:
+            pProp = new CMFCPropertyGridProperty(
+                it->second.name.wstr(),
+                (_variant_t)L"",
+                it->second.name.wstr(), // description
+                it->second.id
+            );
+            break;
 		default:
 			NaDebugOut(L"(OPM) Not supported variant type: %d\n", it->second.vt);
 			DebugBreak();
@@ -326,6 +334,7 @@ void ObjectPropertyMapper::SetProperty(NaString strName, VARIANT *pVar)
 			break;
 		case VT_ETC_NASTR:
 		case VT_ETC_NALIST:
+        case VT_ETC_CUSTOM:
 			{
 				NaString *pRefValue = (NaString*)(it->second.pRefVariable);
 				pRefValue->Format(L"%s", pVar->bstrVal);
@@ -381,6 +390,7 @@ VARIANT ObjectPropertyMapper::GetProperty(NaString strName)
 			break;
 		case VT_ETC_NASTR:
 		case VT_ETC_NALIST:
+        case VT_ETC_CUSTOM:
 			vt = VT_BSTR;
 			var.bstrVal = SysAllocString(((NaString*)pRefValue)->wstr());
 			break;

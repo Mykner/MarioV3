@@ -56,8 +56,10 @@ enum HitBlockPowerTypes
 	POWER_HITBLOCK_UNKNOWN = 0,
 	POWER_HITBLOCK_TINY,				// Can hit ItemBlock only
 	POWER_HITBLOCK_NORMAL,				// Can hit SoftBlock but not destroyed
-	POWER_HITBLOCK_BIGMARIO,			// Can destroy SoftBlock
-	POWER_HITBLOCK_GIANTSHELL,			// Can destroy HardBlock
+    POWER_HITBLOCK_BIGMARIO,			// Can destroy SoftBlock
+    POWER_HITBLOCK_GIANTSHELL,			// Can destroy HardBlock
+    POWER_HITBLOCK_DECOMP_UNK,          // Unknown decompiled enum
+    POWER_HITBLOCK_THWOMP,              // Can destroy HardBlock + Cloud
 	POWER_HITBLOCK_GIANTMARIO,			// Can destroy SuperHardBlock
 	POWER_HITBLOCK_GROWING_GIANTMARIO,	// Can destroy SuperHardBlock + JumpBlock
 };
@@ -130,10 +132,14 @@ enum StageEntranceTypes
 enum AutoScrollTypes
 {
 	AUTOSCROLL_NONE = 0,
+    AUTOSCROLL_HORZ_SUPERSLOW,
+    AUTOSCROLL_HORZ_VERYSLOW,
 	AUTOSCROLL_HORZ_SLOW,
 	AUTOSCROLL_HORZ_NORMAL,
 	AUTOSCROLL_HORZ_FAST,
 	AUTOSCROLL_HORZ_GOD,
+    AUTOSCROLL_VERT_SUPERSLOW,
+    AUTOSCROLL_VERT_VERYSLOW,
 	AUTOSCROLL_VERT_SLOW,
 	AUTOSCROLL_VERT_NORMAL,
 	AUTOSCROLL_VERT_FAST,
@@ -150,10 +156,17 @@ enum SpecialEventTypes
 enum AbilityMasks
 {
 	ABILITY_NONE = 0,
-	ABILITY_CARRYOBJECT = 0x0001,
-	ABILITY_SPINJUMP	= 0x0002,
-	ABILITY_AUTOACCEL	= 0x0004,
-	ABILITY_AUTORUN		= 0x0008,
+	ABILITY_CARRYOBJECT     = 0x0001,
+	ABILITY_SPINJUMP	    = 0x0002,
+	ABILITY_AUTOACCEL	    = 0x0004,
+	ABILITY_AUTORUN		    = 0x0008,
+    ABILITY_WATERJUMP       = 0x0010,
+    ABILITY_ITEMSTACK       = 0x0020,
+    ABILITY_WALLJUMP        = 0x0040,
+    ABILITY_SHELLGETITEM    = 0x0080,
+    ABILITY_NOJUMP          = 0x0100,
+    ABILITY_GROUNDPOUND     = 0x0200,
+    ABILITY_MIDAIRSPIN      = 0x0400,
 };
 
 enum TextActionTypes
@@ -175,7 +188,7 @@ namespace GameDefaults
 	const bool bFrameSkip = false;
 	
 	const int nWorldTileWidth = nTilePerScreenWidth * nMaxStagePage;
-	const int nDefaultStopPointX = nTilePerScreenWidth * nMaxStagePage * nTileWidth;
+    const int nDefaultStopPointX = nTilePerScreenWidth * nMaxStagePage * nTileWidth;
 
 	const int nPageTileWidth = 16;
 	const int nPageTileHeight = 16; // last one is invisible
@@ -238,7 +251,7 @@ enum MarioShapes
 	// From NSMB
 	SHAPE_SHELL,
 	SHAPE_PENGUIN,
-	SHAPE_GIANT,
+	SHAPE_GIANT, // Mykner> 14 in decomp
 };
 
 enum InputTypes
@@ -255,6 +268,7 @@ enum SpriteRenderZOrders
 {
 	Z_ZERO = 0,
 
+    Z_BEHIND_FAR_BACKGROUND,
 	Z_FAR_BACKGROUND,
 
 	Z_BACKGROUND,
@@ -285,7 +299,7 @@ enum SpriteRenderZOrders
 	Z_VEHICLE_BEHIND_OBJ,
 	Z_VEHICLE_BEHIND_OBJ_HEAD,
 
-	Z_COMMON_OBJ,
+	Z_COMMON_OBJ = 26, // Mykner> Sync with decomp...
 	Z_ITEM,
 	Z_BULLET_BEHIND_ENEMY,
 	Z_ENEMY,

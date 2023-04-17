@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++에서 생성한 포함 파일입니다.
-// MarioMapEditor.rc에서 사용되고 있습니다.
+// Microsoft Visual C++ generated include file.
+// Used by MarioMapEditor.rc
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -103,6 +103,8 @@
 #define IDD_DLG_USERNAME                338
 #define IDD_DLG_QNA                     340
 #define IDD_DLG_CREATOR_COMMENT         342
+#define IDC_CURSOR1                     344
+#define IDC_CURSOR_MARIO_CLICK_HAND     344
 #define IDC_STATIC_LIST                 1000
 #define IDC_RADIO_MAIN                  1001
 #define IDC_RADIO_SUBSTAGE1             1002
@@ -308,7 +310,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        344
+#define _APS_NEXT_RESOURCE_VALUE        345
 #define _APS_NEXT_COMMAND_VALUE         32972
 #define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           310

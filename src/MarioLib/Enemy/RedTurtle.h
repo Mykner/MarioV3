@@ -24,6 +24,7 @@ public:
 	// Property Interface
 	BEGIN_DECLARE_PROPERTYMAP()
 		DECL_PROP("MoveDistance", &m_nDistance)
+        DECL_PROP("IsEmptyShell", &m_bIsEmptyShell)
 		DECL_PROP("PowerUp", &m_bPowerUp)
 		DECL_PROP("Winged", &m_bWinged)
 	END_DECLARE_PROPERTYMAP()

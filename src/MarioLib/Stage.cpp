@@ -7,6 +7,7 @@
 #include "RenderManager.h"
 #include "GameObjectBase.h"
 #include "MapObjectBase.h"
+#include "BackgroundObjectBase.h"
 #include "Player.h"
 #include "PipeInfo.h"
 #include "FModManager.h"
@@ -28,6 +29,7 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include "NaException.h"
 
 #include "UIBase.h"
 
@@ -39,23 +41,23 @@ BEGIN_IMPL_PROPERTYMAP(Stage)
 	PROP_LONG("BackgroundColor",	VT_ETC_COLOR,	0xFF5080FF,						0, "Theme"),
 	PROP_INT("MaxPage",				VT_I4,			16,								0, "Map"),
 	PROP_INT("MaxVerticalPage",		VT_I4,			1,								0, "Map"),
-	PROP_INT("Theme",				VT_I4,			STAGETHEME_OVERWORLD,			g_szStageTheme, "Map"),
+	PROP_INT("Theme",				VT_I4,			STAGETHEME_OVERWORLD,			g_szStageTheme, "Theme"),
 	PROP_BOOL("CanGoBack",			VT_BOOL,		true,							0, "Map"),
 	PROP_INT("AutoScroll",			VT_I4,			AUTOSCROLL_NONE,				g_szAutoScrollType, "Map"),
 	PROP_INT("EntranceType",		VT_I4,			STAGEENTRANCE_NONE,				g_szStageEntranceType, "Map"),
-	PROP_STR("NextStageName",		VT_ETC_NASTR,	L"",							0, "Map"),
-	PROP_STR("SkyStageName",		VT_ETC_NASTR,	L"",							0, "Map"),
+	PROP_STR("NextStageName",		VT_ETC_NASTR,	L"",							0, "ForStagePack"),
+	PROP_STR("SkyStageName",		VT_ETC_NASTR,	L"",							0, "ForStagePack"),
 	PROP_INT("Time",				VT_I4,			400,							0, "Map"),
-	PROP_STR("Creator",				VT_ETC_NASTR,	L"Unknown",						0, "Map"),
-	PROP_INT("AbilityFlag",			VT_I4,			0,								0, "Map"),
+	PROP_STR("Creator",				VT_ETC_NASTR,	L"Unknown",						0, "MetaInfo"),
+	PROP_INT("AbilityFlag",         VT_I4,	        0,							    0, "Map"),
 #if !defined(NDEBUG)
-	PROP_INT("InitialShape",		VT_I4,			0,								0, "Map"),
+	PROP_INT("InitialShape",		VT_I4,			0,								0, "Debug"),
 #endif
-	PROP_STR("UniqueId",			VT_ETC_NASTR,	L"",							0, "Map"),
-	PROP_STR("Title",				VT_ETC_NASTR,	L"",							0, "Map"),
-	PROP_INT("Revision",			VT_I4,			1,								0, "Map"),
-	PROP_STR("CustomThemeName",		VT_ETC_NASTR,	L"",							0, "Customize"),
-	PROP_STR("GameTheme",			VT_ETC_NALIST,	L"",							0, "Customize"),
+	PROP_STR("UniqueId",			VT_ETC_NASTR,	L"",							0, "StageWorld"),
+	PROP_STR("Title",				VT_ETC_NASTR,	L"",							0, "MetaInfo"),
+	PROP_INT("Revision",			VT_I4,			1,								0, "StageWorld"),
+	PROP_STR("CustomThemeName",		VT_ETC_NASTR,	L"",							0, "Theme"),
+	PROP_STR("GameTheme",			VT_ETC_NALIST,	L"",							0, "Theme"),
 END_IMPL_PROPERTYMAP()
 
 Stage::Stage(Game *pGame)
@@ -63,7 +65,6 @@ Stage::Stage(Game *pGame)
 	m_pGame = pGame;
 
 	m_pTileData = nullptr;
-	m_pTileBackgroundData = nullptr;
 
 	m_pSprite = nullptr;
 	m_pSpritePiece = nullptr;
@@ -153,9 +154,13 @@ void Stage::Clear()
 
 	m_pCurPipe = nullptr;
 	m_vecSwimArea.clear();
+    m_vecHurtArea.clear();
 	m_strSkyStageName = L"";
 	m_strNextStageName = L"";
-	m_ptEnemyStop.x = GameDefaults::nMaxCameraPosX;
+
+    m_ptStartPoint = { -1, -1 };
+    m_ptStopPoint = { -1, 0 };
+    m_ptEnemyStop.x = GameDefaults::nMaxCameraPosX;
 	
 	m_nPrevJumpPage = -1;
 	m_nNextJumpPage = -1;
@@ -180,13 +185,12 @@ void Stage::Clear()
 	ClearSubStages();
 
 	SAFE_DELETE(m_pTileData);
-	SAFE_DELETE(m_pTileBackgroundData);
 
 	m_mapItem.clear();
 	m_mapHitFrame.clear();
 	m_mapPressFrame.clear();
 	m_mapMessage.clear();
-	
+
 	SAFE_DELETE_OBJPTR_VECTOR(PipeInfo*, m_vecPipeInfo);
 	SAFE_DELETE_OBJPTR_VECTOR(PipeExitInfo*, m_vecPipeExitInfo);
 	SAFE_DELETE_OBJPTR_VECTOR(GameObjectBase*, m_vecEnemy);
@@ -196,10 +200,27 @@ void Stage::Clear()
 	SAFE_DELETE_OBJPTR_VECTOR(GameObjectBase*, m_vecEventObject);
 	SAFE_DELETE_OBJPTR_VECTOR(GameObjectBase*, m_vecVehicle);
 	SAFE_DELETE_OBJPTR_VECTOR(GameObjectBase*, m_vecReservedGameObject);
+    SAFE_DELETE_OBJPTR_VECTOR(BackgroundObjectBase*, m_vecBackgroundObject);
+}
+
+int Stage::CreateTileData()
+{
+    int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
+    m_pTileData = new BYTE[nSizeTileData];
+    memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    return nSizeTileData;
+}
+
+void Stage::DestroyTileData()
+{
+    SAFE_DELETE(m_pTileData);
 }
 
 bool Stage::Load(const wchar_t * name)
 {
+    if (m_bIsSubStage)
+        throw NaException(__FUNCTIONW__, __LINE__, L"Stage.Load called from subStage");
+
 	NaString strName;
 	strName.Format(L"%ls\\%ls\\%ls.map", 
 		PathManager::GetMapPath(m_pGame),
@@ -213,13 +234,6 @@ bool Stage::Load(const wchar_t * name)
 
 	// Init TileData
 	CreateDefaultGround();
-
-	m_ptStartPoint = { -1, -1 };
-	m_ptStopPoint = { GameDefaults::nDefaultStopPointX, 0 };
-	m_ptEnemyStop.x = GameDefaults::nMaxCameraPosX;
-
-	m_nPrevJumpPage = -1;
-	m_nNextJumpPage = -1;
 
 	if (LoadFile(strName.cstr()))
 	{
@@ -246,8 +260,8 @@ bool Stage::LoadFile(const char* lpszPathName, bool bDecryptIfEncrypted /*= true
 
 void Stage::LoadJsonMap(Json::Value & j)
 {
-	if (m_pTileData)
-		delete[] m_pTileData;
+    Clear();
+    DestroyTileData();
 
 	// Lets Load
 	NaString strVersionKey = L"Neoarc's Mario Map v";
@@ -271,9 +285,7 @@ void Stage::LoadJsonMap(Json::Value & j)
 		m_nTime = 10;
 
 	// Init TileData
-	int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
-	m_pTileData = new BYTE[nSizeTileData];
-	memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    int nSizeTileData = CreateTileData();
 
 	// TileData
 	std::string strTileData = j["TileData"].asString();
@@ -394,13 +406,10 @@ void Stage::LoadJsonMap(Json::Value & j)
 // BinaryMap will be deprecated
 void Stage::LoadBinaryMap(FILE * fp)
 {
-	if (m_pTileData)
-		delete[] m_pTileData;
+    DestroyTileData();
 
-	// Init TileData
-	int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
-	m_pTileData = new BYTE[nSizeTileData];
-	memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    // Init TileData
+    int nSizeTileData = CreateTileData();
 
 	fseek(fp, 0, SEEK_SET);
 
@@ -597,23 +606,20 @@ void Stage::LoadBinaryMap(FILE * fp)
 
 void Stage::OnLoad()
 {
-	// StopPoint validation 
-	if (m_ptStopPoint.x > GameDefaults::nTilePerScreenWidth * m_nMaxPage * GameDefaults::nTileWidth)
+    NaDebugOut(L"Stage Loaded: %ls\n", m_strName.wstr());
+
+	// StopPoint validation
+	if (m_ptStopPoint.x == -1 || m_ptStopPoint.x > GameDefaults::nTilePerScreenWidth * m_nMaxPage * GameDefaults::nTileWidth)
 		m_ptStopPoint.x = GameDefaults::nTilePerScreenWidth * m_nMaxPage * GameDefaults::nTileWidth;
 
 	// Find Map Sprite
 	InitTheme();
 
-	m_pGame->m_pThemeManager->RequestTileSprite(L"TileBackground", -1, &m_pSpriteBackground, nullptr);
-
-	// #TODO SPR_MANAGER->Find(L"TileBackground")
-	//m_pSpriteBackground = SPR_MANAGER->Find(L"TileBackground");
-
 	// MapObject to Tile
 	TileizeMapObjects();
 
 	// StartPoint validation
-	if (m_ptStartPoint.x == -1 && m_ptStartPoint.x == -1)
+	if (m_ptStartPoint.x == -1)
 	{
 		m_ptStartPoint.x = 40;
 		m_ptStartPoint.y = 9999;
@@ -630,8 +636,18 @@ void Stage::OnLoad()
 				break;
 
 			m_ptStartPoint.y -= 1;
+
+            // Mykner> This code was in the ddecomp, but why does it do this?
+            if (m_ptStartPoint.y < -TILE_YS)
+            {
+                m_ptStartPoint.x += TILE_XS;
+                m_ptStartPoint.y = nGround;
+            }
 		}
 	}
+
+    if (m_nTime >= 2000)
+        m_nTime = -1;
 
 	InitItems();
 
@@ -660,6 +676,8 @@ void Stage::OnLoad()
 			break;
 		}
 	}
+
+    SetAutoGroundTiles();
 }
 
 void Stage::SaveJsonMap(Json::Value & j)
@@ -923,9 +941,7 @@ void Stage::CreatePresetStage(NaString strName)
 	Clear();
 
 	// Init TileData
-	int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
-	m_pTileData = new BYTE[nSizeTileData];
-	memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    CreateTileData();
 
 	// Create Default Ground
 	int nTileW = m_sizeTile.cx;
@@ -939,8 +955,7 @@ void Stage::CreatePresetStage(NaString strName)
 	}
 
 	m_ptStartPoint.x = 40;
-	m_ptStopPoint.x = GameDefaults::nDefaultStopPointX;
-	m_ptStopPoint.y = 0;
+    m_ptStopPoint = { GameDefaults::nDefaultStopPointX, 0 };
 	m_ptEnemyStop.x = GameDefaults::nMaxCameraPosX;
 	m_nPrevJumpPage = -1;
 	m_nNextJumpPage = -1;
@@ -1016,27 +1031,21 @@ void Stage::CreatePresetStage(NaString strName)
 	}
 
 	InitItems();
-
-	m_pGame->m_pThemeManager->RequestTileSprite(L"TileBackground", -1, &m_pSpriteBackground, nullptr);
 	
 	// MapObject to Tile
 	TileizeMapObjects();
 
 	// Build Background
 	BuildBackground();
+
+    // Set AutoGroundTiles
+    SetAutoGroundTiles();
 }
 
 void Stage::CreateDefaultGround()
 {
-	if (m_pTileData != nullptr)
-	{
-		delete[] m_pTileData;
-		m_pTileData = nullptr;
-	}
-
-	int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
-	m_pTileData = new BYTE[nSizeTileData];
-	memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    DestroyTileData();
+    CreateTileData();
 
 	// Create Default Ground
 	int nTileW = m_sizeTile.cx;
@@ -1237,8 +1246,11 @@ void Stage::InitEnemyStack()
 
 				if (pE1->m_fY - nHeight == pE2->m_fY)
 				{
-					((EnemyObjectBase*)pE1)->m_pOnMyHead = (EnemyObjectBase*)pE2;
-					((EnemyObjectBase*)pE2)->m_pUnderMyFoot = (EnemyObjectBase*)pE1;
+                    if (pE1->m_pOnMyHead != nullptr || pE2->m_pUnderMyFoot != nullptr)
+                        continue;
+
+					pE1->m_pOnMyHead = pE2;
+					pE2->m_pUnderMyFoot = pE1;
 					pE2->SetState(STATE_STACKED);
 					break;
 				}
@@ -1304,7 +1316,12 @@ void Stage::MakeEarthquake(int nPower)
 
 void Stage::RenderBackground()
 {
-	int nTileW = m_sizeTile.cx;
+    BEGIN_VECTOR_LOOP(BackgroundObjectBase*, m_vecBackgroundObject) {
+        if (pObj->IsOnCamera())
+            pObj->Render();
+    } END_VECTOR_LOOP();
+
+	/*int nTileW = m_sizeTile.cx;
 	int nTileH = m_sizeTile.cy;
 
 	RECT rc = CAMERA->GetTileViewport();
@@ -1321,7 +1338,7 @@ void Stage::RenderBackground()
 			if (nData != TILE_EMPTY)
 				RenderTileBackground(x, y, nData);
 		}
-	}
+	}*/
 }
 
 void Stage::Render()
@@ -1367,7 +1384,7 @@ void Stage::Render()
 		}
 	}
 
-	RenderBullets();	
+    RenderBullets();
 
 	BEGIN_VECTOR_LOOP(GameObjectBase*, m_vecReservedGameObject) {
 		if (!pObj->IsOutOfCamera())
@@ -1420,7 +1437,6 @@ void Stage::Render()
 
 void Stage::RenderTile(int x, int y, int nType, long lColor, int nZOrder)
 {
-	NaRect rc = GetTileRect(x, y);
 	int nIdx = GetTileIndex(x, y);
 
 	// Offset includes from GetTileRect()
@@ -1430,33 +1446,48 @@ void Stage::RenderTile(int x, int y, int nType, long lColor, int nZOrder)
 	nType = GetAnimatedTileIndex(nType);
 
 	bool bShadow = (nType != TILE_EMPTY) && (m_pGame->m_bModernStyle) && (nZOrder != Z_MAP_SHADOW);
-	/*
-	if (bShadow)
-	{
-		if (GetTileData(x + 1, y) != TILE_EMPTY &&
-			GetTileData(x, y + 1) != TILE_EMPTY &&
-			GetTileData(x + 1, y + 1) != TILE_EMPTY)
-			bShadow = false;
-	}
-	*/
 
-	if (nType == TILE_GROUND)
-		nType = GetAutoGroundTileIndex(x, y);
+    if (bShadow)
+    {
+        if (IsSomethingTile(nType) &&
+            IsSomethingTile(GetTileData(x + 1, y)) &&
+            IsSomethingTile(GetTileData(x, y + 1)) &&
+            IsSomethingTile(GetTileData(x + 1, y + 1)))
+        {
+            bShadow = false;
+        }
+    }
+
+    if (nZOrder == Z_MAP && IsBackgroundTile(nType))
+        nZOrder = Z_SEMISOLID_BACKGROUND;
+
+    NaRect rc = GetTileRect(x, y);
 
 	if (nZOrder == Z_MAP && rc.top % TILE_YS != 0)
 		nZOrder = Z_MAP_ANIMATING;
-
-	if (nZOrder == Z_MAP)
-	{
-		if (IsBackgroundTile(nType))
-			nZOrder = Z_SEMISOLID_BACKGROUND;
-	}
 	
 	float fScale = 1.0f;
-	if (rc.top % 16 != 0)
+	if (nZOrder != Z_SEMISOLID_BACKGROUND && rc.top % 16 != 0)
 	{
-		POINT ptOffset = GetHitAnimatedTileOffset(x, y);
-		fScale += abs(ptOffset.y) / 40.0f;
+        int nHitOffset = 0;
+		POINT ptOffset = GetHitAnimatedTileOffset(x, y, &nHitOffset);
+        switch (nType)
+        {
+        case TILE_JUMP:
+        case TILE_MESSAGE:
+        case TILE_JUMP1:
+        case TILE_JUMP2:
+        case TILE_JUMP3:
+        case TILE_JUMP4:
+            fScale = (abs(nHitOffset) / 80.0f) + 1.0f;
+            break;
+        default:
+            fScale = (abs(nHitOffset) / 40.0f) + 1.0f;
+            break;
+        }
+
+        if (nType == TILE_TAKENITEM)
+            nType = TILE_TAKINGITEM;
 	}
 
 	NaPointT<float> ptCamera = CAMERA->GetPosition();
@@ -1465,32 +1496,6 @@ void Stage::RenderTile(int x, int y, int nType, long lColor, int nZOrder)
 		(float)rc.left + 8 - ptCamera.x, 
 		(float)rc.top + 16 - ptCamera.y, 
 		nType, false, false, lColor, fScale, fScale, nZOrder, bShadow);
-}
-
-void Stage::RenderTileBackground(int x, int y, int nType)
-{
-	NaRect rc = GetTileRect(x, y, false);
-
-	if (nType == -1)
-		return;
-
-	long lAlpha = -1L;
-	if (m_pGame->m_bModernStyle)
-	{
-		// Removed 2016.11.07
-		// Changed BG Tileset SMB1 to SMM
-
-		// lAlpha = 0xb0ffffff;
-
-		nType = GetAnimatedBackgroundTileIndex(nType);
-	}
-
-	NaPointT<float> ptCamera = CAMERA->GetPosition(CAMERA_PIN_BACKGROUND);
-
-	m_pSpriteBackground->RenderToQueue(
-		(float)rc.left + 8 - ptCamera.x,
-		(float)rc.top + 16 - ptCamera.y,
-		nType, false, false, lAlpha, 1.0f, 1.0f, Z_BACKGROUND);
 }
 
 void Stage::RenderFarBackground()
@@ -1680,7 +1685,7 @@ void Stage::Process()
 	if (m_nTheme == STAGETHEME_AIRSHIP)
 	{
 		// #TODO Change to Function
-		float fOffset = (15.0f) * sin((-90 + (m_nStateFrame)) * fToRadian);
+		float fOffset = (15.0f) * sin(m_nStateFrame * fToRadian);
 
 		CAMERA->m_ptAirShipOffset.x = 0;
 		CAMERA->m_ptAirShipOffset.y = fOffset;
@@ -1972,6 +1977,55 @@ void Stage::ProcessEffects()
 	}
 }
 
+void Stage::CreateCrushBlockEffect(int type, int x, int y, GameObjectBase *pWho, bool bHit)
+{
+    bool bCanBreakItem = false;
+    if (pWho != nullptr)
+        bCanBreakItem = pWho->m_nType == ENEMY_SKEWER || pWho->m_nType == ENEMY_THWOMP && pWho->m_bPowerUp;
+
+    CreateParameter param;
+
+    bool bBrickDebris = true;
+
+    if ((type == TILE_ITEM && bCanBreakItem) || type == TILE_CLOUD)
+    {
+        param.nType = EFFECT_DUST;
+        param.fScaleX = 2.0f;
+        param.fScaleY = 2.0f;
+        CreateEffect(x, y + (TILE_YS / 2), EFFECT_DUST, &param);
+
+        bBrickDebris = false;
+    }
+
+    if (!bBrickDebris)
+        return;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (type != TILE_BRICK)
+            param.nType = (type * 4) + i;
+
+        if (bHit)
+        {
+            param.fXS = i % 2 == 0 ? -1.0f : 1.0f;
+            param.fYS = i < 2 ? -6.0f : -4.0f;
+        }
+        else
+        {
+            if (i % 2 == 0)
+                param.fXS = (pWho->m_fXS * 0.5f) + ((rand() % 30) / 10.0f);
+            else
+                param.fXS = (pWho->m_fXS * 0.5f) - ((rand() % 30) / 10.0f);
+            param.fYS = -(((rand() % 60) / 10.0f) + 1);
+        }
+
+        if (type == TILE_BRICK)
+            CreateEffect(x, y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
+        else
+            CreateEffect(x, y + (TILE_YS / 2), EFFECT_BRICKDEBRIS, &param);
+    }
+}
+
 void Stage::HitBlock(int x, int y, int nPower, GameObjectBase *pWho, GameObjectBase *pOwner)
 {
 	// POWER_HITBLOCK_NORMAL: Hit Brick
@@ -1990,27 +2044,32 @@ void Stage::HitBlock(int x, int y, int nPower, GameObjectBase *pWho, GameObjectB
 		y * TILE_YS - 1
 	};
 
-	if (nType == TILETYPE_ITEM || HasItem(x, y))
+    bool bCanCrush = false;
+    bool bCanPopItem = false;
+
+    if (y >= 0)
+    {
+        bCanCrush = nType == TILETYPE_SOFTHARD && nPower >= POWER_HITBLOCK_BIGMARIO || nType == TILETYPE_HARD && nPower >= POWER_HITBLOCK_DECOMP_UNK || nType == TILETYPE_ITEM && nPower >= POWER_HITBLOCK_DECOMP_UNK;
+        bCanPopItem = HasItem(x, y);
+    }
+    else
+    {
+        if (nType == TILETYPE_ITEM)
+            nType = TILETYPE_HARD;
+        bCanCrush = false;
+        bCanPopItem = false;
+    }
+
+	if (nPower < POWER_HITBLOCK_DECOMP_UNK && (nType == TILETYPE_ITEM || bCanPopItem) ||
+        nPower >= POWER_HITBLOCK_DECOMP_UNK && nType == TILETYPE_EMPTY && bCanPopItem)
 	{
 		// Popup Item
 		PopItemUp(x, y, pOwner);
 		bHitAnimation = true;
 	}
-	else if (nType == TILETYPE_SOFTHARD && nPower >= POWER_HITBLOCK_BIGMARIO)
+	else if (bCanCrush)
 	{
-		CreateParameter param;
-		param.fXS = -1.0f;
-		param.fYS = -6.0f;
-		CreateEffect(ptBlockCenter.x, ptBlockCenter.y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
-		param.fXS = 1.0f;
-		param.fYS = -6.0f;
-		CreateEffect(ptBlockCenter.x, ptBlockCenter.y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
-		param.fXS = -1.0f;
-		param.fYS = -4.0f;
-		CreateEffect(ptBlockCenter.x, ptBlockCenter.y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
-		param.fXS = 1.0f;
-		param.fYS = -4.0f;
-		CreateEffect(ptBlockCenter.x, ptBlockCenter.y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
+        CreateCrushBlockEffect(nData, ptBlockCenter.x, ptBlockCenter.y, pWho, true);
 
 		DestroyTile(x, y);
 		bHitAnimation = false;
@@ -2108,6 +2167,9 @@ void Stage::HitBlock(int x, int y, int nPower, GameObjectBase *pWho, GameObjectB
 
 void Stage::CrushBlock(int x, int y, GameObjectBase * pWho)
 {
+    if (x < 0 || x >= m_sizeTile.cx || y < 0 || y >= m_sizeTile.cy)
+        return;
+
 	int nData = GetTileData(x, y);
 	int nType = GetDataType(nData);
 	POINT ptBlockCenter =
@@ -2158,6 +2220,8 @@ void Stage::CrushBlock(int x, int y, GameObjectBase * pWho)
 		// Remove EnemyGenerator too
 		auto rcTile = GetTileRect(x, y, false);
 		BEGIN_VECTOR_LOOP(GameObjectBase*, m_vecEventObject) {
+            if (pObj->m_nType != EVENTOBJECT_ENEMYGENERATOR && pObj->m_nType != EVENTOBJECT_OBJECTGENERATOR)
+                continue;
 			auto rcObj = pObj->GetRect();
 			if (rcTile.IsOverlapped(rcObj))
 			{
@@ -2166,30 +2230,27 @@ void Stage::CrushBlock(int x, int y, GameObjectBase * pWho)
 		} END_VECTOR_LOOP();
 	}
 
-	if (nType == TILETYPE_ITEM || HasItem(x, y))
+    if (IsGroundTile(nData))
+        UpdateAutoGroundTileRegion(x, y);
+
+    bool bCanBreakItem = pWho->m_nType == ENEMY_SKEWER || pWho->m_nType == ENEMY_THWOMP && pWho->m_bPowerUp;
+
+	if (!bCanBreakItem && (nType == TILETYPE_ITEM || HasItem(x, y)))
 	{
+        if (pWho->m_fYS > 0 && pWho->m_nState == STATE_GOTOFFVEHICLE)
+            PopItemUp(x, y, pWho, COLLISION_BOTTOM);
+        else
+            PopItemUp(x, y, pWho);
+
 		int nIdx = GetTileIndex(x, y);
 		std::map<int, int>::iterator it = m_mapItem.find(nIdx);
 		if (it != m_mapItem.end())
 		{
 			it->second = ITEM_COIN;
 		}
-
-		PopItemUp(x, y, pWho);
 	}
 
-	CreateParameter param;
-	for (int i = 0; i < 4; i++)
-	{
-		if (nData != TILE_BRICK)
-			param.nType = (nData * 4) + i;
-		if (i % 2 == 0)
-			param.fXS = pWho->m_fXS + ((rand() % 30) / 10.0f);
-		else
-			param.fXS = pWho->m_fXS - ((rand() % 30) / 10.0f);
-		param.fYS = -(((rand() % 60) / 10.0f) + 1);
-		CreateEffect(ptBlockCenter.x, ptBlockCenter.y + (TILE_YS), EFFECT_BRICKDEBRIS, &param);
-	}
+    CreateCrushBlockEffect(nData, ptBlockCenter.x, ptBlockCenter.y, pWho);
 }
 
 void Stage::PressBlock(int x, int y, int nPower, GameObjectBase * pWho)
@@ -2228,7 +2289,8 @@ void Stage::PressBlock(int x, int y, int nPower, GameObjectBase * pWho)
 				std::pair<int, int>(nIdx, 13)
 			);
 
-			if (HasItem(x, y))
+            int nDataAfter = GetTileData(x, y);
+			if (HasItem(x, y) || nDataAfter == TILE_ITEM)
 			{
 				PopItemUp(x, y, pWho, COLLISION_BOTTOM);
 			}
@@ -2275,6 +2337,14 @@ void Stage::PressBlock(int x, int y, int nPower, GameObjectBase * pWho)
 				pObj->m_rcExit.Offset(0, 16);
 			}
 		} END_VECTOR_LOOP();
+
+        BEGIN_VECTOR_LOOP(GameObjectBase*, m_vecEventObject) {
+            auto rcObj = pObj->GetRect();
+            if (rcTile.IsOverlapped(rcObj))
+            {
+                pObj->m_fY += 16.0f;
+            }
+        } END_VECTOR_LOOP();
 	}
 }
 
@@ -2437,15 +2507,18 @@ bool Stage::PressJumpBlock(int x, int y, GameObjectBase * pWho)
 bool Stage::CanCrush(int x, int y, int nPower)
 {
 	int nData = GetTileData(x, y);
+
+    if (IsGroundTile(nData))
+    {
+        if (GetTileData(x + 1, y - 1) == TILE_HPIPEHEAD_B)
+            return false;
+        if (nPower >= POWER_HITBLOCK_GIANTMARIO && y <= m_sizeTile.cy - 4)
+            return true;
+        return false;
+    }
+
 	switch (nData)
 	{
-	case TILE_GROUND:
-		if (GetTileData(x + 1, y - 1) == TILE_HPIPEHEAD_B)
-			return false;
-		if (nPower >= POWER_HITBLOCK_GIANTMARIO && y <= 12)
-			return true;
-		return false;
-		break;
 	case TILE_BRICK:
 	case TILE_ITEM:
 	case TILE_TAKENITEM:
@@ -2465,7 +2538,7 @@ bool Stage::CanCrush(int x, int y, int nPower)
 				GetTileData(x + 1, y) == TILE_BRIDGE_B)
 				return false;
 
-			if (nPower == POWER_HITBLOCK_GIANTMARIO && y > 12)
+			if (nData == TILE_TAKENITEM && nPower == POWER_HITBLOCK_GIANTMARIO && y > m_sizeTile.cy - 4)
 				return false;
 		}
 		return true;
@@ -2475,6 +2548,7 @@ bool Stage::CanCrush(int x, int y, int nPower)
 		if (CanCrushPipe(x, y))
 			return true;
 		return false;
+    case TILE_HPIPERIGHT_B:
 	case TILE_PIPEBODY_L:
 	case TILE_PIPEBODY_R:
 	case TILE_HPIPEHEAD_T:
@@ -2489,16 +2563,28 @@ bool Stage::CanCrush(int x, int y, int nPower)
 	case TILE_ISLANDHEAD_L:
 	case TILE_ISLANDHEAD_C:
 	case TILE_ISLANDHEAD_R:
+    case TILE_SEMI_SOLID_LT:
+    case TILE_SEMI_SOLID_CT:
+    case TILE_SEMI_SOLID_RT:
+    case TILE_SEMI_SOLID3_LT:
+    case TILE_SEMI_SOLID3_CT:
+    case TILE_SEMI_SOLID3_RT:
 	case TILE_MUSHROOMHEAD_L:
 	case TILE_MUSHROOMHEAD_C:
 	case TILE_MUSHROOMHEAD_R:
+    case TILE_BRIDGE_LB:
 	case TILE_BRIDGE_B:
+    case TILE_BRIDGE_RB:
 	case TILE_MESSAGE:
 		return false;
 	case TILE_JUMP:
 		if (nPower >= POWER_HITBLOCK_GROWING_GIANTMARIO)
 			return true;
 		return false;
+    case TILE_CLOUD:
+        if (nPower == POWER_HITBLOCK_THWOMP)
+            return true;
+        return false;
 	default:
 		return true;
 	}
@@ -2518,7 +2604,7 @@ bool Stage::CanPress(int x, int y)
 	case TILE_ITEM:
 	case TILE_TAKENITEM:
 	case TILE_HARDBRICK:
-		if (y > 12)
+		if (nData == TILE_HARDBRICK && y > 12)
 			return false;
 
 		if (GetTileData(x + 1, y - 1) == TILE_HPIPEHEAD_B)
@@ -2536,9 +2622,9 @@ bool Stage::CanPress(int x, int y)
 			}
 			else
 			{
-				if (nDataUnder == TILE_GROUND &&
-					GetTileData(x, y + 2) == TILE_GROUND &&
-					y <= 12)
+				if (IsGroundTile(nDataUnder) &&
+					IsGroundTile(GetTileData(x, y + 2)) &&
+					y <= m_sizeTile.cy - 4)
 					return true;
 			}
 			return false;
@@ -2692,7 +2778,7 @@ int Stage::GetObjectCount(int nType, bool bInCameraOnly)
 	// Reference dummy vector to default.
 	// Ref = Vec causes copy elements
 	std::vector<GameObjectBase*> &vec = std::vector<GameObjectBase*>();
-	int nNonMaskedType = nType & ~ENEMY_MASK_POWERUP & ~ENEMY_MASK_WINGED;
+	int nNonMaskedType = nType & ~ENEMY_MASK_POWERUP & ~ENEMY_MASK_WINGED & ~ENEMY_MASK_UNKNOWN1 & ~ENEMY_MASK_UNKNOWN2;
 
 	if (nNonMaskedType >= EFFECT_BEGIN && nNonMaskedType <= EFFECT_END)
 		vec = m_vecEffect;
@@ -3037,12 +3123,7 @@ void Stage::InitObjectIntoPipe()
 
 void Stage::BuildBackground()
 {
-	if (m_pTileBackgroundData)
-		delete[] m_pTileBackgroundData;
-
-	m_pTileBackgroundData = new BYTE[m_sizeTile.cx * m_sizeTile.cy];
-
-	memset(m_pTileBackgroundData, 0, sizeof(BYTE) * m_sizeTile.cx * m_sizeTile.cy);
+    SAFE_DELETE_OBJPTR_VECTOR(BackgroundObjectBase*, m_vecBackgroundObject);
 
 	BackgroundBase *pBg = BackgroundBase::CreateInstance(m_nBackgroundTheme, this);
 	if (pBg)
@@ -3151,6 +3232,28 @@ bool Stage::CanSwim(NaRect &rc)
 	return false;
 }
 
+bool Stage::CanHurt(NaRect &rc)
+{
+    std::vector<NaRect>::iterator it = m_vecHurtArea.begin();
+    for (; it != m_vecHurtArea.end(); ++it)
+    {
+        if ((*it).IsOverlapped(rc))
+            return true;
+    }
+
+    return false;
+}
+
+void Stage::AddSwimArea(NaRect &rc)
+{
+    m_vecSwimArea.push_back(rc);
+}
+
+void Stage::AddHurtArea(NaRect &rc)
+{
+    m_vecHurtArea.push_back(rc);
+}
+
 void Stage::BeginStopWatch()
 {
 	m_dwBeginTime = NaPlatform::GetTickCount();
@@ -3176,32 +3279,12 @@ void Stage::EndStopWatch()
 
 int Stage::GetTileData(int x, int y)
 {
-	if (x < 0 || x >= m_sizeTile.cx)
-		return 0;
+    int nIdx = GetTileDataIndex(x, y);
 
-	if (y < 0)
-		y = 0;
-	if (y >= m_sizeTile.cy)
-		y = m_sizeTile.cy - 1;
+    if (nIdx == -1)
+        return 0;
 
-	CalcPageJumpedPos(x, y);
-
-	int nIdx = GetTileIndex(x, y);
 	return m_pTileData[nIdx];
-}
-
-int Stage::GetTileBackgroundData(int x, int y)
-{
-	if (m_pTileBackgroundData == nullptr)
-		return 0;
-
-	if (x < 0 || y < 0 || x >= m_sizeTile.cx || y >= m_sizeTile.cy)
-		return 0;
-
-	CalcPageJumpedPos(x, y);
-
-	int nIdx = GetTileIndex(x, y);
-	return m_pTileBackgroundData[nIdx];
 }
 
 void Stage::SetItem(int x, int y, int type)
@@ -3263,7 +3346,7 @@ bool Stage::HasItem(int x, int y)
 	return false;
 }
 
-POINT Stage::GetHitAnimatedTileOffset(int x, int y)
+POINT Stage::GetHitAnimatedTileOffset(int x, int y, int* hitOffset, int* pressOffset)
 {
 	int nIdx = GetTileIndex(x, y);
 	POINT pt = { 0, 0 };
@@ -3279,6 +3362,8 @@ POINT Stage::GetHitAnimatedTileOffset(int x, int y)
 			const int nHitAnimOffset[16] = { 0, 0, 1, -1, -3, -4, -5, -6, -7, -7, -7, -6, -6, -5, -3, -1 };
 			pt.y += nHitAnimOffset[nHitFrame];
 
+            if (hitOffset != nullptr)
+                *hitOffset = nHitAnimOffset[nHitFrame];
 		}
 	}
 
@@ -3295,6 +3380,9 @@ POINT Stage::GetHitAnimatedTileOffset(int x, int y)
 				0, 1, 2, 3, 4, 5, 6, 8, 8, 7, 6, 5, 3, 1,
 			};
 			pt.y += nPressAnimOffset[nHitFrame];
+
+            if (pressOffset != nullptr)
+                *pressOffset = nPressAnimOffset[nHitFrame];
 		}
 	}
 
@@ -3430,7 +3518,7 @@ int Stage::GetAutoGroundTileIndex(int x, int y)
 	bool m[9];
 	for (int i=0; i<9; i++)
 	{
-		if (nMatrix[i] == TILE_GROUND)
+		if (IsGroundTile(nMatrix[i]))
 			m[i] = true;
 		else
 			m[i] = false;
@@ -3559,11 +3647,98 @@ int Stage::GetAutoGroundTileIndex(int x, int y)
 			}
 		}
 
-		if (bMismatch == false)
-			return nPatterns[j][9];
+        if (bMismatch == false)
+        {
+            int nType = nPatterns[j][9];
+            switch (nType)
+            {
+            case TILE_X183:
+            case TILE_X226:
+            case TILE_X228:
+            case TILE_X229:
+            case TILE_X230:
+            case TILE_X232:
+                return GetGroundTileDecoration(x, y, nType);
+            default:
+                return nType;
+            }
+        }
 	}
 
 	return 0;
+}
+
+int Stage::GetGroundTileDecoration(int x, int y, int nType)
+{
+    static short nTable[] = {
+        1, 0, 1, 0, 0, 2, 3, 1, 1, 0,
+        1, 3, 1, 0, 2, 0, 3, 1, 0, 2,
+        1, 0, 1, 0, 0, 1, 1, 3, 3, 1,
+        1, 2, 0, 1, 3, 1, 0, 1, 2, 1,
+        1, 3, 2, 0, 1, 0, 2, 0, 3, 0,
+        1, 3, 3, 1, 0, 0, 3, 2, 3, 2,
+        0, 3, 2, 0, 3, 1, 2, 3, 0, 3,
+        2, 1, 0, 3, 0, 3, 1, 1, 0, 1,
+        1, 1, 3, 0, 1, 2, 0, 1, 3, 2,
+        1, 2, 3, 3, 3, 3, 0, 2, 3, 1,
+    };
+
+    int nSeed = m_nTime <= 0 ? 0 : m_nTime;
+    int nMagic = nTable[(3 * y + x + nSeed + 2 * m_nTheme + 4 * m_nBackgroundTheme) % 100];
+
+    if (nMagic == 3)
+        return nType;
+
+    switch (nType)
+    {
+    case TILE_X183:
+        return nMagic + 190;
+    case TILE_X226:
+        return nMagic + 193;
+    case TILE_X228:
+        return nMagic + 202;
+    case TILE_X229:
+        return nMagic + 196;
+    case TILE_X230:
+        return nMagic + 205;
+    case TILE_X232:
+        return nMagic + 199;
+    default:
+        return nType;
+    }
+}
+
+void Stage::SetAutoGroundTiles()
+{
+    for (int i = 0; i < m_sizeTile.cy; i++)
+    {
+        for (int j = 0; j < m_sizeTile.cx; j++)
+        {
+            int nIdx = GetTileDataIndex(j, i);
+            if (nIdx != -1 && IsGroundTile(m_pTileData[nIdx]))
+                m_pTileData[nIdx] = GetAutoGroundTileIndex(j, i);
+        }
+    }
+}
+
+void Stage::UpdateAutoGroundTileRegion(int x, int y)
+{
+    RECT rcRegion = {
+        std::max(x - 2, 0),
+        std::max(y - 2, 0),
+        std::min(x + 2, (int)m_sizeTile.cx),
+        std::min(y + 2, (int)m_sizeTile.cy)
+    };
+
+    for (int j = rcRegion.top; j < rcRegion.bottom; j++)
+    {
+        for (int i = rcRegion.left; i < rcRegion.right; i++)
+        {
+            int nIdx = GetTileDataIndex(i, j);
+            if (nIdx != -1 && IsGroundTile(m_pTileData[nIdx]))
+                m_pTileData[nIdx] = GetAutoGroundTileIndex(i, j);
+        }
+    }
 }
 
 void Stage::SetPageJump(int nPrevPage, int nJumpPage)
@@ -3743,6 +3918,24 @@ MapObjectBase* Stage::AddMapObject(int x, int y, int type)
 	return nullptr;
 }
 
+// Add BackgroundObject (Cloud, Bush, Tree, etc...)
+BackgroundObjectBase* Stage::AddBackgroundObject(int x, int y, int type)
+{
+    //NaDebugOut(L"AddObject: %d, %d / Type: %d\n", x, y, type);
+    BackgroundObjectBase *pObj = BackgroundObjectBase::CreateInstance(m_pGame, this, type);
+    if (pObj)
+    {
+        SIZE s = pObj->GetSize();
+
+        pObj->m_nX = (x * TILE_XS) + (s.cx / 2);
+        pObj->m_nY = y * TILE_YS;
+
+        m_vecBackgroundObject.push_back(pObj);
+        return pObj;
+    }
+    return nullptr;
+}
+
 // Add Emeny
 GameObjectBase* Stage::AddEnemy(int x, int y, int type)
 {
@@ -3828,6 +4021,21 @@ int Stage::GetTileIndex(int x, int y)
 	return nIdx;
 }
 
+int Stage::GetTileDataIndex(int x, int y)
+{
+    if (x < 0 || x >= m_sizeTile.cx)
+        return -1;
+
+    if (y < 0)
+        y = 0;
+    if (y >= m_sizeTile.cy)
+        y = m_sizeTile.cy - 1;
+
+    CalcPageJumpedPos(x, y);
+
+    return GetTileIndex(x, y);
+}
+
 POINT Stage::GetTilePosition(int idx)
 {
 	int nTileW = GameDefaults::nPageTileWidth * m_nMaxPage;
@@ -3896,7 +4104,6 @@ bool Stage::IsHardTile(int x, int y, int dir)
 	case TILE_VERTICAL_LINE:
 		return false;
 		break;
-	case TILE_GROUND:
 	case TILE_BRICK:
 	case TILE_ITEM:
 	case TILE_TAKENITEM:
@@ -3967,7 +4174,7 @@ bool Stage::IsHardTile(int x, int y, int dir)
 		break;
 	}
 
-	return false;
+	return IsGroundTile(nType);
 }
 
 bool Stage::IsDamageTile(int x, int y, int dir)
@@ -4006,6 +4213,10 @@ bool Stage::IsBackgroundTile(int type)
 {
 	switch (type)
 	{
+    case TILE_X016:
+    case TILE_BRIDGE_T:
+    case TILE_X017:
+
 	case TILE_MUSHROOMBODY_T:
 	case TILE_MUSHROOMBODY_B:
 	case TILE_ISLANDBODY_L:
@@ -4018,6 +4229,10 @@ bool Stage::IsBackgroundTile(int type)
 	case TILE_SEMI_SOLID3_CTB:
 	case TILE_SEMI_SOLID3_RTB:
 
+    case TILE_X055:
+    case TILE_X056:
+    case TILE_RIVER_T:
+
 	case TILE_SEMI_SOLID1_LBT:
 	case TILE_SEMI_SOLID1_CBT:
 	case TILE_SEMI_SOLID1_RBT:
@@ -4027,6 +4242,10 @@ bool Stage::IsBackgroundTile(int type)
 	case TILE_SEMI_SOLID3_LBT:
 	case TILE_SEMI_SOLID3_CBT:
 	case TILE_SEMI_SOLID3_RBT:
+
+    case TILE_X071:
+    case TILE_X072:
+    case TILE_RIVER_B:
 
 	case TILE_SEMI_SOLID1_LBB:
 	case TILE_SEMI_SOLID1_CBB:
@@ -4044,6 +4263,134 @@ bool Stage::IsBackgroundTile(int type)
 	return false;
 }
 
+bool Stage::IsGroundTile(int type)
+{
+    switch (type)
+    {
+    case TILE_GROUND:
+
+    case TILE_X157:
+    case TILE_X158:
+    case TILE_X159:
+    case TILE_X160:
+    case TILE_X161:
+    case TILE_X162:
+    case TILE_X163:
+    case TILE_X164:
+    case TILE_X165:
+    case TILE_X166:
+    case TILE_X167:
+    case TILE_X168:
+    case TILE_X169:
+    case TILE_X170:
+    case TILE_X171:
+    case TILE_X172:
+    case TILE_X173:
+    case TILE_X174:
+    case TILE_X175:
+    case TILE_X176:
+    case TILE_X177:
+    case TILE_X178:
+    case TILE_X179:
+    case TILE_X180:
+    case TILE_X181:
+    case TILE_X182:
+    case TILE_X183:
+    case TILE_X184:
+    case TILE_X185:
+    case TILE_X186:
+    case TILE_X187:
+    case TILE_X188:
+    case TILE_X189:
+    case TILE_X190:
+    case TILE_X191:
+    case TILE_X192:
+    case TILE_X193:
+    case TILE_X194:
+    case TILE_X195:
+    case TILE_X196:
+    case TILE_X197:
+    case TILE_X198:
+    case TILE_X199:
+    case TILE_X200:
+    case TILE_X201:
+    case TILE_X202:
+    case TILE_X203:
+    case TILE_X204:
+    case TILE_X205:
+    case TILE_X206:
+    case TILE_X207:
+    case TILE_X208:
+    case TILE_X209:
+    case TILE_X210:
+    case TILE_X211:
+    case TILE_X222:
+    case TILE_X223:
+    case TILE_X224:
+    case TILE_X225:
+    case TILE_X226:
+    case TILE_X227:
+    case TILE_X228:
+    case TILE_X229:
+    case TILE_X230:
+    case TILE_X231:
+    case TILE_X232:
+    case TILE_X233:
+    case TILE_X234:
+    case TILE_X235:
+    case TILE_X236:
+    case TILE_X237:
+        return true;
+        break;
+    }
+
+    return false;
+}
+
+// Mykner> Not sure what is the type of tile...
+bool Stage::IsSomethingTile(int type)
+{
+    switch (type)
+    {
+    case TILE_BRICK:
+    case TILE_ITEM:
+    case TILE_JUMP:
+    case TILE_TAKENITEM:
+    case TILE_HARDBRICK:
+    case TILE_MESSAGE:
+    case TILE_TAKINGITEM:
+
+    case TILE_X071:
+    case TILE_X072:
+    case TILE_RIVER_B:
+
+    case TILE_GROUND:
+    case TILE_ITEM2:
+    case TILE_ITEM3:
+    case TILE_X163:
+    case TILE_X164:
+    case TILE_X165:
+    case TILE_X166:
+    case TILE_X167:
+    case TILE_X168:
+    case TILE_X169:
+    case TILE_X170:
+    case TILE_X171:
+    case TILE_X172:
+    case TILE_X173:
+    case TILE_X174:
+    case TILE_X183:
+    case TILE_X192:
+    case TILE_X193:
+    case TILE_X196:
+    case TILE_X229:
+        return true;
+        break;
+    }
+
+    return false;
+}
+
 int Stage::GetDataType(int type)
 {
 	switch (type)
@@ -4056,16 +4403,15 @@ int Stage::GetDataType(int type)
 	case TILE_MUSHROOMBODY_B:
 	case TILE_BRIDGE_T:
 	case TILE_CASTLE_HEAD1:
-	case TILE_CASTLE_HEAD2:
-	case TILE_CASTLE_WINDOW1:
 	case TILE_CASTLE_BRICK:
-	case TILE_CASTLE_WINDOW2:
-	case TILE_CASTLE_DOOR_T:
-	case TILE_CASTLE_DOOR_B:
 	case TILE_RIVER_T:
 	case TILE_RIVER_B:
 	case TILE_VERTICAL_LINE:
 	case TILE_HIDDENITEM:
+    case TILE_X055:
+    case TILE_X056:
+    case TILE_X071:
+    case TILE_X072:
 		return TILETYPE_EMPTY;
 		break;
 	case TILE_BRICK:
@@ -4074,6 +4420,7 @@ int Stage::GetDataType(int type)
 	case TILE_TAKENITEM:
 	case TILE_HARDBRICK:
 	case TILE_TAKINGITEM:
+    case TILE_X093:
 		return TILETYPE_HARD;
 		break;
 	case TILE_GROUND:
@@ -4084,11 +4431,19 @@ int Stage::GetDataType(int type)
 	case TILE_ISLANDHEAD_L:
 	case TILE_ISLANDHEAD_C:
 	case TILE_ISLANDHEAD_R:
+    case TILE_SEMI_SOLID_LT:
+    case TILE_SEMI_SOLID_CT:
+    case TILE_SEMI_SOLID_RT:
+    case TILE_SEMI_SOLID3_LT:
+    case TILE_SEMI_SOLID3_CT:
+    case TILE_SEMI_SOLID3_RT:
 	case TILE_MUSHROOMHEAD_L:
 	case TILE_MUSHROOMHEAD_C:
 	case TILE_MUSHROOMHEAD_R:
 	case TILE_CLOUD:
+    case TILE_BRIDGE_LB:
 	case TILE_BRIDGE_B:
+    case TILE_BRIDGE_RB:
 	case TILE_CANNONHEAD_T:
 	case TILE_CANNONHEAD_B:
 	case TILE_CANNONBODY:
@@ -4096,8 +4451,12 @@ int Stage::GetDataType(int type)
 	case TILE_HPIPEHEAD_B:
 	case TILE_HPIPEBODY_T:
 	case TILE_HPIPEBODY_B:
+    case TILE_HPIPERIGHT_T:
+    case TILE_HPIPERIGHT_B:
+    case TILE_PIPEBOTTOM_L:
+    case TILE_PIPEBOTTOM_R:
 	case TILE_PIPEJUNCTION_T:
-	case TILE_PIPEJUNCTION_B:	
+	case TILE_PIPEJUNCTION_B:
 	case TILE_MESSAGE:
 		return TILETYPE_SUPERHARD;
 		break;
@@ -4106,11 +4465,6 @@ int Stage::GetDataType(int type)
 	case TILE_ITEM3:
 		return TILETYPE_ITEM;
 		break;
-	case TILE_SEMI_SOLID_LT:
-	case TILE_SEMI_SOLID_CT:
-	case TILE_SEMI_SOLID_RT:
-		// ?
-		break;
 	case TILE_SPIKE:
 		return TILETYPE_DAMAGE;
 		break;
@@ -4118,6 +4472,9 @@ int Stage::GetDataType(int type)
 		return TILETYPE_JUMP;
 		break;
 	}
+
+    if (IsGroundTile(type))
+        return TILETYPE_SUPERHARD;
 
 	if (IsBackgroundTile(type))
 		return TILETYPE_EMPTY;

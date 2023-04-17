@@ -18,20 +18,22 @@ void BackgroundUnderWater::BuildBackground()
 	if (m_pStage == nullptr)
 		return;
 
-	if (m_pStage->m_pTileBackgroundData == nullptr)
-		m_pStage->m_pTileBackgroundData = new BYTE[m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy];
+    int nGround = GetGroundY();
+    for (int i = 0; i < (m_pStage->m_nMaxPage / 3) + 1; i++)
+    {
+        int nOffset = i * GameDefaults::nPageTileWidth * 3;
 
-	m_pData = m_pStage->m_pTileBackgroundData;
-	memset(m_pData, 0, sizeof(BYTE) * m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy);
+        CreateLongCoral(nOffset + 3, nGround, 1);
+        CreateLongCoral(nOffset + 16, nGround, 1);
+        CreateShortCoral(nOffset + 11, nGround, 3);
+        CreateShortCoral(nOffset + 23, nGround, 1);
+        CreateShortCoral(nOffset + 41, nGround, 2);
+    }
 
 	int nVortexBegin = -1;
 	int nTileH = m_pStage->m_sizeTile.cy;
 	for (int i = 0; i < m_pStage->m_nMaxPage * GameDefaults::nPageTileWidth; i++)
 	{
-		SetData(i, 0, TILEBG_WATER_SKY);
-		SetData(i, 1, TILEBG_WATER_SKY);
-		SetData(i, 2, TILEBG_WATER_T);
-
 		if (!m_pStage->m_bIsDesignStage)
 		{
 			if (m_pStage->GetTileData(i, nTileH - 1) == TILE_EMPTY)
@@ -49,4 +51,6 @@ void BackgroundUnderWater::BuildBackground()
 			}
 		}
 	}
+
+    CreateWaterSky();
 }

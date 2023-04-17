@@ -20,6 +20,7 @@ public:
 	virtual void Process();
 	virtual void ProcessBase();
 	virtual void ProcessShapeChange(int nStateFrame);
+    virtual void ProcessCarry();
 
 	virtual void OnBeforeProcess();
 	virtual void OnAfterProcess();
@@ -63,6 +64,9 @@ public:
 	// For Mario
 	virtual void ChangeShape(int nShape);
 	virtual void OnChangeShape(int nShape);
+
+    virtual void CheckOutOfStage();
+    virtual void UnderwaterEffect();
 
 	virtual bool CanFire();
 	virtual void ThrowFireball();

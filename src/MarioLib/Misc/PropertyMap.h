@@ -8,6 +8,7 @@ enum VARENUM_ETC
 	VT_ETC_COLOR = 0x10000,
 	VT_ETC_NASTR,
 	VT_ETC_NALIST,
+    VT_ETC_CUSTOM,
 };
 
 class PropertyInfo;

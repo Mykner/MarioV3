@@ -60,6 +60,10 @@ public:
 
 	virtual int GetMaskedType();
 
+    virtual float GetStackXOffset();
+    virtual int GetStackUnderMeCount();
+    virtual EnemyObjectBase* GetStackEnemyBeforeLast();
+
 	static GameObjectBase* CreateInstance(Game *pGame, Stage *pStage, int nType);
 
 	EnemyObjectBase *m_pOnMyHead;

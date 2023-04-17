@@ -34,6 +34,8 @@ public:
 	void MakeEarthquake(int nPower = 2);
 	void StopEarthquake();
 
+    NaPointT<float> GetScrollSpeed();
+
 	/*
 	union {
 		POINT m_pt;

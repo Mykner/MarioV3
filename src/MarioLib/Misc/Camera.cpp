@@ -46,7 +46,7 @@ void Camera::Process()
 
 		// Horz movement
 		{
-			if (CUR_STAGE->m_nAutoScroll < AUTOSCROLL_HORZ_SLOW || 
+			if (CUR_STAGE->m_nAutoScroll < AUTOSCROLL_HORZ_SUPERSLOW || 
 				CUR_STAGE->m_nAutoScroll > AUTOSCROLL_HORZ_GOD)
 			{
 				bool bCanGoBack = CUR_STAGE->m_bCanGoBack;
@@ -72,19 +72,21 @@ void Camera::Process()
 			else
 			{
 				bAutoScrollX = true;
-				switch(CUR_STAGE->m_nAutoScroll)
-				{
-				case AUTOSCROLL_HORZ_SLOW:		m_fXS = 1; break;
-				case AUTOSCROLL_HORZ_NORMAL:	m_fXS = 2; break;
-				case AUTOSCROLL_HORZ_FAST:		m_fXS = 3; break;
-				case AUTOSCROLL_HORZ_GOD:		m_fXS = 4; break;
-				}				
+                switch (CUR_STAGE->m_nAutoScroll)
+                {
+                case AUTOSCROLL_HORZ_SUPERSLOW:	m_fXS = 0.3; break;
+                case AUTOSCROLL_HORZ_VERYSLOW:	m_fXS = 0.5; break;
+                case AUTOSCROLL_HORZ_SLOW:		m_fXS = 1; break;
+                case AUTOSCROLL_HORZ_NORMAL:	m_fXS = 2; break;
+                case AUTOSCROLL_HORZ_FAST:		m_fXS = 3; break;
+                case AUTOSCROLL_HORZ_GOD:		m_fXS = 4; break;
+                }
 			}
 		}
 
 		// Vert movement
 		{
-			if (CUR_STAGE->m_nAutoScroll < AUTOSCROLL_VERT_SLOW ||
+			if (CUR_STAGE->m_nAutoScroll < AUTOSCROLL_VERT_SUPERSLOW ||
 				CUR_STAGE->m_nAutoScroll > AUTOSCROLL_VERT_GOD)
 			{
 				int nMaxY = ((CUR_STAGE->m_sizeTile.cy - 1) * TILE_YS) - m_pGame->m_nHeight;
@@ -108,13 +110,15 @@ void Camera::Process()
 			else
 			{
 				bAutoScrollY = true;
-				switch (CUR_STAGE->m_nAutoScroll)
-				{
-				case AUTOSCROLL_VERT_SLOW:		m_fYS = -0.3f; break;
-				case AUTOSCROLL_VERT_NORMAL:	m_fYS = -0.5f; break;
-				case AUTOSCROLL_VERT_FAST:		m_fYS = -1.0f; break;
-				case AUTOSCROLL_VERT_GOD:		m_fYS = -2.0f; break;
-				}
+                switch (CUR_STAGE->m_nAutoScroll)
+                {
+                case AUTOSCROLL_VERT_SUPERSLOW:	m_fYS = -0.1f; break;
+                case AUTOSCROLL_VERT_VERYSLOW:	m_fYS = -0.15f; break;
+                case AUTOSCROLL_VERT_SLOW:		m_fYS = -0.3f; break;
+                case AUTOSCROLL_VERT_NORMAL:	m_fYS = -0.5f; break;
+                case AUTOSCROLL_VERT_FAST:		m_fYS = -1.0f; break;
+                case AUTOSCROLL_VERT_GOD:		m_fYS = -2.0f; break;
+                }
 			}
 		}
 
@@ -204,9 +208,9 @@ void Camera::ProcessPlayerBound()
 
 void Camera::ProcessLimit()
 {
-	int nStopPointX = CUR_STAGE->m_ptStopPoint.x;
-	if (nStopPointX == 0)
-		nStopPointX = GameDefaults::nMaxCameraPosX;
+    int nStopPointX = CUR_STAGE->m_ptStopPoint.x;
+    if (CUR_STAGE->m_bIsDesignStage)
+        nStopPointX = 16 * CUR_STAGE->m_sizeTile.cx;
 
 	int nMaxX = nStopPointX - m_pGame->m_nWidth;
 	
@@ -242,6 +246,10 @@ NaPointT<float> Camera::GetPosition(int nPin)
 		pt.y += (m_ptAirShipOffset.y / 5.0f);
 		break;
 	case CAMERA_PIN_FARBACKGROUND:
+        if (CUR_STAGE->m_nTheme != STAGETHEME_AIRSHIP)
+            break;
+        
+        pt.x += (CUR_STAGE->m_nStateFrame * 2);
 		break;
 	}
 
@@ -269,7 +277,7 @@ NaRect Camera::GetTileViewport()
 {
 	NaRect rc = GetViewport();
 	rc.left = rc.left / TILE_XS;
-	rc.top = rc.top / TILE_YS;
+	rc.top = rc.top < 0 ? -1 : rc.top / TILE_YS;
 	rc.right = rc.right / TILE_XS + 1;
 	rc.bottom = rc.bottom / TILE_YS + 1;
 
@@ -323,4 +331,31 @@ void Camera::StopEarthquake()
 {
 	m_ptEarthQuakeOffset = { 0, 0 };
 	m_nEarthQuakeCooltime = 0;
+}
+
+NaPointT<float> Camera::GetScrollSpeed()
+{
+    NaPointT<float> ptSpeed = { 0, 0 };
+
+    switch (CUR_STAGE->m_nAutoScroll)
+    {
+    case AUTOSCROLL_HORZ_SUPERSLOW:	ptSpeed.x = 0.3; break;
+    case AUTOSCROLL_HORZ_VERYSLOW:	ptSpeed.x = 0.5; break;
+    case AUTOSCROLL_HORZ_SLOW:		ptSpeed.x = 1; break;
+    case AUTOSCROLL_HORZ_NORMAL:	ptSpeed.x = 2; break;
+    case AUTOSCROLL_HORZ_FAST:		ptSpeed.x = 3; break;
+    case AUTOSCROLL_HORZ_GOD:		ptSpeed.x = 4; break;
+    }
+
+    switch (CUR_STAGE->m_nAutoScroll)
+    {
+    case AUTOSCROLL_VERT_SUPERSLOW:	ptSpeed.y = -0.1f; break;
+    case AUTOSCROLL_VERT_VERYSLOW:	ptSpeed.y = -0.15f; break;
+    case AUTOSCROLL_VERT_SLOW:		ptSpeed.y = -0.3f; break;
+    case AUTOSCROLL_VERT_NORMAL:	ptSpeed.y = -0.5f; break;
+    case AUTOSCROLL_VERT_FAST:		ptSpeed.y = -1.0f; break;
+    case AUTOSCROLL_VERT_GOD:		ptSpeed.y = -2.0f; break;
+    }
+
+    return ptSpeed;
 }

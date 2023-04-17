@@ -45,15 +45,7 @@ void BuzzyBeetle::OnAfterProcess()
 		m_vecPassenger.clear();
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
-
-		OnChangeState(m_nState);
-	}
+    ProcessState();
 }
 
 void BuzzyBeetle::Render(int nColor, int nZOrder)
@@ -199,26 +191,34 @@ int BuzzyBeetle::GetSpriteIndex()
 	int nFrame;
 	switch (m_nState)
 	{
+    case STATE_PUSHEDUP:
 	case STATE_SHELLAWAKE:
 	case STATE_PRESSED:
 	case STATE_SHELLIDLE:
 	case STATE_CARRYBYHAND:
 	case STATE_KICKEDUP:
 	case STATE_PLACEDBYHAND:
-		if (IS_MODERN)
-			nFrame = SPRIDX_BUZZYBEETLE_SPIN1;
+        if (IS_MODERN)
+        {
+            if (m_bDeadInside)
+                nFrame = SPRIDX_BUZZYBEETLE_EMPTY_SPIN1;
+            else
+                nFrame = SPRIDX_BUZZYBEETLE_SPIN1;
+        }
 		else
 			nFrame = SPRIDX_BUZZYBEETLE_SHELL;
 		break;
 	case STATE_SHELLRUN:
 		if (m_pGame->m_bModernStyle)
 		{
-			nFrame = SPRITE_INDEX_CYCLE(SPRIDX_BUZZYBEETLE_SPIN1, 4, 3);
+            if (m_bDeadInside)
+                nFrame = SPRITE_INDEX_CYCLE(SPRIDX_BUZZYBEETLE_EMPTY_SPIN1, 4, 3);
+            else
+			    nFrame = SPRITE_INDEX_CYCLE(SPRIDX_BUZZYBEETLE_SPIN1, 4, 3);
 		}
 		else
 			nFrame = SPRIDX_BUZZYBEETLE_SHELL;
 		break;
-	case STATE_PUSHEDUP:
 	case STATE_BURNT:
 		nFrame = SPRIDX_BUZZYBEETLE_SHELL;
 		break;
@@ -227,8 +227,18 @@ int BuzzyBeetle::GetSpriteIndex()
 			nFrame = SPRIDX_BUZZYBEETLE2;
 		else
 			nFrame = SPRIDX_BUZZYBEETLE1 + (m_nStateFrame / 8) % 2;
-		if (m_nShape == TURTLESHAPE_SHELL || m_bDeadInside)
-			nFrame = SPRIDX_BUZZYBEETLE_SHELL;
+        if (m_nShape == TURTLESHAPE_SHELL || m_bDeadInside || m_bIsEmptyShell)
+        {
+            if (IS_MODERN)
+            {
+                if (m_bDeadInside || m_bIsEmptyShell)
+                    nFrame = SPRIDX_BUZZYBEETLE_EMPTY_SPIN1;
+                else
+                    nFrame = SPRIDX_BUZZYBEETLE_SPIN1;
+            }
+            else
+                nFrame = SPRIDX_BUZZYBEETLE_SHELL;
+        }
 		break;
 	}
 

@@ -17,6 +17,7 @@ class MapObjectBase;
 class CreateParameter;
 class PipeInfo;
 class PipeExitInfo;
+class BackgroundObjectBase;
 class Stage : public PropertyObjectBase
 {
 public:
@@ -24,6 +25,9 @@ public:
 	virtual ~Stage();
 
 	void Clear();
+
+    int CreateTileData();
+    void DestroyTileData();
 
 	// Load/Save Map File
 	virtual bool Load(const wchar_t* name);
@@ -54,7 +58,6 @@ public:
 	virtual void OnAfterProcess();
 	void ProcessEffects();
 	virtual void RenderTile(int x, int y, int nType, long lColor = 0xffffffff, int nZOrder = Z_MAP);
-	void RenderTileBackground(int x, int y, int nType);
 	void RenderFarBackground();
 	void RenderItems();
 	void RenderEnemies();
@@ -65,6 +68,8 @@ public:
 
 	long GetBackgroundColor();
 	float GetGravity() { return m_fGravity; }
+
+    void CreateCrushBlockEffect(int type, int x, int y, GameObjectBase *pWho = nullptr, bool bHit = false);
 
 	void HitBlock(int x, int y, int nPower, GameObjectBase *pWho = nullptr, GameObjectBase *pOwner = nullptr);
 	void CrushBlock(int x, int y, GameObjectBase *pWho = nullptr);
@@ -100,6 +105,9 @@ public:
 
 	bool CanEnterSky();
 	bool CanSwim(NaRect &rc);
+    bool CanHurt(NaRect &rc);
+    void AddSwimArea(NaRect &rc);
+    void AddHurtArea(NaRect &rc);
 
 	void BeginStopWatch();
 	void EndStopWatch();
@@ -121,11 +129,11 @@ public:
 
 	// Tile Handling
 	int GetTileIndex(int x, int y);
+    int GetTileDataIndex(int x, int y);
 	POINT GetTilePosition(int idx);
 	void SetTileData(int x, int y, int type);
 	void DestroyTile(int x, int y);
 	int GetTileData(int x, int y);
-	int GetTileBackgroundData(int x, int y);
 	int GetDataType(int type);
 	void SetItem(int x, int y, int type);
 	int GetItem(int x, int y);
@@ -134,13 +142,18 @@ public:
 	bool IsDamageTile(int x, int y, int dir = -1);
 	bool IsJumpTile(int x, int y, int dir = -1);
 	bool IsBackgroundTile(int type);
+    bool IsGroundTile(int type);
+    bool IsSomethingTile(int type);
 	bool HasItem(int x, int y);
 
-	POINT GetHitAnimatedTileOffset(int x, int y);
+	POINT GetHitAnimatedTileOffset(int x, int y, int* hitOffset = nullptr, int* pressOffset = nullptr);
 	int GetJumpTileFrame(int x, int y);
 	int GetAnimatedTileIndex(int nType);
 	int GetAnimatedBackgroundTileIndex(int nType);
 	int GetAutoGroundTileIndex(int x, int y);
+    int GetGroundTileDecoration(int x, int y, int nType);
+    void SetAutoGroundTiles();
+    void UpdateAutoGroundTileRegion(int x, int y);
 
 	void SetPageJump(int nPrevPage, int nJumpPage);
 	void CalcPageJumpedPos(int &tx, int &ty);
@@ -148,6 +161,7 @@ public:
 	// For Load & Design
 	bool AddItem(int x, int y, int type);
 	MapObjectBase* AddMapObject(int x, int y, int type);
+    BackgroundObjectBase* AddBackgroundObject(int x, int y, int type);
 	GameObjectBase* AddEnemy(int x, int y, int type);
 
 	// SubStage
@@ -163,7 +177,6 @@ public:
 	int m_nMaxPage;
 	int m_nMaxVertPage;
 	BYTE* m_pTileData;
-	BYTE* m_pTileBackgroundData;
 
 	POINT m_ptStartPoint;
 	POINT m_ptStopPoint;
@@ -204,11 +217,13 @@ public:
 	std::map<int, int> m_mapItem; // Item that hide in Block (not live object)
 	std::map<int, NaString> m_mapMessage;
 	std::vector<MapObjectBase*> m_vecMapObject;
+    std::vector<BackgroundObjectBase*> m_vecBackgroundObject;
 	std::vector<PipeInfo*> m_vecPipeInfo;
 	std::vector<PipeExitInfo*> m_vecPipeExitInfo;
 
 	PipeInfo* m_pCurPipe;
 	std::vector<NaRect> m_vecSwimArea;
+    std::vector<NaRect> m_vecHurtArea;
 	SIZE m_sizeTile;
 	bool m_bIsDesignStage;
 

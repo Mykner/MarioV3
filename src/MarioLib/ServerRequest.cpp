@@ -1,5 +1,5 @@
 #include "ServerRequest.h"
-#include "ServerRequest_.h"
+//#include "ServerRequest_.h"
 
 #include "Stage.h"
 #include "NaException.h"
@@ -10,8 +10,8 @@
 #include "aes/md5.h"
 #include "PathManager.h"
 
-//NaString ServerRequest::s_strUpdateUrl = L"http://[storage server]/update";
-//NaString ServerRequest::s_strBaseUrl = L"https://[rest server]/";
+NaString ServerRequest::s_strUpdateUrl = L"http://[storage server]/update";
+NaString ServerRequest::s_strBaseUrl = L"https://[rest server]/";
 
 // Using a7
 int ServerRequest::s_nCurrentVersion = 11;
@@ -743,7 +743,7 @@ void ServerRequest::UpdateStageRecordInfo(NaString strUniqueId, NaString strDeat
 	strUrl += L"/DeathPositions.json";
 
 	NaString strData;
-	strData.Format(L"\"%ls\"", strDeathPositions);
+	strData.Format(L"\"%ls\"", strDeathPositions.wstr());
 	NaString strRet = curl.Put(strUrl, strData);
 
 	Json::Value jMeta;

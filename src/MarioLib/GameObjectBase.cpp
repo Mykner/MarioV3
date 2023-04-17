@@ -101,6 +101,14 @@ void GameObjectBase::RequestSprites(Stage * pStage)
 bool GameObjectBase::HitTest(int x, int y)
 {
 	NaRect rcMe = GetRect();
+
+    if (rcMe.Width() < TILE_XS)
+    {
+        int nAdjust = (TILE_XS - rcMe.Width()) / 2;
+        rcMe.left -= nAdjust;
+        rcMe.right += nAdjust;
+    }
+
 	if (rcMe.ptInRect(x, y))
 		return true;
 
@@ -231,8 +239,14 @@ void GameObjectBase::CheckCollision()
 		if (m_fYS >= 0 && CUR_STAGE->IsJumpTile(x, y) && !CUR_STAGE->IsHardTile(x, y - 1, COLLISION_TOP))
 		{
 			NaRect rcStageTile = CUR_STAGE->GetTileRect(x, y, true);
-			if (rcStageTile.top + 8 < rcFoot.bottom)
-				continue;
+            NaRect rcNoOffsetStageTile = CUR_STAGE->GetTileRect(x, y, false);
+            bool bHasTileOffset = rcStageTile.bottom != rcNoOffsetStageTile.bottom;
+
+            if (!bHasTileOffset && rcStageTile.top + 8 < rcFoot.bottom)
+                continue;
+
+            if (bHasTileOffset && rcStageTile.top + 8 < rcFoot.bottom && rcNoOffsetStageTile.top + 8 < rcFoot.bottom)
+                continue;
 
 			SHOW_STAGETILEBOX2(0x70000000);
 			if (m_bCollision[COLLISION_BOTTOM])
@@ -987,15 +1001,30 @@ void GameObjectBase::OnAfterProcess()
 		m_nDamageCooltime--;
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
+    ProcessState();
+}
 
-		OnChangeState(m_nState);
-	}
+void GameObjectBase::ProcessState()
+{
+    m_nStateFrame++;
+    if (m_nNextState != -1)
+    {
+        m_nState = m_nNextState;
+        m_nNextState = -1;
+        m_nStateFrame = 0;
+
+        OnChangeState(m_nState);
+    }
+
+    // Mykner> TODO?
+    /*if ( *((float *)this + 28) != 0.0 )
+      {
+        *((float *)this + 28) = *((float *)this + 28) / 2.0;
+        v1 = abs(*((float *)this + 28));
+        if ( v1 < 0.1 )
+          *((_DWORD *)this + 28) = 0;
+      }
+      *((_DWORD *)this + 29) = 0;*/
 }
 
 void GameObjectBase::RenderWing(int nColor, int nZOrder)
@@ -1355,6 +1384,13 @@ void GameObjectBase::OnApplyGravity(float fMagnification, float fMaxSpeed)
 		fMagnification /= 4.0f;
 		fMaxSpeed /= 2.0f;
 	}
+
+    if (m_fYS > 0 && fMaxSpeed > m_fYS)
+    {
+        float fYS = (fMaxSpeed - m_fYS) / 25.0f;
+        if (fGravity - fYS > 0)
+            fGravity -= fYS;
+    }
 
 	m_fYS += (fGravity * fMagnification);
 
@@ -2047,14 +2083,7 @@ NaRect GameObjectBase::GetTileRect()
 
 NaRect GameObjectBase::GetRect()
 {
-	NaRect rc;
-	SIZE s = GetSize();
-	rc.left = m_fX - s.cx / 2;
-	rc.right = m_fX + s.cx / 2 - 1;
-	rc.top = m_fY - s.cy + 1;
-	rc.bottom = m_fY;
-
-	return rc;
+	return GetRectFloat();
 }
 
 NaRectT<float> GameObjectBase::GetRectFloat()

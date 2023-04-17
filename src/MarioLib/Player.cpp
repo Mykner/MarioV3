@@ -348,26 +348,27 @@ void Player::RenderDesignStatus()
 
 	if (CUR_PLAYER_OBJ)
 	{
-		// Design Play
-		if (m_pGame->m_nWidth > 300)
-			str = L"DOUBLE CLICK / SPACE KEY TO STOP";
-		else
-			str = L"DOUBLE CLICK TO STOP";
-		RENDER_MANAGER->Text(22, 14, str, 0xffffffff, 1.0f, Z_TEXT, true);
+        if (m_pGame->m_nGameFrame < 300 && m_pGame->m_nGameFrame % 60 < 30 ||
+            m_pGame->m_nGameFrame < 600 && m_pGame->m_nGameFrame % 30 < 15)
+        {
+            // Design Play
+            str = L"DOUBLE CLICK / SPACE KEY TO STOP";
+            RENDER_MANAGER->Text(22, m_pGame->m_nHeight - TILE_YS, str, 0xffffffff, 1.0f, Z_TEXT, true);
+        }
 
 		str.Format(L"$*%02d", CUR_PLAYER->m_nCoin);
-		RENDER_MANAGER->Text(22, 24, str, 0xffffffff, 1.0f, Z_TEXT, true);
+		RENDER_MANAGER->Text(22, 14, str, 0xffffffff, 1.0f, Z_TEXT, true);
 
 		str.Format(L"%06d", CUR_PLAYER->m_nScore);
 		RENDER_MANAGER->Text(
 			m_pGame->m_nWidth - 22 - (6 * 8), 
-			24, 
+			14, 
 			str, 0xffffffff, 1.0f, Z_TEXT, true);
 	}
 	else
 	{
 		// Design
-		if (m_pGame->m_nWidth > 300)
+		if (m_pGame->m_nWidth > 400)
 			str = L"DOUBLE CLICK / SPACE KEY TO PLAY";
 		else
 			str = L"DOUBLE CLICK TO PLAY";

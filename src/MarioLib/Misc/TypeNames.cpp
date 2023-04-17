@@ -46,6 +46,8 @@ wchar_t *g_szStageBackgroundTheme[] =
 	L"RedCloud",
 	L"Underground",
 	L"Castle",
+    L"GhostHouse",
+    L"AirShip",
 	nullptr,
 }; 
 
@@ -61,10 +63,14 @@ wchar_t *g_szStageEntranceType[] =
 wchar_t *g_szAutoScrollType[] =
 {
 	L"None",
+    L"Horz SuperSlow",
+    L"Horz VerySlow",
 	L"Horz Slow",
 	L"Horz Normal",
 	L"Horz Fast",
 	L"Horz God",
+    L"Vert SuperSlow",
+    L"Vert VerySlow",
 	L"Vert Slow",
 	L"Vert Normal",
 	L"Vert Fast",
@@ -294,6 +300,9 @@ wchar_t *g_szEventObjectTypes[] =
 	L"OneWayWall",
 	L"PowBlock",
 	L"ShoeSmoke",
+    L"GoalBox",
+    L"GoalPost",
+    L"ObjectGenerator",
 	nullptr,
 };
 

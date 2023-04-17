@@ -40,7 +40,7 @@ void ResourceHolder::LoadResources(Game * pGame, bool bIsDesign)
 
 		try
 		{
-#ifdef WIN32
+#if defined(WIN32) && defined(SUPPORT_DIRECTX)
 			if (m_bUseDirectX)
 				m_pRenderManager = new DirectXManager(pGame);
 			else

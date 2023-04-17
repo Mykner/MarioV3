@@ -57,9 +57,9 @@ enum TileDataTypes
 	TILE_PIPEBOTTOM_R,
 
 	// Line4
-	TILE_X026, // bridge lb
+	TILE_BRIDGE_LB, // bridge lb
 	TILE_BRIDGE_B,
-	TILE_X027, // bridge rb
+	TILE_BRIDGE_RB, // bridge rb
 	TILE_MUSHROOMHEAD2_L, // mushroom head yellow 
 	TILE_MUSHROOMHEAD2_C, // mushroom head yellow 
 	TILE_MUSHROOMHEAD2_R, // mushroom head yellow 
@@ -590,10 +590,16 @@ enum EnemyTypes
 
 	ENEMY_BOOMBOOM,
 
+    ENEMY_DECOMP_UNK1, // Mykner> Unknown value found in decomp
+    ENEMY_DECOMP_UNK2, // Mykner> Unknown value found in decomp
+    ENEMY_SKEWER, // Mykner> TODO
+
 	ENEMY_END = 3999,
 
 	ENEMY_MASK_POWERUP = 0x10000,
 	ENEMY_MASK_WINGED = 0x20000,
+    ENEMY_MASK_UNKNOWN1 = 0x30000, // Mykner> Unknown value found in decomp
+    ENEMY_MASK_UNKNOWN2 = 0x40000,  // Mykner> Unknown value found in decomp
 };
 
 enum BulletTypes
@@ -693,6 +699,8 @@ enum EventObjectTypes
 	EVENTOBJECT_SHOESMOKE,
 	EVENTOBJECT_GOALBOX,
 	EVENTOBJECT_GOALPOST,
+
+    EVENTOBJECT_OBJECTGENERATOR, // Mykner> 6035 in decomp
 
 	EVENTOBJECT_END = 6999,
 };

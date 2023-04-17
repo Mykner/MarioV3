@@ -6,6 +6,7 @@
 #include "ResourceHolder.h"
 #include "Stage.h"
 #include "PathManager.h"
+#include "JsonManager.h"
 
 Sprite::Sprite(Game *pGame)
 {
@@ -195,6 +196,36 @@ bool Sprite::LoadTexture(const wchar_t * szName, const wchar_t * szBitmap, NaStr
 
 bool Sprite::LoadInfo(NaString strInfo)
 {
+    Json::Value *pj = JsonManager::LoadFile(strInfo.cstr(), true);
+    if (pj != nullptr && pj->isObject())
+    {
+        Json::Value &j = *pj;
+
+        NaString strVersionKey = L"Neoarc's Sprite v";
+        double dVersion = 0;
+
+        std::string strVer = j["Version"].asString();
+        NaString strVersion = strVer.c_str();
+        if (strVersion.GetLength() > 0 && strVersion.Find(strVersionKey.wstr()) == 0)
+        {
+            int nIdx = strVersionKey.GetLength();
+            strVersion = strVersion.Mid(nIdx);
+            dVersion = atof(strVersion.cstr());
+        }
+
+        if (dVersion >= 2.0)
+            LoadNewJsonInfo(j, strInfo, dVersion);
+        else
+            LoadOldJsonInfo(j, strInfo, dVersion);
+
+        return true;
+    }
+    else
+    {
+        // Invalid json
+        delete pj;
+    }
+
 	FILE *fp;
 	NaPlatform::FileOpen(&fp, strInfo.cstr(), "rb");
 	if (fp != nullptr)
@@ -219,6 +250,9 @@ bool Sprite::LoadInfo(NaString strInfo)
 						&nTemp))
 				break;
 
+            if (f.m_rc.left == -1)
+                break;
+
 			m_vecFrames.push_back(f);
 		}
 		fclose(fp);
@@ -226,6 +260,90 @@ bool Sprite::LoadInfo(NaString strInfo)
 	}
 
 	return false;
+}
+
+void Sprite::LoadNewJsonInfo(Json::Value &j, NaString &strInfo, double dVersion)
+{
+    assert(false && "Not implemented");
+}
+
+void Sprite::LoadOldJsonInfo(Json::Value &j, NaString &strInfo, double dVersion)
+{
+    if (dVersion >= 1.3)
+    {
+        Json::Value jGroup = j.get("NamedAnimations", Json::nullValue);
+        for (int i = 0; i < jGroup.size(); i++)
+        {
+            Json::Value jObj = jGroup[i];
+
+            NaString strName = jObj["Name"].asString().c_str();
+            if (strName.GetLength() > 0)
+            {
+                NaString strFrames = jObj["Frames"].asString().c_str();
+                NaStrArray arFrames = strFrames.Split(L",");
+
+                if (arFrames.GetCount() > 0)
+                {
+                    int nDelay = -1;
+                    if (jObj["Delay"].isNull())
+                        nDelay = -1;
+                    else
+                        nDelay = jObj["Delay"].asInt();
+
+                    SpriteAnimation sa;
+                    sa.m_nStartFrame = arFrames[0].ToInt();
+                    sa.m_nLength = arFrames[arFrames.GetCount() - 1].ToInt() - sa.m_nStartFrame - 1;
+                    sa.m_nDelay = nDelay;
+
+                    m_mapAnimations.emplace(strName, sa);
+                }
+            }
+        }
+    }
+    
+    NaStrArray arSubPositions;
+
+    if (dVersion >= 1.2)
+    {
+        Json::Value jObj = j.get("SubPositions", Json::nullValue);
+        if (!jObj.isNull())
+        {
+            m_strSubPositions = jObj.asString().c_str();
+            arSubPositions = m_strSubPositions.Split(L",");
+        }
+    }
+
+    if (dVersion >= 1.1)
+    {
+        Json::Value jGroup = j["Frames"];
+        for (int i = 0; i < jGroup.size(); i++)
+        {
+            NaString strFrame = jGroup[i].asString().c_str();
+            NaStrArray arFrame = strFrame.Split(L" ");
+
+            SpriteFrame f;
+            f.m_rc.left = arFrame[0].ToInt();
+            f.m_rc.top = arFrame[1].ToInt();
+            f.m_rc.right = arFrame[2].ToInt();
+            f.m_rc.bottom = arFrame[3].ToInt();
+            f.m_ptOffset.x = arFrame[4].ToInt();
+            f.m_ptOffset.y = arFrame[5].ToInt();
+
+            for (int i = 0; i < arSubPositions.GetCount(); i++)
+            {
+                int nFrameInfoCount = arFrame.GetCount();
+                if (nFrameInfoCount < 2 * i + 8)
+                    break;
+
+                NaPoint ptPos = { arFrame[2 * i + 6].ToInt(), arFrame[2 * i + 7].ToInt() };
+                NaString strSubPos = arSubPositions[i];
+
+                f.m_mapSubPositions.emplace(strSubPos, ptPos);
+            }
+
+            m_vecFrames.push_back(f);
+        }
+    }
 }
 
 void Sprite::ReloadTexture()

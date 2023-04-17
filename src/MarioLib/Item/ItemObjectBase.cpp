@@ -46,6 +46,8 @@ void ItemObjectBase::CheckCollisionPlayer()
 	m_bCollisionPlayer = false;
 	if ((GameObjectBase*)CUR_PLAYER_OBJ == this)
 		return;
+ 	if (!CUR_PLAYER_OBJ->IsAlive()) // Mykner> Prevent dead players from getting items
+ 		return;
 
 	NaRect rcMe = GetRect();
 	NaRect rcPlayer = CUR_PLAYER_OBJ->GetRect();

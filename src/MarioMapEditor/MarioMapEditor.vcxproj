@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -29,7 +29,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4B08007F-03C2-4E67-B4DC-022269F6B95B}</ProjectGuid>
     <RootNamespace>MarioMapEditor</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,14 +59,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -74,7 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -138,16 +138,18 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_WINDOWS;_DEBUG;SUPPORT_DIRECTX;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%DIRECTX_SDK%\Include;%OPENGL_SDK%;%FMOD_SDK%\api\inc;$(SolutionDir)src\MarioLib;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\freeglut\include\GL;$(SolutionDir)src\FMOD\inc;$(SolutionDir)src\MarioLib;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)\Output\$(Configuration)\MarioLib.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)src\freeglut\lib\freeglut.lib;$(SolutionDir)src\FMOD\lib\fmodex_vc.lib;$(SolutionDir)\Output\$(Configuration)\MarioLib.lib;Dbghelp.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -193,9 +195,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_WINDOWS;NDEBUG;FMT_HEADER_ONLY;SUPPORT_DIRECTX;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%DIRECTX_SDK%\Include;%OPENGL_SDK%;%FMOD_SDK%\api\inc;$(SolutionDir)src\MarioLib;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\freeglut\include\GL;$(SolutionDir)src\FMOD\inc;$(SolutionDir)src\MarioLib;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
     </ClCompile>
@@ -203,7 +205,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)\Output\$(Configuration)\MarioLib.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)src\freeglut\lib\freeglut.lib;$(SolutionDir)src\FMOD\lib\fmodex_vc.lib;$(SolutionDir)\Output\$(Configuration)\MarioLib.lib;Dbghelp.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -243,6 +246,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)\Output\$(Configuration)\MarioLib.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -369,6 +374,7 @@
   <ItemGroup>
     <None Include="MarioMapEditor.reg" />
     <None Include="res\Eraser.cur" />
+    <None Include="res\MarioClickHand.cur" />
     <None Include="res\MarioHand.cur" />
     <None Include="res\MarioMapEditor.rc2" />
   </ItemGroup>

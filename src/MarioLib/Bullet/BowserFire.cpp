@@ -182,7 +182,6 @@ void BowserFire::OnDamagePlayer()
         else if (pEnemy->m_nDamageCooltime == 0)
         {
 			CreateParameter param;
-			param.bIsQuick = true;
 			CUR_STAGE->CreateEffect(m_fX, m_fY, EFFECT_EXPLOSION, &param);
 
 			/*

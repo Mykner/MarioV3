@@ -6,6 +6,8 @@
 #include <string>
 #include "NaCommon.h"
 
+#include "fmt/include/fmt/printf.h"
+
 #define NASTRING_FORMAT_BUFFER_SIZE	65535
 
 #if defined(USE_V8)
@@ -58,17 +60,46 @@ public:
 	operator const char* () const;
 	operator const wchar_t* () const;
 
+    // format
+    template <typename... Args>
+    const NaString & Format(const wchar_t * fmt, const Args&... args)
+    {
+        SetBuf(fmt::sprintf(fmt, args...).c_str());
+        return *this;
+    }
+
+    template <typename... Args>
+    const NaString & Format(const char * fmt, const Args&... args)
+    {
+        SetBuf(fmt::sprintf(fmt, args...).c_str());
+        return *this;
+    }
+
+    template <typename... Args>
+    const NaString & AppendFormat(const wchar_t * fmt, const Args&... args)
+    {
+        Format(L"%ls%ls", (wchar_t*)m_pBuf, fmt::sprintf(fmt, args...).c_str());
+        return *this;
+    }
+
+    template <typename... Args>
+    const NaString & AppendFormat(const char * fmt, const Args&... args)
+    {
+        Format("%s%s", cstr(), fmt::sprintf(fmt, args...).c_str());
+        return *this;
+    }
+
 	// functions
 	void ToLower();
 	void ToUpper();
-	const NaString& Format(const wchar_t *fmt, ...);
-	const NaString& Format(const char *fmt, ...);
+	//const NaString& Format(const wchar_t *fmt, ...);
+	//const NaString& Format(const char *fmt, ...);
 	int GetLength();
 	int GetBufferSize();
 	int Compare(const wchar_t *lpsz);
 	int CompareNoCase(const wchar_t *lpsz);
 	
-	int Find(wchar_t* ch, int begin = 0);
+	int Find(const wchar_t* ch, int begin = 0);
 	NaString Left(int len);
 	NaString Mid(int index, int len = -1);
 	NaString Right(int len);
@@ -76,8 +107,8 @@ public:
 	int ReplaceAll(wchar_t* from, wchar_t* to);
 
 	// utility
-	const NaString& AppendFormat(const wchar_t *fmt, ...);
-	const NaString& AppendFormat(const char *fmt, ...);
+	//const NaString& AppendFormat(const wchar_t *fmt, ...);
+	//const NaString& AppendFormat(const char *fmt, ...);
 	const wchar_t* wstr() const;
 	const char* cstr();
 	wchar_t GetLast();
@@ -101,7 +132,9 @@ public:
 	NaStrArray();
 	~NaStrArray();
 
+    NaStrArray& operator=(NaStrArray &str);
 	NaString operator [](int nIndex);
+
 	void Set(int nIndex, NaString str);
 
 	int Add(NaString str);

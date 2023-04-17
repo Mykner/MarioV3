@@ -142,6 +142,9 @@ void DryBone::Render(int nColor, int nZOrder)
 		float _x = x - pt.x;
 		float _y = y - pt.y;
 
+        if (m_nState == STATE_STACKED)
+            _x += GetStackXOffset();
+
 		(*m_ppSprite)->RenderToQueue(_x, _y, nFrame, m_bFlip, m_bFlipV, nColor,
 			fScaleX, fScaleY, nZOrder, bShadow, fAngle);
 

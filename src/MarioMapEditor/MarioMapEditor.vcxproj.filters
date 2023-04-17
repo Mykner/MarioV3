@@ -164,6 +164,9 @@
     <None Include="res\MarioMapEditor.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\MarioClickHand.cur">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MarioMapEditor.rc">

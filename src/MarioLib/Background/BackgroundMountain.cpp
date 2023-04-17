@@ -18,14 +18,8 @@ void BackgroundMountain::BuildBackground()
 	if (m_pStage == nullptr)
 		return;
 
-	if (m_pStage->m_pTileBackgroundData == nullptr)
-		m_pStage->m_pTileBackgroundData = new BYTE[m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy];
-
-	m_pData = m_pStage->m_pTileBackgroundData;
-    memset(m_pData, 0, sizeof(BYTE) * m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy);
-
 	// Loop 3page pattern
-	int nGround = m_pStage->m_sizeTile.cy - 4;
+	int nGround = GetGroundY();
 	for (int i = 0; i < (m_pStage->m_nMaxPage / 3) + 1; i++)
 	{
 		int nOffset = i * GameDefaults::nPageTileWidth * 3;
@@ -41,8 +35,8 @@ void BackgroundMountain::BuildBackground()
 			}
 		}
 
-		CreateMountain(nOffset + 0, nGround - 2, 2);
-		CreateMountain(nOffset + 16, nGround - 1, 1);
+		CreateMountain(nOffset + 0, nGround, 2);
+		CreateMountain(nOffset + 16, nGround, 1);
 		CreateCloud(nOffset + 8, nGround - 9, 1);
 		CreateCloud(nOffset + 19, nGround - 10, 1);
 		CreateCloud(nOffset + 27, nGround - 9, 3);

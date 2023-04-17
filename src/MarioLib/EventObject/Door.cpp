@@ -15,6 +15,8 @@
 BEGIN_IMPL_PROPERTYMAP(Door)
 	PROP_INT("PairIndex", VT_I4, 0, nullptr, "Door"),
 	PROP_BOOL("Locked", VT_BOOL, false, nullptr, "Door"),
+    PROP_BOOL("ResetStage", VT_BOOL, false, nullptr, "Door"),
+    PROP_BOOL("PSwitchDoor", VT_BOOL, false, nullptr, "Door"),
 END_IMPL_PROPERTYMAP()
 
 Door::Door(Game *pGame, Stage *pStage) :
@@ -26,6 +28,8 @@ Door::Door(Game *pGame, Stage *pStage) :
 	m_nPairIndex = 0;
 	m_bLocked = false;
 	m_nSubType = 0;
+    m_bResetStage = false;
+    m_bPSwitchDoor = false;
 }
 
 Door::~Door()
@@ -59,6 +63,23 @@ void Door::Process()
 	case STATE_OPEN:
 		break;
 	case STATE_CLOSE:
+        if (m_nStateFrame == 24 && m_bLocked) // Mykner> Prevent locked doors to be leaved open
+        {
+            // Effects
+            NaRect rc = GetRect();
+            CreateParameter param;
+            param.fXS = -0.3f;
+            param.fYS = -0.3f;
+            CUR_STAGE->CreateEffect(
+                m_fX - rc.Width() / 2,
+                m_fY - rc.Height(), EFFECT_STARDUST, &param);
+
+            param.fXS = 0.3f;
+            param.fYS = -0.3f;
+            CUR_STAGE->CreateEffect(
+                m_fX + rc.Width() / 2,
+                m_fY - rc.Height(), EFFECT_STARDUST, &param);
+        }
 		break;
 	case STATE_DENY:
 		if (m_nStateFrame == 24)
@@ -122,11 +143,42 @@ void Door::Render(int nColor, int nZOrder)
 	}
 
 	int nFrame = GetSpriteIndex();
+    if (nFrame == 120 || nFrame == 124)
+        bShadow = false;
+
 	float fScaleX, fScaleY;
 	GetScale(fScaleX, fScaleY);
 
 	(*m_ppSprite)->RenderToQueue(_x, _y, nFrame,
 		false, false, nColor, fScaleX, fScaleY, Z_DOOR, bShadow, fAngle);
+}
+
+void Door::RenderDesign(int nColor, int nZOrder)
+{
+    Render(nColor, nZOrder);
+
+    NaPointT<float> pt = CAMERA->GetPosition();
+	float _x = x - pt.x;
+	float _y = y - pt.y;
+
+    SIZE s = GetSize();
+
+    NaString str;
+    str.Format(L"%d", m_nPairIndex);
+    m_pGame->m_pRenderManager->Text(
+        _x - 4,
+        _y - s.cy - 8,
+        str,
+        0xffff0000, 1.0f, Z_TEXT, true);
+
+    if (m_bResetStage)
+    {
+        m_pGame->m_pRenderManager->Text(
+            _x - 8,
+            _y - s.cy - 16,
+            L"!!",
+            0xffff0000, 1.0f, Z_TEXT, true);
+    }
 }
 
 int Door::GetSpriteIndex()
@@ -164,24 +216,29 @@ int Door::GetSpriteIndex()
 		}
 		break;
 	case STATE_CLOSE:
-		if (m_nSubType == 0)
-		{
-			if (m_nStateFrame < 6)
-				nFrame = SPRIDX_MAPOBJ_DOOR3;
-			else if (m_nStateFrame < 12)
-				nFrame = SPRIDX_MAPOBJ_DOOR2;
-			else
-				nFrame = SPRIDX_MAPOBJ_DOOR1;
-		}
-		else
-		{
-			if (m_nStateFrame < 6)
-				nFrame = SPRIDX_MAPOBJ_KEYDOOR3;
-			else if (m_nStateFrame < 12)
-				nFrame = SPRIDX_MAPOBJ_KEYDOOR2;
-			else
-				nFrame = SPRIDX_MAPOBJ_KEYDOOR1;
-		}
+        if (m_bLocked && m_nStateFrame >= 24)
+            nFrame = SPRIDX_MAPOBJ_KEYDOOR_LOCKED;
+        else
+        {
+            if (m_nSubType == 0)
+            {
+                if (m_nStateFrame < 6)
+                    nFrame = SPRIDX_MAPOBJ_DOOR3;
+                else if (m_nStateFrame < 12)
+                    nFrame = SPRIDX_MAPOBJ_DOOR2;
+                else
+                    nFrame = SPRIDX_MAPOBJ_DOOR1;
+            }
+            else
+            {
+                if (m_nStateFrame < 6)
+                    nFrame = SPRIDX_MAPOBJ_KEYDOOR3;
+                else if (m_nStateFrame < 12)
+                    nFrame = SPRIDX_MAPOBJ_KEYDOOR2;
+                else
+                    nFrame = SPRIDX_MAPOBJ_KEYDOOR1;
+            }
+        }
 		break;
 	}
 
@@ -211,7 +268,25 @@ void Door::GetScale(float & fScaleX, float & fScaleY)
 
 		fScaleX = fScale;
 		fScaleY = fScale;
-	}
+	} else if (m_nState == STATE_CLOSE && m_bLocked) // Mykner> Prevent locked doors to be leaved open
+    {
+        float fScale = 1.0f;
+        switch (m_nStateFrame)
+        {
+        case 24:	fScale = 1.1f; break;
+        case 25:	fScale = 1.2f; break;
+        case 26:	fScale = 1.3f; break;
+        case 27:	fScale = 1.4f; break;
+
+        case 28:	fScale = 1.4f; break;
+        case 29:	fScale = 1.3f; break;
+        case 30:	fScale = 1.2f; break;
+        case 31:	fScale = 1.1f; break;
+        }
+
+        fScaleX = fScale;
+        fScaleY = fScale;
+    }
 }
 
 SIZE Door::GetSize()

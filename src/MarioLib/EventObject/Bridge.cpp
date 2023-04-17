@@ -122,15 +122,7 @@ void Bridge::OnAfterProcess()
 		m_vecPassenger.clear();
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
-
-		OnChangeState(m_nState);
-	}
+    ProcessState();
 }
 
 void Bridge::Render(int nColor, int nZOrder)

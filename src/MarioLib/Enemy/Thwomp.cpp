@@ -149,27 +149,22 @@ void Thwomp::OnMoveDown()
 {
 	if (m_bCollision[COLLISION_BOTTOM])
 	{
-		int nRet = SmashAll();
+        bool bHard = false;
+        bool bSuperHard = false;
+        bool bUnbreakable = false;
+
+		SmashAll(bHard, bSuperHard, bUnbreakable);
 		CUR_STAGE->MakeEarthquake();
 
 		m_fXS = 0;
 		m_fYS = 0;
 		m_fY = m_ptCollision[COLLISION_BOTTOM].y;
 
-		if (!m_bPowerUp)
-		{
-			if (nRet >= TILETYPE_SOFTHARD)
-				ChangeState(STATE_STAND);
-		}
-		else
-		{
-			if (nRet >= TILETYPE_SUPERHARD)
-				ChangeState(STATE_STAND);
-		}
+		if (bSuperHard)
+            ChangeState(STATE_STAND);
 
-		// Collision with map object
-		if (nRet == TILETYPE_EMPTY)
-			ChangeState(STATE_STAND);
+        if (!bSuperHard && !bHard && !bUnbreakable)
+            ChangeState(STATE_STAND);
 	}
 	else
 	{
@@ -211,12 +206,10 @@ void Thwomp::OnStacked()
 	ChangeState(STATE_IDLE);
 }
 
-int Thwomp::SmashAll()
+void Thwomp::SmashAll(bool& bHitHard, bool& bHitSuperHard, bool& bHitUnbreakable)
 {
 	int nTX = m_fX / TILE_XS;
 	int nTY = (m_fY + m_fYS + 2) / TILE_YS;
-
-	int nRet = TILETYPE_EMPTY;
 
 	// Destroy Blocks
 	SIZE s = GetSize();
@@ -226,47 +219,74 @@ int Thwomp::SmashAll()
 	for (int _x = nLeftTX; _x <= nRightTX; _x++)
 	{
 		int _y = nTY;
-		if (!CUR_STAGE->IsHardTile(_x, _y))
+		if (!CUR_STAGE->IsHardTile(_x, _y, COLLISION_BOTTOM))
 			continue;
 
 		int nData = CUR_STAGE->GetTileData(_x, _y);
 		int nType = CUR_STAGE->GetDataType(nData);
-		if (m_bPowerUp == false)
-		{
-			if (nType == TILETYPE_SOFTHARD &&
-				CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_BIGMARIO))
-			{
-				CUR_STAGE->CrushBlock(_x, _y, this);
-				nRet = TILETYPE_HARD;
-			}
-			else if (nType == TILETYPE_ITEM)
-			{
-				CUR_STAGE->HitBlock(_x, _y, POWER_HITBLOCK_NORMAL, this, this);
-				nRet = TILETYPE_HARD;
-			}
-			else if ((nType == TILETYPE_HARD || nType == TILETYPE_SUPERHARD) && nRet < TILETYPE_HARD)
-				nRet = TILETYPE_HARD;
-		}
-		else
-		{
-			if (nType != TILETYPE_SUPERHARD &&
-				CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_GIANTMARIO))
-			{
-				CUR_STAGE->CrushBlock(_x, _y, this);
-				if (nRet == TILETYPE_EMPTY)
-					nRet = TILETYPE_HARD;
-			}
+        switch (nType)
+        {
+        case TILETYPE_SOFTHARD:
+            if (CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_THWOMP))
+            {
+                CUR_STAGE->CrushBlock(_x, _y, this);
+                if (m_bPowerUp)
+                    bHitHard = true;
+                else
+                    bHitSuperHard = true;
+            }
+            break;
+        case TILETYPE_HARD:
+            if (!m_bPowerUp)
+            {
+                bHitSuperHard = true;
+                break;
+            }
 
-			if (nType == TILETYPE_SUPERHARD && nRet < TILETYPE_SUPERHARD)
-				nRet = TILETYPE_SUPERHARD;
-		}
+            if (CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_THWOMP))
+            {
+                CUR_STAGE->CrushBlock(_x, _y, this);
+                bHitSuperHard = true;
+            }
+            break;
+        case TILETYPE_SUPERHARD:
+        case TILETYPE_DAMAGE:
+            if (!m_bPowerUp)
+            {
+                if (nData == TILE_CLOUD &&
+                    CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_THWOMP))
+                {
+                    CUR_STAGE->CrushBlock(_x, _y, this);
+                    bHitSuperHard = true;
+                }
 
-		if (nType >= TILETYPE_DAMAGE && nRet < TILETYPE_DAMAGE)
-			nRet = nType;
-		if (nType == TILETYPE_JUMP)
-		{
-			CUR_STAGE->PressJumpBlock(_x, _y);
-		}
+                bHitSuperHard = true;
+                break;
+            }
+
+            if (CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_THWOMP))
+            {
+                CUR_STAGE->CrushBlock(_x, _y, this);
+                if (nData == TILE_CLOUD)
+                    bHitHard = true;
+                else
+                    bHitSuperHard = true;
+            }
+            break;
+        case TILETYPE_ITEM:
+            if (CUR_STAGE->CanCrush(_x, _y, POWER_HITBLOCK_THWOMP))
+            {
+                CUR_STAGE->CrushBlock(_x, _y, this);
+                bHitSuperHard = true;
+            }
+            break;
+        case TILETYPE_JUMP:
+            CUR_STAGE->PressJumpBlock(_x, _y);
+            bHitSuperHard = true;
+            bHitUnbreakable = true;
+        default:
+            continue;
+        }
 	}
 
 	NaRect rc = GetRect();
@@ -327,7 +347,7 @@ int Thwomp::SmashAll()
 	*/
 	
 	// Effects
-	if (nRet != 0)
+	/*if (nRet != 0)
 	{
 		CreateParameter param;
 		param.nType = EFFECT_DUST;
@@ -347,11 +367,9 @@ int Thwomp::SmashAll()
 
  		param.fXS = 1.5f;
  		CUR_STAGE->CreateEffect(m_fX + 24, m_fY, EFFECT_DUST, &param);
-	}
+	}*/
 
-	SOUND_MANAGER->PlaySoundEffect(L"Cannon");
-
-	return nRet;
+	SOUND_MANAGER->PlaySoundEffect(L"BreakBlock");
 }
 
 bool Thwomp::IsAlive()

@@ -19,7 +19,6 @@
 BackgroundBase::BackgroundBase(Stage * pStage)
 {
 	m_pStage = pStage;
-	m_pData = nullptr;
 }
 
 BackgroundBase::~BackgroundBase()
@@ -30,12 +29,6 @@ void BackgroundBase::BuildBackground()
 {
 	if (m_pStage == nullptr)
 		return;
-
-	if (m_pStage->m_pTileBackgroundData == nullptr)
-		m_pStage->m_pTileBackgroundData = new BYTE[m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy];
-
-	m_pData = m_pStage->m_pTileBackgroundData;
-	memset(m_pData, 0, sizeof(BYTE) * m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy);
 
 	// Loop 3page pattern
 	for (int i = 0; i < (m_pStage->m_nMaxPage / 3) + 1; i++)
@@ -57,15 +50,7 @@ void BackgroundBase::CreateCloud(int x, int y, int size)
 	if (m_pStage->m_pSpriteFarBackground)
 		return;
 
-	SetData(x, y + 0, TILEBG_CLOUD_LT);
-	SetData(x++, y + 1, TILEBG_CLOUD_LB);
-	for (int i = 0; i < size; i++)
-	{
-		SetData(x, y + 0, TILEBG_CLOUD_T);
-		SetData(x++, y + 1, TILEBG_CLOUD_B);
-	}
-	SetData(x, y + 0, TILEBG_CLOUD_RT);
-	SetData(x, y + 1, TILEBG_CLOUD_RB);
+    m_pStage->AddBackgroundObject(x, y, size + 4);
 }
 
 void BackgroundBase::CreateRedCloud(int x, int y, int size)
@@ -73,15 +58,7 @@ void BackgroundBase::CreateRedCloud(int x, int y, int size)
 	if (m_pStage->m_pSpriteFarBackground)
 		return;
 
-	SetData(x, y + 0, TILEBG_REDCLOUD_LT);
-	SetData(x++, y + 1, TILEBG_REDCLOUD_LB);
-	for (int i = 0; i < size; i++)
-	{
-		SetData(x, y + 0, TILEBG_REDCLOUD_T);
-		SetData(x++, y + 1, TILEBG_REDCLOUD_B);
-	}
-	SetData(x, y + 0, TILEBG_REDCLOUD_RT);
-	SetData(x, y + 1, TILEBG_REDCLOUD_RB);
+    m_pStage->AddBackgroundObject(x, y, size + 7);
 }
 
 void BackgroundBase::CreateMountain(int x, int y, int size)
@@ -90,20 +67,7 @@ void BackgroundBase::CreateMountain(int x, int y, int size)
 	if (IsContainHole(x, nWidth))
 		return;
 
-	SetData(x + size, y++, TILEBG_MOUNTAIN_T);
-	for (int i = 1; i <= size; i++)
-	{
-		int _x = x + (size - i);
-		SetData(_x++, y, TILEBG_MOUNTAIN_L);
-		for (int j = 0; j < (i * 2) - 1; j++)
-		{
-			if (j % 2 == 0)
-				SetData(_x++, y, TILEBG_MOUNTAIN_TREE);
-			else
-				SetData(_x++, y, TILEBG_MOUNTAIN_C);
-		}
-		SetData(_x, y++, TILEBG_MOUNTAIN_R);
-	}
+    m_pStage->AddBackgroundObject(x, y, size + 2);
 }
 
 void BackgroundBase::CreateBush(int x, int y, int size)
@@ -112,22 +76,15 @@ void BackgroundBase::CreateBush(int x, int y, int size)
 	if (IsContainHole(x, nWidth))
 		return;
 
-	SetData(x++, y + 0, TILEBG_BUSH_L);
-	for (int i = 0; i < size; i++)
-	{
-		SetData(x++, y + 0, TILEBG_BUSH_C);
-	}
-	SetData(x, y + 0, TILEBG_BUSH_R);
+    m_pStage->AddBackgroundObject(x, y, size - 1);
 }
 
 void BackgroundBase::CreateFence(int x, int y, int size)
 {
-	for (int i = 0; i < size; i++)
-	{
-		if (IsContainHole(x + i, 1))
-			return;
-		SetData(x + i, y + 0, TILEBG_FENCE);
-	}
+	if (IsContainHole(x, size))
+		return;
+
+    m_pStage->AddBackgroundObject(x, y, size + 15);
 }
 
 void BackgroundBase::CreateTree(int x, int y, int size)
@@ -135,17 +92,7 @@ void BackgroundBase::CreateTree(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_TREE_B);
-	if (size > 1)
-	{
-		for (int i = 0; i < size - 1; i++)
-		{
-			SetData(x, y--, TILEBG_TREE_C);
-		}
-		SetData(x, y, TILEBG_TREE_T);
-	}
-	else
-		SetData(x, y, TILEBG_TREE_T1);
+    m_pStage->AddBackgroundObject(x, y, size + 10);
 }
 
 void BackgroundBase::CreateSnowTree(int x, int y, int size)
@@ -153,25 +100,28 @@ void BackgroundBase::CreateSnowTree(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_TREE_B);
-	if (size > 1)
-	{
-		for (int i = 0; i < size - 1; i++)
-		{
-			SetData(x, y--, TILEBG_SNOWTREE_C);
-		}
-		SetData(x, y, TILEBG_SNOWTREE_T);
-	}
-	else
-		SetData(x, y, TILEBG_SNOWTREE_T1);
+    m_pStage->AddBackgroundObject(x, y, size + 13);
 }
 
-void BackgroundBase::CreateDeadMushroom(int x, int y, int size)
+void BackgroundBase::CreateShortCoral(int x, int y, int size)
 {
-	if (IsContainHole(x, 1))
-		return;
+    if (IsContainHole(x, 1))
+        return;
 
-	SetData(x, y, TILEBG_DEADMUSHROOM);
+    m_pStage->AddBackgroundObject(x, y, size + 29);
+}
+
+void BackgroundBase::CreateLongCoral(int x, int y, int size)
+{
+    if (IsContainHole(x, 3))
+        return;
+
+    m_pStage->AddBackgroundObject(x, y, 33);
+}
+
+void BackgroundBase::CreateWaterSky()
+{
+    m_pStage->AddBackgroundObject(0, 0, 20);
 }
 
 void BackgroundBase::CreateDeadBush(int x, int y, int size)
@@ -179,21 +129,7 @@ void BackgroundBase::CreateDeadBush(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	if (size == 1)
-	{
-		SetData(x, y, TILEBG_DEADBUSH_R);
-	}
-	else if (size == 2)
-	{
-		SetData(x, y - 1, TILEBG_DEADBUSH_R);
-		SetData(x, y, TILEBG_DEADBUSH_LR);
-	}
-	else
-	{
-		SetData(x, y - 2, TILEBG_DEADBUSH_R);
-		SetData(x, y - 1, TILEBG_DEADBUSH_LR);
-		SetData(x, y, TILEBG_DEADBUSH_BODY);
-	}
+    m_pStage->AddBackgroundObject(x, y, size + 34);
 }
 
 void BackgroundBase::CreateDeadBone(int x, int y, int size)
@@ -201,9 +137,7 @@ void BackgroundBase::CreateDeadBone(int x, int y, int size)
 	if (IsContainHole(x, 3))
 		return;
 
-	SetData(x++, y, TILEBG_DEADBONE_L);
-	SetData(x++, y, TILEBG_DEADBONE_C);
-	SetData(x++, y, TILEBG_DEADBONE_R);
+    m_pStage->AddBackgroundObject(x, y, 34);
 }
 
 void BackgroundBase::CreateBowserJrStatue(int x, int y, int size)
@@ -211,8 +145,7 @@ void BackgroundBase::CreateBowserJrStatue(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_BOWSERJR_STATUE_B);
-	SetData(x, y, TILEBG_BOWSERJR_STATUE_T);
+    m_pStage->AddBackgroundObject(x, y, 38);
 }
 
 void BackgroundBase::CreateBowserStatue(int x, int y, int size)
@@ -220,9 +153,7 @@ void BackgroundBase::CreateBowserStatue(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_BOWSER_STATUE_BODY);
-	SetData(x, y--, TILEBG_BOWSER_STATUE_B);
-	SetData(x, y, TILEBG_BOWSER_STATUE_T);
+    m_pStage->AddBackgroundObject(x, y, 39);
 }
 
 void BackgroundBase::CreateCastleFence(int x, int y, int size)
@@ -230,18 +161,20 @@ void BackgroundBase::CreateCastleFence(int x, int y, int size)
 	if (IsContainHole(x, size))
 		return;
 
-	for (int i = 0; i < size; i++)
-	{
-		if (IsContainHole(x + i, 1))
-			return;
+    m_pStage->AddBackgroundObject(x, y, size + 37);
+}
 
-		if (i == 0)
-			SetData(x + i, y + 0, TILEBG_CASTLE_FENCE_L);
-		else if (i == size - 1)
-			SetData(x + i, y + 0, TILEBG_CASTLE_FENCE_R);
-		else
-			SetData(x + i, y + 0, TILEBG_CASTLE_FENCE_C);
-	}
+void BackgroundBase::CreateLavaLayer()
+{
+    BackgroundObjectBase *pObj = m_pStage->AddBackgroundObject(0, 0, 25);
+
+    NaRect rc;
+    rc.left = -TILE_XS;
+    rc.top = TILE_YS * (m_pStage->m_sizeTile.cy - 1) - 8;
+    rc.right = TILE_XS * (m_pStage->m_sizeTile.cx + 2);
+    rc.bottom = rc.top + TILE_YS;
+
+    m_pStage->AddHurtArea(rc);
 }
 
 void BackgroundBase::CreateGhostDeadMushroom(int x, int y, int size)
@@ -249,7 +182,7 @@ void BackgroundBase::CreateGhostDeadMushroom(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y, TILEBG_GHOSTHOUSE_DEADMUSHROOM);
+    m_pStage->AddBackgroundObject(x, y, 35);
 }
 
 void BackgroundBase::CreateLamp(int x, int y, int size)
@@ -257,8 +190,7 @@ void BackgroundBase::CreateLamp(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_GHOSTHOUSE_LAMP_B);
-	SetData(x, y, TILEBG_GHOSTHOUSE_LAMP_T);
+    m_pStage->AddBackgroundObject(x, y, 42);
 }
 
 void BackgroundBase::CreateClock(int x, int y, int size)
@@ -266,9 +198,15 @@ void BackgroundBase::CreateClock(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_GHOSTHOUSE_CLOCK_B);
-	SetData(x, y--, TILEBG_GHOSTHOUSE_CLOCK_C);
-	SetData(x, y, TILEBG_GHOSTHOUSE_CLOCK_T);
+    m_pStage->AddBackgroundObject(x, y, 43);
+}
+
+void BackgroundBase::CreateGhostHouseFence(int x, int y, int size)
+{
+    if (IsContainHole(x, 3))
+        return;
+
+    m_pStage->AddBackgroundObject(x, y, 44);
 }
 
 void BackgroundBase::CreateMiniBolt(int x, int y, int size)
@@ -276,7 +214,7 @@ void BackgroundBase::CreateMiniBolt(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y, TILEBG_AIRSHIP_MINIBOLT);
+    m_pStage->AddBackgroundObject(x, y, 45);
 }
 
 void BackgroundBase::CreateMiniPipe(int x, int y, int size)
@@ -284,8 +222,7 @@ void BackgroundBase::CreateMiniPipe(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_AIRSHIP_MINIPIPE_B);
-	SetData(x, y, TILEBG_AIRSHIP_MINIPIPE_T);
+    m_pStage->AddBackgroundObject(x, y, 46);
 }
 
 void BackgroundBase::CreateMiniFlag(int x, int y, int size)
@@ -293,9 +230,20 @@ void BackgroundBase::CreateMiniFlag(int x, int y, int size)
 	if (IsContainHole(x, 1))
 		return;
 
-	SetData(x, y--, TILEBG_AIRSHIP_MINIFLAG_B);
-	SetData(x, y--, TILEBG_AIRSHIP_MINIFLAG_C);
-	SetData(x, y, TILEBG_AIRSHIP_MINIFLAG_T);
+    m_pStage->AddBackgroundObject(x, y, 47);
+}
+
+void BackgroundBase::CreateMiniFence(int x, int y, int size)
+{
+    if (IsContainHole(x, 3))
+        return;
+
+    m_pStage->AddBackgroundObject(x, y, 48);
+}
+
+int BackgroundBase::GetGroundY()
+{
+    return m_pStage->m_sizeTile.cy - 3;
 }
 
 bool BackgroundBase::IsContainHole(int x, int width)
@@ -312,17 +260,6 @@ bool BackgroundBase::IsContainHole(int x, int width)
 			return true;
 	}
 	return false;
-}
-
-void BackgroundBase::SetData(int x, int y, int value)
-{
-	if (x < 0 || y < 0 || x >= m_pStage->m_sizeTile.cx || y >= m_pStage->m_sizeTile.cy)
-		return;
-
-	int nTileW = GameDefaults::nPageTileWidth * m_pStage->m_nMaxPage;
-	int nIdx = y * nTileW + x;
-	m_pData[nIdx] = value;
-	m_pStage->m_pTileBackgroundData[nIdx] = value;
 }
 
 BackgroundBase * BackgroundBase::CreateInstance(int nType, Stage * pStage)

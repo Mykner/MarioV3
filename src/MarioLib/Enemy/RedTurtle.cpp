@@ -10,6 +10,7 @@
 // Property Interface
 BEGIN_IMPL_PROPERTYMAP(RedTurtle)
 	PROP_INT("MoveDistance", VT_I4, 104, nullptr, "RedTurtleWingedPatrol"),
+    PROP_BOOL("IsEmptyShell", VT_BOOL, false, nullptr, "RedTurtle"),
 	PROP_BOOL("PowerUp", VT_BOOL, false, nullptr, "RedTurtle"),
 	PROP_BOOL("Winged", VT_BOOL, false, nullptr, "RedTurtle"),
 END_IMPL_PROPERTYMAP()
@@ -32,12 +33,25 @@ RedTurtle::~RedTurtle()
 
 void RedTurtle::OnIdle()
 {
-	if (m_bWinged)
-		m_nBaseState = STATE_MOVE;
-	else
-		m_nBaseState = STATE_WALK;
+    if (m_bIsEmptyShell)
+    {
+        m_bDeadInside = true;
+        m_nBaseState = STATE_SHELLIDLE;
+        m_nShape = TURTLESHAPE_SHELL;
+        ReleaseWing();
 
-	ChangeState(m_nBaseState);
+        if (!CheckFalling())
+            ChangeState(STATE_SHELLIDLE);
+    }
+    else
+    {
+        if (m_bWinged)
+            m_nBaseState = STATE_MOVE;
+        else
+            m_nBaseState = STATE_WALK;
+
+        ChangeState(m_nBaseState);
+    }
 }
 
 void RedTurtle::OnWalk()
@@ -98,8 +112,10 @@ void RedTurtle::OnMove()
 
 void RedTurtle::OnAfterItemPop(int nNextStatePopUp, int nNextStatePopDown)
 {
-	if (m_bWinged)
-		m_nBaseState = STATE_MOVE;
+    if (m_bWinged)
+        m_nBaseState = STATE_MOVE;
+    else if (m_bDeadInside || m_bIsEmptyShell)
+        m_nBaseState = STATE_SHELLIDLE;
 	else
 		m_nBaseState = STATE_WALK;
 
@@ -194,7 +210,7 @@ int RedTurtle::GetSpriteIndex()
 		break;
 	default:
 		nFrame = SPRIDX_REDTURTLE1 + (m_nStateFrame / 8) % 2;
-		if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside)
+		if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside || m_bIsEmptyShell)
 			nFrame = SPRIDX_REDTURTLE_SHELL1;
 		break;
 	}

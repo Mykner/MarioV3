@@ -186,7 +186,8 @@ BOOL CMarioMapEditorApp::InitInstance()
 		}
 		*/
 
-		bDeny = true;
+		// Mykner> nope.
+		//bDeny = true;
 		
 	}
 
@@ -202,8 +203,9 @@ BOOL CMarioMapEditorApp::InitInstance()
 	char szMD5[MD5_STR_LEN + 1];
 	Compute_string_md5((unsigned char*)str.wstr(), str.GetBufferSize(), szMD5);
 	NaString strLocalKey = szMD5;
-	
-	ServerRequest req;
+
+	// Mykner> nope.
+	/*ServerRequest req;
 	try
 	{
 		auto pTicket = req.GetRegisterTicket(strLocalKey);
@@ -213,7 +215,7 @@ BOOL CMarioMapEditorApp::InitInstance()
 	catch(NaException &e)
 	{
 		bDeny = true;
-	}
+	}*/
 
 	if (bDeny)
 	{

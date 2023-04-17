@@ -76,6 +76,7 @@ void GameStateTitle::Init()
 
 	auto strLastStagePack = m_pGame->m_strStagePack;
 
+    CUR_PLAYER_OBJ->SetState(STATE_DEAD); //Mykner> Prevent title mario from getting items
 	CUR_STAGE->CreatePresetStage(L"Title");
 
 	for (int i = m_nFirstProfileIdx; i < m_nProfileCnt; i++)
@@ -149,6 +150,10 @@ void GameStateTitle::Process()
 	}
 #endif
 
+ 	// Mykner> Process stage on title screen
+ 	CUR_STAGE->OnBeforeProcess(); 
+ 	CUR_STAGE->Process();
+ 	CUR_STAGE->OnAfterProcess();
 	CUR_STAGE->ProcessEffects();
 
 	UI_MANAGER->Process();
@@ -906,13 +911,13 @@ void GameStateTitle::InitWorldStageDetailUI()
 
 	// Title
 	if (m_pCurMetaInfo->m_strTitle.GetLength() > 25)
-		str.Format(L"%ls...", m_pCurMetaInfo->m_strTitle.Left(25));
+		str.Format(L"%ls...", m_pCurMetaInfo->m_strTitle.Left(25).wstr());
 	else
-		str.Format(L"%ls", m_pCurMetaInfo->m_strTitle);
+		str.Format(L"%ls", m_pCurMetaInfo->m_strTitle.wstr());
 	UI_MANAGER->CreateText(0, 0, 0, str);
 
 	// Creator
-	str.Format(L"by %ls", m_pCurMetaInfo->m_strCreator);
+	str.Format(L"by %ls", m_pCurMetaInfo->m_strCreator.wstr());
 	pUI = UI_MANAGER->CreateText(0, 8, 12, str);
 	((UIText*)pUI)->m_dwTextColor = 0xffa0a0a0;
 
@@ -1015,7 +1020,7 @@ void GameStateTitle::InitWorldStageDetailUI()
 	}
 
 	// Players' comments
-	str.Format(L"Players' comments", m_pCurMetaInfo->m_strCreator);
+	str.Format(L"Players' comments", m_pCurMetaInfo->m_strCreator.wstr());
 	pUI = UI_MANAGER->CreateText(0 /*UI_WORLDSTAGE_PLAYERCOMMENT*/, 0, 74, str);
 
 	UIList *pList = (UIList*)UI_MANAGER->CreateList(UI_WORLDSTAGE_PLAYERCOMMENT_CONTENT, 8, 86, m_pGame->m_nWidth - 80, 16 * 6);
@@ -1409,6 +1414,7 @@ void GameStateTitle::OnPlayWorldStage()
 		m_pGame->ChangeState(GAMESTATE_STAGEINTRO);
 
 		// Fade in effect
+        CreateParameter param;
 		param.nStartDelay = 0;
 		param.nDuration = 40;
 		m_pGame->CreateSceneEffect(m_pGame->Width() / 2, m_pGame->Height() / 2, EFFECT_SCENE_FADEIN, &param);
@@ -1534,6 +1540,7 @@ void GameStateTitle::OnSelectSomeCustomStage(NaString strName)
 		m_pGame->ChangeState(GAMESTATE_STAGEINTRO);
 
 		// Fade in effect
+        CreateParameter param;
 		param.nStartDelay = 0;
 		param.nDuration = 40;
 		m_pGame->CreateSceneEffect(m_pGame->Width() / 2, m_pGame->Height() / 2, EFFECT_SCENE_FADEIN, &param);

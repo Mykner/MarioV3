@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef WIN32
+#if defined(WIN32) && defined(SUPPORT_DIRECTX) 
 
 #include "RenderManager.h"
 #include <Windows.h>

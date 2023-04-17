@@ -601,20 +601,25 @@ void CMainFrame::OnUpdateToolBars(CCmdUI * pCmdUI)
 	case ID_BTN_OBJ_LOOPHANDLER:
 	case ID_BTN_OBJ_BOOMBOOM:
 	case ID_BTN_OBJ_LEAF:
+    case ID_BTN_OBJ_VINE:
 		pCmdUI->Enable(FALSE);
 		return;
 		break;
 	}
 
-	pCmdUI->Enable();
-
 	CFrameWnd *pFrame = GetActiveFrame();
 	CMarioMapEditorView *pView = (CMarioMapEditorView*)pFrame->GetActiveView();
 	if (pView)
 	{
+        pCmdUI->Enable(!pView->IsPlaying());
+
 		int nCurTool = (pView)->GetCurToolID();
 		pCmdUI->SetCheck(pCmdUI->m_nID == nCurTool);
 	}
+    else
+    {
+        pCmdUI->Enable(FALSE);
+    }
 }
 
 void CMainFrame::OnTogglePlayedShadow()

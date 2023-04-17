@@ -133,6 +133,12 @@
     <Filter Include="ExtLib\NaLib\aes">
       <UniqueIdentifier>{a9a32d4e-cb75-412f-88b5-0f26dbbe9f9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BackgroundObjects">
+      <UniqueIdentifier>{820bf065-972b-43ed-96f3-14ed3c6daa6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BackgroundObjects">
+      <UniqueIdentifier>{f09244e4-f170-4345-9182-45ce8e6442da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NaLib\NaCommon.cpp">
@@ -881,6 +887,18 @@
     </ClCompile>
     <ClCompile Include="GameState\GameStateRegisterUser.cpp">
       <Filter>Source Files\GameEngine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundObjectBase.cpp">
+      <Filter>Source Files\BackgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundUnderWaterLayer.cpp">
+      <Filter>Source Files\BackgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Background\BackgroundLavaLayer.cpp">
+      <Filter>Source Files\BackgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EventObject\ObjectGenerator.cpp">
+      <Filter>Source Files\GameObjects\EventObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1747,6 +1765,21 @@
     </ClInclude>
     <ClInclude Include="GameState\GameStateRegisterUser.h">
       <Filter>Header Files\GameEngine\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundObjectBase.h">
+      <Filter>Header Files\BackgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundUnderWaterLayer.h">
+      <Filter>Header Files\BackgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Background\BackgroundLavaLayer.h">
+      <Filter>Header Files\BackgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObject\ObjectGenerator.h">
+      <Filter>Header Files\GameObjects\EventObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

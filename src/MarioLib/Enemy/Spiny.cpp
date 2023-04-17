@@ -270,18 +270,21 @@ int Spiny::GetSpriteIndex()
 	int nFrame;
 	switch (m_nState)
 	{
+    case STATE_PUSHEDUP:
 	case STATE_SHELLIDLE:
 	case STATE_SHELLAWAKE:
 	case STATE_CARRYBYHAND:
 	case STATE_KICKEDUP:
 	case STATE_PLACEDBYHAND:
-		nFrame = SPRIDX_SPINY_SPIN1;
-		break;
-	case STATE_PUSHEDUP:
-		if (IS_CLASSIC)
-			nFrame = SPRIDX_SPINY1;
-		else
-			nFrame = SPRIDX_SPINY_SPIN1;
+        if (IS_MODERN)
+        {
+            if (m_bDeadInside)
+                nFrame = SPRIDX_SPINY_EMPTY_SPIN1;
+            else
+                nFrame = SPRIDX_SPINY_SPIN1;
+        }
+        else
+            nFrame = SPRIDX_SPINY1;
 		break;
 	case STATE_THROWN:
 		nFrame = SPRITE_INDEX_CYCLE(SPRIDX_SPINY_EGG1, 2, 6);
@@ -292,7 +295,10 @@ int Spiny::GetSpriteIndex()
 	case STATE_SHELLRUN:
 		if (m_pGame->m_bModernStyle)
 		{
-			nFrame = SPRITE_INDEX_CYCLE(SPRIDX_SPINY_SPIN1, 4, 3);
+            if (m_bDeadInside)
+                nFrame = SPRITE_INDEX_CYCLE(SPRIDX_SPINY_EMPTY_SPIN1, 4, 3);
+            else
+			    nFrame = SPRITE_INDEX_CYCLE(SPRIDX_SPINY_SPIN1, 4, 3);
 		}
 		else
 			nFrame = SPRIDX_SPINY_SPIN1;
@@ -307,10 +313,17 @@ int Spiny::GetSpriteIndex()
 		}
 		else 
 			nFrame = SPRIDX_SPINY1 + (m_nStateFrame / 8) % 2;
-		if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside)
-			nFrame = SPRIDX_SPINY_SPIN1;
+        if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside || m_bIsEmptyShell)
+        {
+            if (m_bDeadInside || m_bIsEmptyShell)
+                nFrame = SPRIDX_SPINY_EMPTY_SPIN1;
+            else
+                nFrame = SPRIDX_SPINY_SPIN1;
+        }
 		break;
 	}
+
+    m_nSpriteIndex = nFrame;
 
 	return nFrame;
 }

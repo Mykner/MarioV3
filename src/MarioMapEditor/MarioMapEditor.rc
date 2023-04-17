@@ -17,7 +17,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 한국어(대한민국) resources
+// Korean (Korea) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
 LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
@@ -295,7 +295,6 @@ BEGIN
     BUTTON      ID_BTN_OBJ_PIPE
     BUTTON      ID_BTN_OBJ_PIPEBODY
     BUTTON      ID_BTN_OBJ_ISLAND
-    BUTTON      ID_BTN_OBJ_RIVER
     BUTTON      ID_BTN_OBJ_CAMERASTOP
     BUTTON      ID_BTN_OBJ_SKYEXIT
     BUTTON      ID_BTN_OBJ_RIVERBRIDGE
@@ -305,6 +304,7 @@ BEGIN
     BUTTON      ID_BTN_OBJ_WALL
     BUTTON      ID_BTN_OBJ_SEMI_SOLID
     BUTTON      ID_BTN_OBJ_MESSAGEBLOCK
+    BUTTON      ID_BTN_OBJ_RIVER
 END
 
 IDR_TOOLBAR_EVENTOBJECTS TOOLBAR 16, 16
@@ -663,8 +663,6 @@ BEGIN
 END
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // DESIGNINFO
@@ -781,6 +779,8 @@ END
 IDC_CURSOR_MARIO_HAND   CURSOR                  "res\\MarioHand.cur"
 
 IDC_CURSOR_ERASER       CURSOR                  "res\\Eraser.cur"
+
+IDC_CURSOR_MARIO_CLICK_HAND CURSOR                  "res\\MarioClickHand.cur"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -949,7 +949,7 @@ BEGIN
     IDS_FIND_TAB            "찾기"
 END
 
-#endif    // 한국어(대한민국) resources
+#endif    // Korean (Korea) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

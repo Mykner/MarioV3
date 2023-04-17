@@ -42,7 +42,6 @@ public:
 	ControllerBase *pFromPlayer;
 	GameObjectBase *pFromObject;
 	float fXS, fYS, fZS;
-	bool bIsQuick;
 	float fScaleX, fScaleY;
 	int nDuration;
 	int nStartDelay;
@@ -98,6 +97,7 @@ public:
 	virtual void ProcessShapeChange(int nStateFrame) {};
 	virtual void OnBeforeProcess();
 	virtual void OnAfterProcess();
+    virtual void ProcessState();
 
 	virtual void ChangeShape(int nShape) {};
 	virtual void OnChangeShape(int nShape) {};

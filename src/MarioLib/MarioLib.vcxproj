@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -30,7 +30,7 @@
     <ProjectGuid>{47908BCF-CE9A-4863-87FC-CF47C50C665D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MarioLib</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -58,20 +58,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -125,9 +125,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;_DEBUG;_LIB;FMT_HEADER_ONLY;SUPPORT_DIRECTX;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%DIRECTX_SDK%Include;%OPENGL_SDK%;%FMOD_SDK%api\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(SolutionDir)src\freeglut\include\GL;$(SolutionDir)src\FMOD\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <CallingConvention>Cdecl</CallingConvention>
@@ -138,7 +138,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)src\freeglut\lib\freeglut.lib;$(SolutionDir)src\FMOD\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>$(SolutionDir)OutPut\pre_build_mario_lib.bat</Command>
@@ -165,13 +165,15 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;WIN32;NDEBUG;_LIB;FMT_HEADER_ONLY;SUPPORT_DIRECTX;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%DIRECTX_SDK%Include;%OPENGL_SDK%;%FMOD_SDK%api\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\freeglut\include\GL;$(SolutionDir)src\FMOD\inc;%FMOD_SDK%..\dirent\include;$(SolutionDir)src\NaLib;$(SolutionDir)src\CurlLib\include;$(SolutionDir)src\JsonLib;$(SolutionDir)src\JsonLib\json;$(SolutionDir)src\MarioLib;$(SolutionDir)src\MarioLib/Common;$(SolutionDir)src\MarioLib/Background;$(SolutionDir)src\MarioLib/Bullet;$(SolutionDir)src\MarioLib/ControllableObject;$(SolutionDir)src\MarioLib/Design;$(SolutionDir)src\MarioLib/Effect;$(SolutionDir)src\MarioLib/Enemy;$(SolutionDir)src\MarioLib/EventObject;$(SolutionDir)src\MarioLib/GameState;$(SolutionDir)src\MarioLib/Item;$(SolutionDir)src\MarioLib/Manager;$(SolutionDir)src\MarioLib/MapObject;$(SolutionDir)src\MarioLib/Misc;$(SolutionDir)src\MarioLib/UserInterface;$(SolutionDir)src\MarioLib/Vehicle;E:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <CallingConvention>Cdecl</CallingConvention>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,7 +181,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>%OPENGL_SDK%\glut32.lib;%DIRECTX_SDK%\Lib\x86\d3d9.lib;%DIRECTX_SDK%\Lib\x86\d3dx9.lib;%FMOD_SDK%\api\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)src\freeglut\lib\freeglut.lib;$(SolutionDir)src\FMOD\lib\fmodex_vc.lib;$(SolutionDir)src\CurlLib\lib\libcurl.lib;$(SolutionDir)src\CurlLib\lib\libeay32.lib;$(SolutionDir)src\CurlLib\lib\ssleay32.lib;ws2_32.lib;wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>$(SolutionDir)OutPut\pre_build_mario_lib.bat</Command>
@@ -278,11 +280,14 @@
     <ClCompile Include="Background\BackgroundCloud.cpp" />
     <ClCompile Include="Background\BackgroundFence.cpp" />
     <ClCompile Include="Background\BackgroundGhostHouse.cpp" />
+    <ClCompile Include="Background\BackgroundLavaLayer.cpp" />
     <ClCompile Include="Background\BackgroundMountain.cpp" />
+    <ClCompile Include="Background\BackgroundObjectBase.cpp" />
     <ClCompile Include="Background\BackgroundRedCloud.cpp" />
     <ClCompile Include="Background\BackgroundSnowFence.cpp" />
     <ClCompile Include="Background\BackgroundUnderground.cpp" />
     <ClCompile Include="Background\BackgroundUnderWater.cpp" />
+    <ClCompile Include="Background\BackgroundUnderWaterLayer.cpp" />
     <ClCompile Include="Bullet\Boomerang.cpp" />
     <ClCompile Include="Bullet\BowserFire.cpp" />
     <ClCompile Include="Bullet\BulletObjectBase.cpp" />
@@ -376,6 +381,7 @@
     <ClCompile Include="EventObject\GoalPost.cpp" />
     <ClCompile Include="EventObject\LoopFlag.cpp" />
     <ClCompile Include="EventObject\LoopHandler.cpp" />
+    <ClCompile Include="EventObject\ObjectGenerator.cpp" />
     <ClCompile Include="EventObject\OneWayWall.cpp" />
     <ClCompile Include="EventObject\PowBlock.cpp" />
     <ClCompile Include="EventObject\Princess.cpp" />
@@ -550,11 +556,14 @@
     <ClInclude Include="Background\BackgroundCloud.h" />
     <ClInclude Include="Background\BackgroundFence.h" />
     <ClInclude Include="Background\BackgroundGhostHouse.h" />
+    <ClInclude Include="Background\BackgroundLavaLayer.h" />
     <ClInclude Include="Background\BackgroundMountain.h" />
+    <ClInclude Include="Background\BackgroundObjectBase.h" />
     <ClInclude Include="Background\BackgroundRedCloud.h" />
     <ClInclude Include="Background\BackgroundSnowFence.h" />
     <ClInclude Include="Background\BackgroundUnderground.h" />
     <ClInclude Include="Background\BackgroundUnderWater.h" />
+    <ClInclude Include="Background\BackgroundUnderWaterLayer.h" />
     <ClInclude Include="Bullet\Boomerang.h" />
     <ClInclude Include="Bullet\BowserFire.h" />
     <ClInclude Include="Bullet\BulletObjectBase.h" />
@@ -664,6 +673,7 @@
     <ClInclude Include="EventObject\GoalPost.h" />
     <ClInclude Include="EventObject\LoopFlag.h" />
     <ClInclude Include="EventObject\LoopHandler.h" />
+    <ClInclude Include="EventObject\ObjectGenerator.h" />
     <ClInclude Include="EventObject\OneWayWall.h" />
     <ClInclude Include="EventObject\PowBlock.h" />
     <ClInclude Include="EventObject\Princess.h" />
@@ -709,6 +719,7 @@
     <ClInclude Include="GameState\GameStateTest.h" />
     <ClInclude Include="GameState\GameStateTimeUp.h" />
     <ClInclude Include="GameState\GameStateTitle.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Item\CloudItem.h" />
     <ClInclude Include="Item\DoorKey.h" />
     <ClInclude Include="Item\DoorKeyCoin.h" />

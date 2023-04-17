@@ -46,9 +46,7 @@ DesignStage::DesignStage(Game *pGame)
 
 	m_bShowPlayedShadow = false;
 
-	int nSizeTileData = m_sizeTile.cx * m_sizeTile.cy;
-	m_pTileData = new BYTE[nSizeTileData];
-	memset(m_pTileData, 0, sizeof(BYTE) * nSizeTileData);
+    CreateTileData();
 
 	// Create Default Ground
 	int nTileW = m_sizeTile.cx;
@@ -101,11 +99,6 @@ void DesignStage::Render()
 		m_pSpriteDesign = SPR_MANAGER->Find(L"Design");
 	}
 
-	if (m_pSpriteBackground == nullptr)
-	{
-		m_pSpriteBackground = SPR_MANAGER->Find(L"TileBackground");
-	}
-
 	int nTileW = m_sizeTile.cx;
 	int nTileH = m_sizeTile.cy;
 
@@ -133,15 +126,7 @@ void DesignStage::Render()
 	}
 
 	// Background Scene
-	for (int x = nBeginX; x < nEndX; x++)
-	{
-		for (int y = nBeginY; y < nEndY; y++)
-		{
-			int nData = GetTileBackgroundData(x, y);
-			if (nData != TILE_EMPTY)
-				RenderTileBackground(x, y, nData);
-		}
-	}
+    RenderBackground();
 
 	// Tile & Item
 	for (int x = nBeginX; x < nEndX; x++)
@@ -167,6 +152,20 @@ void DesignStage::Render()
 			}
 		}
 	}
+
+    // Grid hover box
+    if (m_nCurMode == EDIT_SELECT)
+    {
+        NaPointT<float> pt = CAMERA->GetPosition();
+
+        const int nDefaultGridSize = 8;
+
+        int _x = ((m_ptCursor.x / TILE_XS) * TILE_XS) + nDefaultGridSize - pt.x;
+        int _y = ((m_ptCursor.y / TILE_YS + 1) * TILE_YS) - pt.y;
+
+        m_pSpriteDesign->RenderToQueue(_x, _y, SPRIDX_ETC_CIRCLE,
+            false, false, 0x30000000, 1.0f, 1.0f, Z_UI_BOX);
+    }
 
 	// Render MapObjects
 	{
@@ -380,23 +379,21 @@ void DesignStage::RenderTile(int x, int y, int nType, long lColor, int nZOrder)
 	x -= pt.x;
 	y -= pt.y;
 
-	std::map<int, int>::iterator it = m_mapHitFrame.find(nIdx);
-	if (it != m_mapHitFrame.end())
-	{
-		int nHitFrame = it->second;
-		if (nHitFrame < 0)
-			nHitFrame = 0;
-
-		const int nHitAnimOffset[16] = { 0, 0, 1, -1, -3, -4, -5, -6, -7, -7, -7, -6, -6, -5, -3, -1 };
-		rc.Offset(0, nHitAnimOffset[nHitFrame]);
-	}
-
-	nType = GetAnimatedTileIndex(nType);
-
 	if (nType == TILE_EMPTY)
 		nZOrder = Z_DESIGN_EMPTYTILE;
 
 	bool bShadow = (nType != TILE_EMPTY) && (m_pGame->m_bModernStyle) && (nZOrder != Z_MAP_SHADOW);
+
+    if (bShadow)
+    {
+        if (IsSomethingTile(nType) &&
+            IsSomethingTile(GetTileData(tx + 1, ty)) &&
+            IsSomethingTile(GetTileData(tx, ty + 1)) &&
+            IsSomethingTile(GetTileData(tx + 1, ty + 1)))
+        {
+            bShadow = false;
+        }
+    }
 
 	if (nType == TILE_GROUND)
 		nType = GetAutoGroundTileIndex(tx, ty);
@@ -1297,7 +1294,7 @@ void DesignStage::RemoveSelected()
 	m_nCurType = -1;
 }
 
-GameObjectBase * DesignStage::GetSelectedObject()
+PropertyObjectBase * DesignStage::GetSelectedObject()
 {
 	switch (m_nCurToolType)
 	{
@@ -1309,7 +1306,7 @@ GameObjectBase * DesignStage::GetSelectedObject()
 		return nullptr;
 		break;
 	case TOOLTYPE_MAPOBJECT:
-		return nullptr; // m_pMapObject
+        return m_pMapObject;
 		break;
 	case TOOLTYPE_ENEMY:
 		return m_pEnemyObject;
@@ -1558,9 +1555,10 @@ POINT DesignStage::GetDefaultHandOffset(int nType)
 		pt = { -8, -16 };
 		break;
 	case EVENTOBJECT_ENEMYGENERATOR:
+    case EVENTOBJECT_OBJECTGENERATOR:
 		pt = { 8, 8 };
 		break;
-		// PlayerObject
+	// PlayerObject
 	case PLAYEROBJECT_MARIO:
 		pt = { 0, -8 };
 		break;
@@ -1569,10 +1567,36 @@ POINT DesignStage::GetDefaultHandOffset(int nType)
 	return pt;
 }
 
-void DesignStage::MovePlayBot(float x, float y)
+void DesignStage::MovePlayBot(float x, float y, bool bValidate)
 {
 	m_pPlayBotObject->m_fX += x;
 	m_pPlayBotObject->m_fY += y;
+
+    if (!bValidate)
+        return;
+
+    NaRect rcViewport = CAMERA->GetViewport();
+    rcViewport.top += 8;
+    rcViewport.bottom -= 8;
+    rcViewport.left += 8;
+    rcViewport.right -= 8;
+
+    NaRect rcRect = m_pPlayBotObject->GetRect();
+
+    if (!rcViewport.IsOverlapped(rcRect))
+    {
+        m_pPlayBotObject->m_fX -= x;
+        m_pPlayBotObject->m_fY -= y;
+
+        if (!rcViewport.IsOverlapped(rcRect))
+        {
+            m_pPlayBotObject->m_fX = rcViewport.Center();
+            m_pPlayBotObject->m_fY = rcViewport.Middle();
+        }
+
+        PLAYSOUND(L"NotCorrect");
+        NaDebugOut(L"Fixed PlayBot Position\n");
+    }
 }
 
 void DesignStage::MovePlayBotToSafePlace()
@@ -1760,10 +1784,11 @@ bool DesignStage::QuickPowerUp()
 			auto pObj = GetSelectedObject();
 			if (pObj->HasProperty(L"PowerUp"))
 			{
-				pObj->m_bPowerUp = !pObj->m_bPowerUp;
-				pObj->OnPowerUp();
+                auto pGameObj = (GameObjectBase*)pObj;
+                pGameObj->m_bPowerUp = !pGameObj->m_bPowerUp;
+                pGameObj->OnPowerUp();
 
-				if (pObj->m_bPowerUp)
+				if (pGameObj->m_bPowerUp)
 				{
 					PLAYSOUND(L"PowerUp");
 				}
@@ -1792,8 +1817,10 @@ bool DesignStage::QuickToggleWing()
 			auto pObj = GetSelectedObject();
 			if (pObj->HasProperty(L"Winged"))
 			{
-				pObj->m_bWinged = !pObj->m_bWinged;
-				if (pObj->m_bWinged)
+                auto pGameObj = (GameObjectBase*)pObj;
+                pGameObj->m_bWinged = !pGameObj->m_bWinged;
+
+				if (pGameObj->m_bWinged)
 				{
 					PLAYSOUND(L"PowerUp");
 				}

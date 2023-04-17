@@ -43,15 +43,7 @@ void ClownCar::OnAfterProcess()
 		m_pPassenger->m_fY += m_fYS;
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
-
-		OnChangeState(m_nState);
-	}
+    ProcessState();
 }
 
 void ClownCar::OnFly()

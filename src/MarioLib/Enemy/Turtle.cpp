@@ -12,6 +12,7 @@
 #include "SpeechBubble.h"
 
 BEGIN_IMPL_PROPERTYMAP(Turtle)
+    PROP_BOOL("IsEmptyShell", VT_BOOL, false, nullptr, "Turtle"),
 	PROP_BOOL("PowerUp", VT_BOOL, false, nullptr, "Turtle"),
 	PROP_BOOL("Winged", VT_BOOL, false, nullptr, "Turtle"),
 END_IMPL_PROPERTYMAP()
@@ -30,6 +31,7 @@ Turtle::Turtle(Game *pGame, Stage *pStage) :
 	m_bDeadInside = false;
 	m_nAwakeTimer = 0;
 	m_nShape = TURTLESHAPE_NORMAL;
+    m_bIsEmptyShell = false;
 }
 
 Turtle::~Turtle()
@@ -57,10 +59,10 @@ void Turtle::OnAfterProcess()
 {
 	EnemyObjectBase::OnAfterProcess();
 
-	if (m_nShape == TURTLESHAPE_SHELL && m_nAwakeTimer > 0 && m_fYS == 0)
+	if (m_nShape == TURTLESHAPE_SHELL && m_nAwakeTimer > 0 && m_fYS == 0 && m_nState != STATE_SHELLRUN)
 	{
 		m_nAwakeTimer--;
-		if (m_nAwakeTimer == 0)
+		if (m_nAwakeTimer == 0 && !m_bDeadInside && !m_bIsEmptyShell)
 		{
 			m_nShape = TURTLESHAPE_SHELLAWAKEN;
 		}
@@ -109,7 +111,13 @@ void Turtle::Render(int nColor, int nZOrder)
 		float fScaleX, fScaleY;
 		GetScale(fScaleX, fScaleY);
 
-		(*m_ppSprite)->RenderToQueue(x - pt.x, y - pt.y, nFrame, m_bFlip, m_bFlipV, nColor,
+        float _x = x - pt.x;
+        float _y = y - pt.y;
+
+        if (m_nState == STATE_STACKED)
+            _x += GetStackXOffset();
+
+		(*m_ppSprite)->RenderToQueue(_x, _y, nFrame, m_bFlip, m_bFlipV, nColor,
 			fScaleX, fScaleY, nZOrder, bShadow, fAngle);
 
 		// Wing
@@ -629,6 +637,24 @@ void Turtle::OnChangeState(int nState)
 	//m_nNextState = nState;
 }
 
+void Turtle::OnIdle()
+{
+    if (m_bIsEmptyShell)
+    {
+        m_bDeadInside = true;
+        m_nBaseState = STATE_SHELLIDLE;
+        m_nShape = TURTLESHAPE_SHELL;
+        ReleaseWing();
+
+        if (!CheckFalling())
+            ChangeState(STATE_SHELLIDLE);
+    }
+    else
+    {
+        EnemyObjectBase::OnIdle();
+    }
+}
+
 void Turtle::OnWalk()
 {
 	if (m_bWinged)
@@ -938,6 +964,27 @@ void Turtle::OnShellKicked()
 	ChangeState(STATE_SHELLRUN);
 }
 
+void Turtle::OnStacked()
+{
+    if (m_bDeadInside || m_bIsEmptyShell)
+    {
+        if (m_bIsEmptyShell)
+        {
+            m_bDeadInside = true;
+            m_nBaseState = STATE_SHELLIDLE;
+            m_nShape = TURTLESHAPE_SHELL;
+            ReleaseWing();
+        }
+
+        ReleaseEnemyStack();
+        ChangeState(STATE_FALL);
+    }
+    else
+    {
+        EnemyObjectBase::OnStacked();
+    }
+}
+
 void Turtle::OnBlockJump()
 {
 	if (m_nStateFrame < GameDefaults::nBlockJumpFreeze)
@@ -949,13 +996,26 @@ void Turtle::OnBlockJump()
 			m_ptCollision[COLLISION_BOTTOM].y / TILE_YS
 		);
 
-		m_fY = m_ptCollision[COLLISION_BOTTOM].y + ptOffset.y;
+        if (m_nStateFrame < GameDefaults::nBlockJumpFreeze - 1)
+		    m_fY = m_ptCollision[COLLISION_BOTTOM].y + ptOffset.y;
 	}
 
-	if (m_nStateFrame == GameDefaults::nBlockJumpFreeze)
-	{
-		m_fYS = -6.0f;
+    bool bChangeState = false;
 
+    if (m_nStateFrame == GameDefaults::nBlockJumpFreeze)
+    {
+        m_fYS = -6.0f;
+        bChangeState = true;
+    }
+
+    if (m_nStateFrame > GameDefaults::nBlockJumpFreeze)
+    {
+        m_fYS = -(6.0f - ((m_nStateFrame - GameDefaults::nBlockJumpFreeze) * 0.1f));
+        bChangeState = true;
+    }
+
+    if (bChangeState)
+    {
 		switch (m_nShape)
 		{
 		case TURTLESHAPE_SHELLKICKED:
@@ -1017,6 +1077,8 @@ bool Turtle::CanDamageEnemy()
 {
 	switch (m_nState)
 	{
+    case STATE_IDLE:
+        return !m_bDeadInside && !m_bIsEmptyShell;
 	case STATE_PRESSED:
 	case STATE_KICKED:
 	case STATE_SHELLIDLE:
@@ -1149,8 +1211,13 @@ int Turtle::GetSpriteIndex()
 		break;
 	default:
 		nFrame = SPRIDX_TURTLE1 + (m_nStateFrame / 8) % 2;
-		if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside)
-			nFrame = SPRIDX_TURTLE_SHELL1;
+        if (m_nShape < TURTLESHAPE_NORMAL || m_bDeadInside || m_bIsEmptyShell)
+        {
+            if (m_bDeadInside || m_bIsEmptyShell)
+                nFrame = SPRIDX_TURTLE_SPIN1;
+            else
+                nFrame = SPRIDX_TURTLE_SHELL1;
+        }
 		
 		break;
 	}

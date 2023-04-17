@@ -5,6 +5,18 @@
 
 #pragma once
 
+//  Define min max macros required by GDI+ headers.
+#ifndef max
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+#else
+#error max macro is already defined
+#endif
+#ifndef min
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#else
+#error min macro is already defined
+#endif
+
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
 #endif
@@ -33,6 +45,10 @@
 
 #include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원
 
+
+//  Undefine min max macros so they won't collide with <limits> header content.
+#undef min
+#undef max
 
 
 

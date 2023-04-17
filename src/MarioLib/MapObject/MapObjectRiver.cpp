@@ -10,6 +10,7 @@
 // Property Interface
 BEGIN_IMPL_PROPERTYMAP(MapObjectRiver)
 	PROP_INT("CanSwim", VT_BOOL, false, 0, "River"),
+    PROP_INT("CanHurt", VT_BOOL, false, 0, "River"),
 END_IMPL_PROPERTYMAP()
 
 
@@ -52,16 +53,21 @@ bool MapObjectRiver::Tileize(int nPhase)
 			}
 		}
 
-		// #TODO Improvement Swimarea handling
 		if (m_bCanSwim)
 		{
 			// Initilize SwimArea
 			NaRect rc = m_rc;
 			rc.top += 8;
-			m_pStage->m_vecSwimArea.push_back(rc);
-			
-			//m_pStage->AddSwimZone();
+			m_pStage->AddSwimArea(rc);
 		}
+
+        if (m_bCanHurt)
+        {
+            // Initialize HurtArea
+            NaRect rc = m_rc;
+            rc.top += 8;
+            m_pStage->AddHurtArea(rc);
+        }
 
 		return true;
 	}

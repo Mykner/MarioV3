@@ -9,7 +9,7 @@ enum GameObjectStates
 	STATE_SIT,
 	STATE_WALK,
 	STATE_BREAK,
-	STATE_JUMP,
+	STATE_JUMP = 7, // Mykner> Sync with decomp...
 	STATE_SITJUMP,
 	STATE_FALL,
 	STATE_SITFALL,
@@ -17,20 +17,20 @@ enum GameObjectStates
 	STATE_GROUNDPOUND,
 	STATE_WALLSWEEP,
 
-	STATE_SWIM,
+	STATE_SWIM = 21, // Mykner> Sync with decomp...
 	STATE_SWIMJUMP,
 	STATE_SPINJUMP,
 
 	STATE_CLIMBIDLE,
 	STATE_CLIMBMOVE,
 
-	STATE_ITEMPOP,
+	STATE_ITEMPOP = 36, // Mykner> Sync with decomp...
 	STATE_ITEMPOPDOWN,
 	STATE_THROWFIRE,
 
 	STATE_PIPEDOWN,
 	STATE_PIPERIGHT,
-	STATE_PIPEUP,
+	STATE_PIPEUP = 43, // Mykner> Sync with decomp...
 	STATE_PIPELEFT,
 
 	STATE_VINEUP,
@@ -66,7 +66,7 @@ enum GameObjectStates
 	STATE_FIREUP,
 
 	// Bridge, Winged Patrol, ...
-	STATE_MOVE,
+	STATE_MOVE = 65, // Mykner> Sync with decomp...
 	STATE_MOVEUP,
 	STATE_MOVEDOWN,
 
@@ -91,13 +91,13 @@ enum GameObjectStates
 	// Yoshi
 	STATE_HATCH,
 
-	STATE_HELDBYTONGUE,
+	STATE_HELDBYTONGUE = 81, // Mykner> Sync with decomp...
 	STATE_HELD,
 	STATE_SPITTED,
 	STATE_SPITTED_SAFE,
 
 	STATE_STACKED,
-	STATE_BLOCKJUMP,
+	STATE_BLOCKJUMP = 87, // Mykner> Sync with decomp...
 
 	// Door
 	STATE_OPEN,
@@ -113,7 +113,7 @@ enum GameObjectStates
 	STATE_SPECIALPOSE,
 	STATE_VICTORYPOSE,
 
-	STATE_CARRYBYHAND,
+	STATE_CARRYBYHAND = 103, // Mykner> Sync with decomp...
 	STATE_PLACEDBYHAND,
 	STATE_KICKEDUP,
 
@@ -124,6 +124,6 @@ enum GameObjectStates
 	STATE_TEST,
 
 	STATE_EVENTDEAD,
-	STATE_DEAD,	// already dead!
+	STATE_DEAD = 116,	// already dead! // Mykner> Sync with decomp...
 	STATE_,
 };

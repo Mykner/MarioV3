@@ -18,19 +18,14 @@ void BackgroundGhostHouse::BuildBackground()
 	if (m_pStage == nullptr)
 		return;
 
-	if (m_pStage->m_pTileBackgroundData == nullptr)
-		m_pStage->m_pTileBackgroundData = new BYTE[m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy];
-
-	m_pData = m_pStage->m_pTileBackgroundData;
-    memset(m_pData, 0, sizeof(BYTE) * m_pStage->m_sizeTile.cx * m_pStage->m_sizeTile.cy);
-
 	// Loop 3page pattern
-	int nGround = m_pStage->m_sizeTile.cy - 4;
+	int nGround = GetGroundY();
 	for (int i = 0; i < (m_pStage->m_nMaxPage / 3) + 1; i++)
 	{
 		int nOffset = i * GameDefaults::nPageTileWidth * 3;
 
 		// Page1
+        CreateGhostHouseFence(nOffset, nGround, 3);
 		CreateLamp(nOffset + 4, nGround, 3);
 		CreateGhostDeadMushroom(nOffset + 5, nGround, 1);
 		CreateLamp(nOffset + 10, nGround, 3);
@@ -38,8 +33,10 @@ void BackgroundGhostHouse::BuildBackground()
 		// Page2
 		CreateClock(nOffset + 12, nGround, 1);
 		CreateLamp(nOffset + 17, nGround, 2);
+        CreateGhostHouseFence(nOffset + 19, nGround, 3);
 		CreateGhostDeadMushroom(nOffset + 24, nGround, 1);
 		CreateClock(nOffset + 27, nGround, 1);
+        CreateGhostHouseFence(nOffset + 29, nGround, 3);
 
 		// Page3
 		CreateLamp(nOffset + 35, nGround, 1);

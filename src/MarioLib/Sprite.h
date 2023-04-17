@@ -17,6 +17,7 @@ enum SpriteLoadModes
 
 class Game;
 class SpriteFrame;
+class SpriteAnimation;
 class SpriteRenderInfo;
 class TextureBase;
 class Sprite
@@ -28,6 +29,8 @@ public:
 	void Load(const wchar_t* szName, const wchar_t* szBitmap = nullptr, bool bWarn = true, int nMode = SPRITE_LOAD_DEFAULT);
 	bool LoadTexture(const wchar_t * szName, const wchar_t* szBitmap, NaString &strTexture, bool bWarn);
 	bool LoadInfo(NaString strInfo);
+    void LoadNewJsonInfo(Json::Value &j, NaString &strInfo, double dVersion);
+    void LoadOldJsonInfo(Json::Value &j, NaString &strInfo, double dVersion);
 	void ReloadTexture();
 	void MakeStageTileInfo(bool bMakePieceSprite = false);
 	void MakeFontTileInfo();
@@ -63,6 +66,8 @@ public:
 	TextureBase *m_pTexture;
 	TextureBase *m_pTextureHD;
 	std::vector<SpriteFrame> m_vecFrames;
+    std::map<NaString, SpriteAnimation> m_mapAnimations;
+    NaString m_strSubPositions;
 	Game *m_pGame;
 };
 
@@ -77,6 +82,27 @@ public:
 
 	RECT m_rc;
 	POINT m_ptOffset;
+    std::map<NaString, NaPoint> m_mapSubPositions;
+};
+
+class SpriteAnimation
+{
+public:
+    SpriteAnimation() {
+        m_nDelay = -1;
+        m_bSomething1 = true;
+        m_bSomething2 = true;
+        m_nSomething3 = 0;
+        m_nLength = 0;
+    };
+    virtual ~SpriteAnimation() {};
+
+    int m_nDelay;
+    bool m_bSomething1;
+    bool m_bSomething2;
+    int m_nSomething3;
+    int m_nStartFrame;
+    int m_nLength;
 };
 
 class SpriteRenderInfo

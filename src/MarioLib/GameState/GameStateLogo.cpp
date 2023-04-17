@@ -20,7 +20,8 @@ GameStateLogo::GameStateLogo(Game *pGame)
 	m_nType = GAMESTATE_LOGO;
 
 	m_Transaction.Init(pGame);
-	m_bHavePermission = false;
+	//m_bHavePermission = false;
+	m_bHavePermission = true; // Mykner> Always give permission :)
 }
 
 GameStateLogo::~GameStateLogo()
@@ -96,11 +97,13 @@ void GameStateLogo::Process()
 			if (pConfig->m_strName.GetLength() == 0 ||
 				pConfig->m_strUniqueId.GetLength() == 0)
 			{
-				m_pGame->ChangeState(GAMESTATE_REGISTERUSER);
+				// Mykner> Skip registration bullshit
+				//m_pGame->ChangeState(GAMESTATE_REGISTERUSER);
 			}
 			else
 			{
-				m_Transaction.m_pJobThread = new std::thread(CheckPermissions, this); 
+				// Mykner> Skip registration bullshit
+				//m_Transaction.m_pJobThread = new std::thread(CheckPermissions, this); 
 			}
 		}
 		break;
@@ -155,7 +158,9 @@ void GameStateLogo::Process()
 			*/
 
 #if defined(NDEBUG)
-		m_pGame->ChangeState(GAMESTATE_APPUPDATE);
+		//m_pGame->ChangeState(GAMESTATE_APPUPDATE);
+		// Mykner> Skip update
+		m_pGame->ChangeState(GAMESTATE_TITLE);
 #else
 		m_pGame->ChangeState(GAMESTATE_TITLE);
 #endif

@@ -71,7 +71,7 @@ EnemyObjectBase::EnemyObjectBase(Game *pGame, Stage *pStage) :
 
 EnemyObjectBase::~EnemyObjectBase()
 {
-	SAFE_DELETE(m_pController);
+    SAFE_DELETE(m_pController);
 }
 
 void EnemyObjectBase::Process()
@@ -107,7 +107,13 @@ void EnemyObjectBase::Render(int nColor, int nZOrder)
 		float fScaleX, fScaleY;
 		GetScale(fScaleX, fScaleY);
 
-		(*m_ppSprite)->RenderToQueue(x - pt.x, y - pt.y, nFrame, m_bFlip, m_bFlipV, nColor,
+        float _x = x - pt.x;
+        float _y = y - pt.y;
+
+        if (m_nState == STATE_STACKED)
+            _x += GetStackXOffset();
+
+		(*m_ppSprite)->RenderToQueue(_x, _y, nFrame, m_bFlip, m_bFlipV, nColor,
 			fScaleX, fScaleY, nZOrder, bShadow, fAngle);
 		
 		if (m_bWinged)
@@ -381,15 +387,7 @@ void EnemyObjectBase::OnAfterProcess()
 		m_pOnMyHead->m_fY += m_fYS;
 	}
 
-	m_nStateFrame++;
-	if (m_nNextState != -1)
-	{
-		m_nState = m_nNextState;
-		m_nNextState = -1;
-		m_nStateFrame = 0;
-
-		OnChangeState(m_nState);
-	}
+    ProcessState();
 
 	if (m_pVehicle)
 		m_pVehicle->OnAfterProcess();
@@ -885,6 +883,46 @@ int EnemyObjectBase::GetMaskedType()
 		nType |= ENEMY_MASK_WINGED;
 	
 	return nType;
+}
+
+float EnemyObjectBase::GetStackXOffset()
+{
+    int nDownCount = GetStackUnderMeCount();
+    EnemyObjectBase *pEnemyBeforeLast = GetStackEnemyBeforeLast();
+
+    if (pEnemyBeforeLast == nullptr)
+        return 0;
+
+    return sin((pEnemyBeforeLast->m_nStateFrame / 10.0) + (nDownCount * 0.7f)) * 3.0f;
+}
+
+int EnemyObjectBase::GetStackUnderMeCount()
+{
+    int nCount = 0;
+    EnemyObjectBase *pObj = this;
+
+    while (pObj != nullptr && pObj->m_pUnderMyFoot != nullptr)
+    {
+        nCount += 1;
+        pObj = pObj->m_pUnderMyFoot;
+    }
+
+    return nCount;
+}
+
+EnemyObjectBase* EnemyObjectBase::GetStackEnemyBeforeLast()
+{
+    EnemyObjectBase *pObj = this;
+
+    while (pObj != nullptr)
+    {
+        if (pObj->GetStackUnderMeCount() == 1)
+            return pObj;
+
+        pObj = pObj->m_pUnderMyFoot;
+    }
+
+    return nullptr;
 }
 
 GameObjectBase * EnemyObjectBase::CreateInstance(Game * pGame, Stage * pStage, int nType)

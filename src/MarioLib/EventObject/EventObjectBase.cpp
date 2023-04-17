@@ -36,6 +36,7 @@
 #include "ShoeSmoke.h"
 #include "GoalBox.h"
 #include "GoalPost.h"
+#include "ObjectGenerator.h"
 
 EventObjectBase::EventObjectBase(Game *pGame, Stage *pStage) :
 	GameObjectBase(pGame, pStage)
@@ -128,6 +129,7 @@ GameObjectBase * EventObjectBase::CreateInstance(Game * pGame, Stage * pStage, i
 	case EVENTOBJECT_SHOESMOKE:			pObj = new ShoeSmoke(pGame, pStage);			break;
 	case EVENTOBJECT_GOALBOX:			pObj = new GoalBox(pGame, pStage);				break;
 	case EVENTOBJECT_GOALPOST:			pObj = new GoalPost(pGame, pStage);				break;
+    case EVENTOBJECT_OBJECTGENERATOR:   pObj = new ObjectGenerator(pGame, pStage);      break;
 	}
 
 	return pObj;

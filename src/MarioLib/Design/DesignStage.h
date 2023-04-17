@@ -64,7 +64,7 @@ public:
 	void MoveSelected(int x, int y);
 	void RemoveSelected();
 
-	GameObjectBase *GetSelectedObject();
+    PropertyObjectBase *GetSelectedObject();
 	
 	void SetSelectedCostume(int nType);
 
@@ -74,7 +74,7 @@ public:
 
 	POINT GetDefaultHandOffset(int nType);
 	MapObjectBase* GetStartPointInViewport();
-	void MovePlayBot(float x, float y);
+	void MovePlayBot(float x, float y, bool bValidate = false);
 	void MovePlayBotToPipeExit(MapObjectBase *pPipeObj);
 	void MovePlayBotToSafePlace();
 

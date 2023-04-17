@@ -70,6 +70,7 @@ public:
 	int m_nMode;
 	int m_nEditType;
 	BOOL m_bLButtonDown;
+    BOOL m_bWasSimpleClick;
 
 	DesignStage* GetStage();
 	void RefreshProperties();

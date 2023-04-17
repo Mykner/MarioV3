@@ -58,6 +58,13 @@ void DoorKey::Process()
 
 		OnItemPopDown();
 		break;
+    case STATE_PUSHEDUP:
+        // Mykner> Hopefully get the key when it's pushed up
+        CUR_PLAYER_OBJ->OnApplyItem(this);
+        SetState(STATE_DEAD);
+
+        CUR_PLAYER->AddDoorKey(this);
+        break;
 	default:
 		ProcessBase();
 		break;
@@ -82,6 +89,9 @@ void DoorKey::ChangeState(int nState, ChangeStateInfo * pInfo)
 	case STATE_TRAMPOLINPRESS:
 	case STATE_TRAMPOLINJUMP:
 		return;
+    case STATE_PUSHEDUP:
+        MakeTwinkle();
+        break;
 	default:
 		ItemObjectBase::ChangeState(nState, pInfo);
 		return;

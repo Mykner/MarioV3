@@ -200,6 +200,7 @@ bool JsonManager::LoadJsonObjectProperty(PropertyObjectBase * pObj, Json::Value 
 			break;
 		case VT_ETC_NASTR:
 		case VT_ETC_NALIST:
+        case VT_ETC_CUSTOM:
 			{
 				NaString *pRefStr = (NaString*)pRefValue;
 				pRefStr->Format("%s", jPropVal.asString().c_str());
@@ -244,6 +245,7 @@ bool JsonManager::SaveJsonObjectProperty(PropertyObjectBase * pObj, Json::Value 
 			break;
 		case VT_ETC_NASTR:
 		case VT_ETC_NALIST:
+        case VT_ETC_CUSTOM:
 			jObj[info.strPropName.cstr()] = ((NaString*)pRefValue)->cstr();
 			break;
 		}

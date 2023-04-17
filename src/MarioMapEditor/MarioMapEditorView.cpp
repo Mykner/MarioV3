@@ -34,6 +34,7 @@
 #include "MapObjectPipe.h"
 #include "MapObjectPipeHorz.h"
 #include "Bridge.h"
+#include "Turtle.h"
 #include "FireBar.h"
 #include "TrampolinMini.h"
 #include "Yoshi.h"
@@ -138,7 +139,6 @@ int g_ControlToolTypeMap[][3] =
 	{ ID_BTN_OBJ_PIPEEXIT,					TOOLTYPE_MAPOBJECT, MAPOBJECT_PIPEEXIT },
 	{ ID_BTN_OBJ_CHECKPOINT,				TOOLTYPE_MAPOBJECT, MAPOBJECT_CHECKPOINT },
 	{ ID_BTN_OBJ_CAMERASTOP,				TOOLTYPE_MAPOBJECT, MAPOBJECT_CAMERASTOP },
-	{ ID_BTN_OBJ_RIVER,						TOOLTYPE_MAPOBJECT, MAPOBJECT_RIVER },
 	{ ID_BTN_OBJ_SKYEXIT,					TOOLTYPE_MAPOBJECT, MAPOBJECT_SKYEXIT },
 	{ ID_BTN_OBJ_RIVERBRIDGE,				TOOLTYPE_MAPOBJECT, MAPOBJECT_RIVERBRIDGE },
 	{ ID_BTN_OBJ_ENEMYSTOP,					TOOLTYPE_MAPOBJECT, MAPOBJECT_ENEMYSTOP },
@@ -147,6 +147,7 @@ int g_ControlToolTypeMap[][3] =
 	{ ID_BTN_OBJ_WALL,						TOOLTYPE_MAPOBJECT, MAPOBJECT_WALL },
 	{ ID_BTN_OBJ_SEMI_SOLID,				TOOLTYPE_MAPOBJECT, MAPOBJECT_SEMISOLID },
 	{ ID_BTN_OBJ_MESSAGEBLOCK,				TOOLTYPE_MAPOBJECT, MAPOBJECT_MESSAGEBLOCK },
+    { ID_BTN_OBJ_RIVER,						TOOLTYPE_MAPOBJECT, MAPOBJECT_RIVER },
 
 	{ ID_BTN_OBJ_FLAGPOLE,					TOOLTYPE_EVENTOBJECT, EVENTOBJECT_FLAGPOLE },
 	{ ID_BTN_OBJ_GOALPOINT,					TOOLTYPE_EVENTOBJECT, EVENTOBJECT_GOALPOINT },
@@ -158,7 +159,7 @@ int g_ControlToolTypeMap[][3] =
 	{ ID_BTN_OBJ_TRAMPOLIN,					TOOLTYPE_EVENTOBJECT, EVENTOBJECT_TRAMPOLIN },
 	{ ID_BTN_OBJ_WARPZONETEXT,				TOOLTYPE_EVENTOBJECT, EVENTOBJECT_WARPZONETEXT },
 	{ ID_BTN_OBJ_SKYBRIDGE,					TOOLTYPE_EVENTOBJECT, EVENTOBJECT_SKYBRIDGE },
-	{ ID_BTN_OBJ_ENEMYGENERATOR,			TOOLTYPE_EVENTOBJECT, EVENTOBJECT_ENEMYGENERATOR },
+	{ ID_BTN_OBJ_ENEMYGENERATOR,			TOOLTYPE_EVENTOBJECT, EVENTOBJECT_OBJECTGENERATOR },
 	{ ID_BTN_OBJ_LOOPHANDLER,				TOOLTYPE_EVENTOBJECT, EVENTOBJECT_LOOPHANDLER },
 	{ ID_BTN_OBJ_LOOPFLAG,					TOOLTYPE_EVENTOBJECT, EVENTOBJECT_LOOPFLAG },
 	{ ID_BTN_OBJ_WARPZONEFLAG,				TOOLTYPE_EVENTOBJECT, EVENTOBJECT_WARPZONEFLAG },
@@ -232,6 +233,10 @@ END_MESSAGE_MAP()
 CMarioMapEditorView::CMarioMapEditorView()
 {
 	m_pDesignPlayGame = nullptr;
+    m_nMode = 0;
+    m_nEditType = 0;
+    m_bLButtonDown = FALSE;
+    m_bWasSimpleClick = FALSE;
 }
 
 CMarioMapEditorView::~CMarioMapEditorView()
@@ -486,6 +491,15 @@ void CMarioMapEditorView::QuickChangeProperty()
 
 	switch (pStage->m_nCurType)
 	{
+    case ENEMY_TURTLE:
+    case ENEMY_REDTURTLE:
+    case ENEMY_BUZZYBEETLE:
+    case ENEMY_SPINY:
+        {
+            ((Turtle*)pStage->m_pEnemyObject)->m_bIsEmptyShell =
+                !((Turtle*)pStage->m_pEnemyObject)->m_bIsEmptyShell;
+        }
+        break;
 	case ENEMY_FIREBAR:
 		{
 			((FireBar*)pStage->m_pEnemyObject)->m_fSpeed *= -1.0f;
@@ -799,7 +813,7 @@ bool CMarioMapEditorView::OnDragMoveComplete()
 							GetClientRect(&rcClient);
 							float fScaleX = (float)rcClient.Width() / (float)(pGame->m_nWidth);
 
-							pGame->m_pCamera->m_ptPos.x = max(0, pStage->m_pPlayBotObject->m_fX - (pGame->m_nWidth / 2));
+							pGame->m_pCamera->m_ptPos.x = std::max(0.f, pStage->m_pPlayBotObject->m_fX - (pGame->m_nWidth / 2));
 
 							SetScrollPos(
 								SB_HORZ,
@@ -1104,6 +1118,7 @@ void CMarioMapEditorView::DoPlaying(int nX, int nY)
 	}
 
 	SetFocus();
+    GetMainFrame()->m_wndProperties.EnableWindow(FALSE);
 	GetMainFrame()->m_pDesignPlayThread = AfxBeginThread(PlayGameThreadProc, this);
 
 	InvalidateGame();
@@ -1126,12 +1141,16 @@ UINT CMarioMapEditorView::PlayGameThreadProc(LPVOID pArg)
 		pGame->ProcessGameLoop();
 	}
 
+    DesignGame *pDesignGame = (DesignGame*)pThis->GetGame();
+
+    // Mykner> Fix resizing during play mode
+    pDesignGame->m_nWidth = pGame->m_nWidth;
+    pDesignGame->m_nHeight = pGame->m_nHeight;
+
 	NaDebugOut(L"DesignPlayGame: Out Of MainLoop\n");
 	pGame->RestoreGame();
 	pGame->Release();
 	delete pGame;
-
-	DesignGame *pDesignGame = (DesignGame*)pThis->GetGame();
 
 	// Restore ScrollBar
 	if (!pThis->GetMainFrame()->m_bOnClosing)
@@ -1148,6 +1167,7 @@ UINT CMarioMapEditorView::PlayGameThreadProc(LPVOID pArg)
 
 	pThis->m_pDesignPlayGame = nullptr;
 	pThis->GetMainFrame()->m_pDesignPlayThread = nullptr;
+    pThis->GetMainFrame()->m_wndProperties.EnableWindow(TRUE);
 	NaDebugOut(L"DesignPlayGame: Current RenderQueue Size: %d\n",
 		pThis->GetGame()->m_pSpriteManager->m_vecRenderQueue.size()
 	);
@@ -1323,6 +1343,8 @@ void CMarioMapEditorView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 	if (IsPlaying())
 		return;
 
+    m_bLButtonDown = FALSE;
+    ReleaseCapture();
 	ClientToScreen(&point);
 	OnContextMenu(this, point);
 }
@@ -1363,6 +1385,13 @@ void CMarioMapEditorView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 		strQuickProp = L"Toggle Pipe.Direction";
 		bQuickChangeProp = true;
 		break;
+    case ENEMY_TURTLE:
+    case ENEMY_REDTURTLE:
+    case ENEMY_BUZZYBEETLE:
+    case ENEMY_SPINY:
+        strQuickProp = L"Toggle IsEmptyShell";
+        bQuickChangeProp = true;
+        break;
 	}
 
 	if (pStage->m_nCurType >= ITEM_MYSTERYMUSHROOM &&
@@ -1394,6 +1423,8 @@ void CMarioMapEditorView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 		pMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, this);
 		delete pMenu;
 	}
+
+    m_bLButtonDown = FALSE;
 #endif
 }
 
@@ -1788,7 +1819,8 @@ BOOL CMarioMapEditorView::PreTranslateMessage(MSG* pMsg)
 
 		pStage->MovePlayBot(
 			(ptScroll.x * nScrollSize),
-			(ptScroll.y * nScrollSize)
+			(ptScroll.y * nScrollSize),
+            true
 		);
 		SyncScrollPos();
 
@@ -1853,6 +1885,11 @@ void CMarioMapEditorView::OnLButtonDown(UINT nFlags, CPoint point)
 	DesignGame *pGame = (DesignGame*)GetGame();
 	DesignStage *pStage = (DesignStage*)pGame->m_pCurStage;
 
+    if (pStage->m_nCurToolType != TOOLTYPE_ERASER)
+    {
+        ::SetCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_MARIO_CLICK_HAND));
+    }
+
 	CPoint pt = ClientToGame(point);
 	pStage->m_ptDragStart = pt;
 	pStage->m_bDrag = true;
@@ -1863,20 +1900,29 @@ void CMarioMapEditorView::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 	case EDIT_SELECT:
 	case EDIT_SELECTED:
-		pStage->Select(pt.x, pt.y);
-		if (pStage->m_nCurToolType != TOOLTYPE_PICK)
-		{
-			SetEditMode(EDIT_SELECTED);
-			pStage->m_bIsCurToolNotPlaced = false;
-		}
-		else
-		{
-			SetEditMode(EDIT_SELECT);
-			SetCurTool(TOOLTYPE_PICK);
-			pStage->m_bIsCurToolNotPlaced = true;
-		}
+        {
+            PropertyObjectBase *pOldObj = pStage->GetSelectedObject();
 
-		UpdateStatusBar(ID_INDICATOR_TYPENAME);
+		    pStage->Select(pt.x, pt.y);
+		    if (pStage->m_nCurToolType != TOOLTYPE_PICK)
+		    {
+			    SetEditMode(EDIT_SELECTED);
+			    pStage->m_bIsCurToolNotPlaced = false;
+		    }
+		    else
+		    {
+			    SetEditMode(EDIT_SELECT);
+			    SetCurTool(TOOLTYPE_PICK);
+			    pStage->m_bIsCurToolNotPlaced = true;
+		    }
+
+            PropertyObjectBase *pNewObj = pStage->GetSelectedObject();
+
+            if (pOldObj && pNewObj && pOldObj == pNewObj)
+                m_bWasSimpleClick = TRUE;
+
+		    UpdateStatusBar(ID_INDICATOR_TYPENAME);
+        }
 		break;
 	case EDIT_DRAW:
 		{
@@ -1900,6 +1946,8 @@ void CMarioMapEditorView::OnLButtonDown(UINT nFlags, CPoint point)
 	InvalidateGame();
 
 	CScrollView::OnLButtonDown(nFlags, point);
+
+    SetCapture();
 }
 
 void CMarioMapEditorView::OnMouseMove(UINT nFlags, CPoint point)
@@ -1907,17 +1955,22 @@ void CMarioMapEditorView::OnMouseMove(UINT nFlags, CPoint point)
 	if (IsPlaying())
 		return;
 
+    if (!theApp.GetMainWnd()->IsTopParentActive())
+        return;
+
+    DesignGame *pGame = (DesignGame*)GetGame();
+    DesignStage *pStage = (DesignStage*)pGame->m_pCurStage;
+
 	// Convert to Game Coord
 	CPoint pt = ClientToGame(point);
-	DesignGame *pGame = (DesignGame*)GetGame();
-	DesignStage *pStage = (DesignStage*)pGame->m_pCurStage;
-
 	pStage->m_ptCursor = { pt.x, pt.y };
 
 	//NaDebugOut(L"PlayBot: %.2f, %.2f\n", pStage->m_pPlayBotObject->m_fX, pStage->m_pPlayBotObject->m_fY);
 
 	if (m_bLButtonDown)
 	{
+        m_bWasSimpleClick = FALSE;
+
 		switch (m_nMode)
 		{
 		case EDIT_SELECT:
@@ -1989,6 +2042,11 @@ void CMarioMapEditorView::OnLButtonUp(UINT nFlags, CPoint point)
 	DesignGame *pGame = (DesignGame*)GetGame();
 	DesignStage *pStage = (DesignStage*)pGame->m_pCurStage;
 
+    if (pStage->m_nCurToolType != TOOLTYPE_ERASER)
+    {
+        ::SetCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_MARIO_HAND));
+    }
+
 	CPoint pt = ClientToGame(point);
 	CPoint ptTile = GameToTile(pt);
 	pStage->m_ptDragEnd = pt;
@@ -1996,11 +2054,21 @@ void CMarioMapEditorView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	m_bLButtonDown = FALSE;
 
+    CScrollView::OnLButtonUp(nFlags, point);
+    ReleaseCapture();
+
 	switch (m_nMode)
 	{
 	case EDIT_SELECT:
 		pStage->Select(pt.x, pt.y);
 		break;
+    case EDIT_SELECTED:
+        if (m_bWasSimpleClick)
+        {
+            QuickChangeProperty();
+            m_bWasSimpleClick = FALSE;
+        }
+        break;
 	case EDIT_DRAGMOVE:
 		pStage->DragMove(pt.x, pt.y);
 		if (OnDragMoveComplete() == false)
@@ -2022,9 +2090,9 @@ void CMarioMapEditorView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	InvalidateGame();
 	RefreshProperties();
-
-	CScrollView::OnLButtonUp(nFlags, point);
 }
+
+
 
 void CMarioMapEditorView::OnClearGroundBlocks()
 {
@@ -2273,7 +2341,7 @@ BOOL CMarioMapEditorView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 		}
 		else
 		{
-			::SetCursor(AfxGetApp()->LoadCursor(IDC_CURSOR_MARIO_HAND));
+			::SetCursor(AfxGetApp()->LoadCursor(m_bLButtonDown ? IDC_CURSOR_MARIO_CLICK_HAND : IDC_CURSOR_MARIO_HAND));
 		}
 		return TRUE;
 		break;
@@ -2695,7 +2763,7 @@ void CMarioMapEditorView::OnEditCopy()
 	case TOOLTYPE_EVENTOBJECT:
 	case TOOLTYPE_VEHICLE:
 		{
-			auto pObj = pStage->GetSelectedObject();
+			auto pObj = (GameObjectBase*)pStage->GetSelectedObject();
 
 			jObj["X"] = pObj->m_fX;
 			jObj["Y"] = pObj->m_fY;
