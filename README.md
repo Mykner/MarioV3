@@ -15,13 +15,17 @@ This repository contains the complete source code for MarioV3 version 3.4.0.0 (S
 - Added support for the new BackgroundObject class and the many derived classes (BlackGroundUnderWater, BackgroundLava, etc)
 - Probably more things that I forgot :)
 
+## What about the Stage server?
+
+The data for the Stage server as well as others auxiliary servers are in the folder `ServerData`. With this you can build your own local version of the Stage server.
+
 ## How to build?
 
 Try to figure it out yourself, it's not hard.
 
 ## Where are the Resources?
 
-I removed them from the repository to avoid DMCA from Nintendo, send a email to rokoaccounts@proton.me and I will send them to you.
+The Resources contain copyrighted assets from Nintendo, so I removed them from the repository to avoid a DMCA, send a email to rokoaccounts@proton.me and I will send them to you.
 
 ## Credits
 
